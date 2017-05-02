@@ -25,3 +25,13 @@ nav {
     
     
 }
+
+.col{
+    text-align: center;
+    
+}
+
+.row{
+    width: 100%;
+    margin-left: 1px;
+}

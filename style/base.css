@@ -98,3 +98,24 @@ nav {
     float:left;
     padding-left:10px;
 }
+
+/** Info **/
+#info{
+     background-color:#197F53;
+    text-align: center;
+    color:white;
+    padding:5px;
+    margin:1px;
+    border: 1px solid white;
+    
+}
+#infoText{
+    color:white;
+    margin-top:10px;
+    margin-bottom: 10px;;
+    
+}
+li {
+    
+    
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Waste Watcher</title>
+    <!-- Bootstrap 4 alpha CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="style/base.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <nav>
+
+
+        <h1>
+            <a href="index.html"> <i class="back fa fa-arrow-left" aria-hidden="true"></i></a>
+        </h1>
+
+        <h1 id="navTitle"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</h1>
+    </nav>
+    <div id="container">
+
+        <div id="accordion">
+
+            <h2 id="info">Lunch</h2>
+            <div id="infoText">
+                <div id="center">
+                    <input type="text" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item"></div>
+                
+                <div v-if="lunch.length > 0"@click="checkAll()">
+                    <i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All
+                </div>
+                
+                <ul id="">
+                    <li @click="checkIt(k)" id="listItem" v-for="(i, k) in lunch">
+
+                        <i v-if="!i.checked" class="fa fa-square-o" aria-hidden="true"></i>
+                        <i v-else class="fa fa-check-square-o" aria-hidden="true"></i>
+
+                        
+                        <span v-if="i.checked"><s> <span v-if="i.quantity != 0">{{i.quantity}}</span>  {{i.item}}</s></span>
+                        <span v-else> <span v-if="i.quantity != 0">{{i.quantity}}</span> {{i.item}}</span>
+                    
+                    </li>
+                </ul>
+
+                <button v-if="anyChecked()" type="button" class="btn btn-success">Add To Fridge</button>
+                <button v-if="anyChecked()" type="button" class="btn btn-danger" @click="remove()">Remove</button>
+
+            </div>
+
+
+            <h2 id="info">Mexican Food</h2>
+            <div id="infoText">
+                <ul id="">
+                    <li></li>
+
+
+
+                </ul>
+            </div>
+
+            <h2 id="info">Breakfast Foods</h2>
+            <div id="infoText">
+                <ul id="">
+                    <li></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Tether -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 4 Alpha JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+    <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+
+    <!-- Initialize Bootstrap functionality -->
+    <script>
+        // Initialize tooltip component
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        // Initialize popover component
+        $(function() {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+    <script>
+        $(function() {
+            $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content",
+                autoHeight: false,
+                clearStyle: true,
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#accordion',
+            data: {
+                newTodoText: '',
+                lunch: [{
+                    quantity: 3,
+                    item: "Apples",
+                    checked: false
+                }, {
+                    quantity: 0,
+                    item: "Eggs",
+                    checked: false
+                }, {
+                    quantity: 4,
+                    item: "Bananas",
+                    checked: false
+                }],
+            },
+            methods: {
+                checkIt: function(index) {
+                    this.lunch[index].checked = !this.lunch[index].checked;
+                },
+                addItem: function() {
+                    var obj = {
+                        quantity: 0,
+                        item: this.newTodoText,
+                        checked: false
+                    }
+                    this.lunch.push(obj)
+                    this.newTodoText = '';
+                },
+                anyChecked: function() {
+                    var vm = this;
+                    for (i = 0; i < vm.lunch.length; i++) {
+                        if (vm.lunch[i].checked) return true;
+                    }
+                },
+                checkAll: function(){
+                    var vm = this;
+                    for (i = 0; i < vm.lunch.length; i++) {
+                        vm.lunch[i].checked = true;
+                        
+                }
+                },
+                //TODO
+                addToFridge: function() {},
+                remove: function() {
+                    var vm = this;
+                    for (i = 0; i < vm.lunch.length; i++) {
+                        if (vm.lunch[i].checked) {
+                            vm.lunch.splice(i, 1)
+                            i--
+                        }
+                    }
+                }
+            }
+        });
+    </script>

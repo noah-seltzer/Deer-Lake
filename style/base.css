@@ -200,3 +200,12 @@ li {
 .slideout-open .slideout-menu {
     display: block;
 }
+
+.menuIcon
+{
+    width: 100px;
+}
+
+.menuVertical li {
+    list-style-type: none;
+}

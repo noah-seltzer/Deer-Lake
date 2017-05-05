@@ -1,0 +1,27 @@
+li.listItem{
+    background-color: white;
+    color:black;
+    list-style-type: none;
+    margin:1px;
+    width:100%;
+    font-size:140%;
+    padding-left:20px;
+}
+#fridgeList{
+    padding:0px;
+
+}
+#quantityManager{
+    background-color: white;
+    color:black;
+}
+
+#selected{
+    background-color: #197F53;
+    color:#5CBF74;
+}
+
+.center{
+    text-align:center;
+}
+

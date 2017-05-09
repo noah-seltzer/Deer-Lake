@@ -12,13 +12,72 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="vue.js"></script>
 </head>
 
 <body>
+
+
+<!-- Slideout menu -->
+<nav id="menu">
+    <header>
+        <ul class="menuVertical">
+            <div class="menuLinks"><a href="index.html">
+                <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png">
+                    <span class="menuPageNames">Home</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+            <div class="menuLinks"><a href="lists.html">
+                <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png">
+                    <span class="menuPageNames">My List</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+            <div class="menuLinks"><a href="fridge.html">
+                <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png">
+                    <span class="menuPageNames">My Fridge</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+            <div class="menuLinks"><a href="stats.html">
+                <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png">
+                    <span class="menuPageNames">Reports</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+            <div class="menuLinks"><a href="info.html">
+                <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png">
+                    <span class="menuPageNames">Info & Tips</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+            <div class="menuLinks"><a href="login.html">
+                <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png">
+                    <span class="menuPageNames">Login</span>
+                </li>
+            </a>
+            </div>
+            <hr>
+        </ul>
+
+    </header>
+</nav>
+
+<!-- main page content area -->
+<main id="panel">
+    <header>
+        <div class="topNav">
+            <button class="toggle-button"><img src="images/Icon%20Assets/topMenu.png"></button>
+        </div>
+    </header>
     <nav>
-
-
         <h1>
             <a href="index.html"> <i class="back fa fa-arrow-left" aria-hidden="true"></i></a>
         </h1>
@@ -76,7 +135,8 @@
 
         </div>
     </div>
-
+</main>
+</body>
 
 
 
@@ -177,3 +237,17 @@
             }
         });
     </script>
+
+<!-- slideout menu component -->
+<script src="dist/slideout.min.js"></script>
+<script>
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 300,
+        'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
+    });
+</script>

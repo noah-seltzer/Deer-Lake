@@ -54,6 +54,10 @@
                 <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
                 <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
             </span>
+            <span v-if="isCheckedAndLarge(k)" id="">
+                {{quantity}}
+                <input type="range" min="0" max="100" v-model="quantity">
+            </span>
 
 
 
@@ -203,6 +207,9 @@
             throwOutRest: function(index) {
                 this.fridge[index].quantity = 0;
                 //TODO back end stuff
+            },
+            updateLargeQuantity: function(index, val) {
+              this.fridge[index].quantity = val;
             },
 
             //TODO

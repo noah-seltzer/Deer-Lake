@@ -33,27 +33,36 @@
 
         <h2 id="info">Lunch</h2>
         <div id="infoText" class="row">
-            <div id="center">
+            <div class="center">
                 <input type="text" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item"></div>
+
 
             <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
                 <!--<i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All-->
             <!--</div>-->
+        <div class="col-xs-5">
+        <ul @click="uncheckAll(k);checkIt(k)" v-for="(i, k) in fridge" class="no_bottom listItem">
+                <li v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span>  {{i.item}}</li>
+                <li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
+        </ul></div>
 
-        <ul class="col-xs-4">
-            <li @click="uncheckAll(k);checkIt(k)" id="listItem" v-for="(i, k) in fridge">
+        <div class="col-xs-6" v-for="(i,k) in fridge" class="center" id="quantityManager">
+            <span v-if="i.checked" >{{i.item}} <br></span>
+            <span v-if="i.checked" > Quantity: {{i.quantity}}<br></span>
+
+            <span v-if="isCheckedAndSmall(k)" >
+                <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
+                <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
+            </span>
 
 
-                <span v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}</span>  {{i.item}}</span>
-                <span v-else> <span v-if="i.quantity != 0">{{i.quantity}}</span> {{i.item}}</span>
 
-            </li>
-        </ul>
-        <div class="col-xs-8" v-for="(i,k) in fridge" class="center" id="quantityManager">
-            <span v-if="i.checked" >{{i.item}}</span>
+
+
+            <button v-if="isCheckedAndNotZero(k)" type="button"  class="btn btn-success" @click="throwOutRest(k)">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+
         </div>
-
-        <button v-if="anyChecked()" type="button" class="btn btn-success">Add To Fridge</button>
+        <button v-if="anyChecked()" type="button" class="offset-xs-1 btn btn-success " >Add To Fridge</button>
 
     </div>
 
@@ -91,6 +100,9 @@
     $(function() {
         $('[data-toggle="popover"]').popover()
     })
+    //Slider for large fruits
+
+
 </script>
 
 <script>
@@ -100,6 +112,11 @@
             heightStyle: "content",
             autoHeight: false,
             clearStyle: true,
+        });
+    });
+    $(function() {
+        $("#slider").slider({
+
         });
     });
 </script>
@@ -112,15 +129,23 @@
             fridge: [{
                 quantity: 3,
                 item: "Apples",
-                checked: true
+                checked: true,
+                large: false
             }, {
                 quantity: 0,
                 item: "Eggs",
-                checked: false
-            }, {
+                checked: false,
+                large: false
+            },{
+                quantity:45,
+                item: "Eggplant",
+                checked:false,
+                large:true
+            },{
                 quantity: 4,
                 item: "Bananas",
-                checked: false
+                checked: false,
+                large: false
             }],
         },
         methods: {
@@ -137,7 +162,8 @@
                 var obj = {
                     quantity: 0,
                     item: this.newTodoText,
-                    checked: false
+                    checked: false,
+                    large:false
                 }
                 this.fridge.push(obj)
                 this.newTodoText = '';
@@ -155,6 +181,30 @@
 
                 }
             },
+            addQuantitySmall: function(index){
+                var vm = this;
+                vm.fridge[index].quantity += 1;
+            },
+            minusQuantitySmall: function(index){
+                var vm = this;
+                if(vm.fridge[index].quantity !== 0){
+
+                 vm.fridge[index].quantity-= 1;}
+            },
+            isCheckedAndSmall: function(index) {
+                return !this.fridge[index].large && this.fridge[index].checked;
+            },
+            isCheckedAndLarge: function(index) {
+                return this.fridge[index].large && this.fridge[index].checked;
+            },
+            isCheckedAndNotZero: function(index) {
+                return (this.fridge[index].quantity > 0) && this.fridge[index].checked;
+            },
+            throwOutRest: function(index) {
+                this.fridge[index].quantity = 0;
+                //TODO back end stuff
+            },
+
             //TODO
             addToFridge: function() {},
             remove: function() {

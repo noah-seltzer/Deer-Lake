@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background-color: #9ECAA9;
+    /* background-color: #9ECAA9; */
     margin: 0px;
     padding: 0px;
 }
@@ -13,8 +13,13 @@ body {
 nav {
     background-color: #5CBF74;
 
-}
 
+}
+.title {
+    position: relative;
+    background-color: #5CBF74;
+    top: -10px;
+}
 #navTitle {
     color: white;
     padding: 7px;
@@ -30,9 +35,9 @@ nav {
 #container {
     margin: 20px;
     background-color: #5CBF74;
-    padding: 10px;
     max-width: 100%;
-    padding-bottom: 30px;
+    padding: 10px 10px 30px;
+
 }
 
 .col {
@@ -71,6 +76,12 @@ nav {
 .hvr-grow:focus,
 .hvr-grow:active {
     transform: scale(1.07);
+}
+
+/* Index Styles */
+#panel {
+    background-color: #f0f0f0;
+    height:100vh;
 }
 
 /** Lists **/
@@ -174,7 +185,8 @@ li {
     width: 300px;
     min-height: 100vh;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
 }
@@ -220,7 +232,7 @@ li {
 }
 
 .menuVertical {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .menuVertical li {
@@ -235,8 +247,8 @@ li {
     background-image: -ms-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
     background-image: -o-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
     position: relative;
-    left: -50px;
-    width: 356px;
+    left: -40px;
+    width: 300px;
 }
 
 .menuLinks {
@@ -249,10 +261,11 @@ li {
 }
 
 .topNav img {
-    width: 50px;
+    width: 40px;
     position: relative;
-    top: 10px;
+    top: 16px;
     left: 10px;
+
 
 }
 
@@ -275,4 +288,19 @@ li {
 
 #loginIcon {
     margin-left: 10px;
+}
+
+/* mobile responsive CSS */
+
+@media screen and (min-width: 330px) and (max-width: 500px) {
+
+    #panel {
+
+    }
+
+    #container {
+        width:90vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

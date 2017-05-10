@@ -36,9 +36,15 @@
         <div id="infoText" class="row">
             <div class="center">
                 <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
-                <div hidden="true" id="largeSelector">
-                    <input type="checkbox" hidden="true" id="largebox" checked="false">
-                    <i class="fa fa-square-o" id="largeboxUI" @click="setLargeBox"></i>Large fruit or vegetable?
+                <div hidden="true" id="largeSelector" class="row">
+                    <div class="col-xs-5">
+                    <input type="checkbox" hidden="true" id="largebox">
+                        <button type="button" id="largebutton" class="btn btn-success" @click="setLargeBox"><i class="fa fa-square-o" id="largeboxUI" ></i>Large fruit or vegetable?</button>
+                    </div>
+                    <div class="offset-xs-1 col-xs-5">
+                        <button type="button" id="addvegbutton" class="btn btn-success" @click="addItem">Add Item to Fridge</button>
+                    </div>
+
                 </div>
             </div>
 
@@ -54,15 +60,16 @@
 
         <div class="col-xs-6" v-for="(i,k) in fridge" class="center" id="quantityManager">
             <span v-if="i.checked" >{{i.item}}<br></span>
-            <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}</span><br></span>
+            <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span><br></span>
 
             <span v-if="isCheckedAndSmall(k)" >
                 <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
                 <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
             </span>
             <span v-if="isCheckedAndLarge(k)">
-                <div id="quantitySlider"></div>
+
                 <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)">
+                <!--v-on:change="updateLargeQuantity(k)"-->
             </span>
 
 

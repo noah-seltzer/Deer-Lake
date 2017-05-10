@@ -29,4 +29,15 @@
 .no_bottom{
     margin-bottom: 0px;
 }
+#largebutton{
+    margin-bottom:10px;
+    border:0px;
+}
+#addvegbutton{
+    border:0px;
+}
+
+#quantityManager{
+    text-align: center;
+}
 

@@ -1,0 +1,28 @@
+#container {
+	height: 100vh;
+}
+
+#content {
+	padding-top: 10%;
+	width: 206px;
+	margin: auto;
+}
+
+form {
+	position: relative;
+	width: 100%;
+}
+
+.textinput {
+	border: none;
+	border-bottom: 1px solid #000000;
+}
+
+#logo {
+	width: 100%;
+	height: 73%;
+}
+
+#message {
+	width: 110%;
+}

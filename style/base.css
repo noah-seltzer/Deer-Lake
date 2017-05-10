@@ -10,22 +10,34 @@ body {
     padding: 0px;
 }
 
-nav {
-    background-color: #5CBF74;
-
-
-}
-.title {
-    position: relative;
-    background-color: #5CBF74;
-    top: -10px;
-}
 #navTitle {
     color: white;
     padding: 7px;
     text-align: center;
+    position: relative;
+    top: -35px;
+}
+
+.topNav {
+    background-color: #5CBF74;
+    height: 70px;
+}
+
+.topNav img {
+    width: 40px;
+    position: relative;
+
+    top: 16px;
+    left: 10px;
+
 
 }
+
+.topNav button {
+    background: none;
+    border: none;
+}
+
 
 .icon {
     width: 90%;
@@ -34,7 +46,6 @@ nav {
 
 #container {
     margin: 20px;
-
     background-color: #5CBF74;
     max-width: 100%;
     padding: 10px 10px 30px;
@@ -82,8 +93,7 @@ nav {
 /* Index Styles */
 #panel {
     background-color: #f0f0f0;
-
-    height:100vh;
+    height: 100%;
 
 }
 
@@ -192,6 +202,7 @@ li {
     /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
+    background-color: #5CBF74;
 }
 
 .slideout-menu-left {
@@ -258,26 +269,6 @@ li {
     display: block;
 }
 
-.topNav {
-    background-color: #f0f0f0;
-    height: 70px;
-}
-
-.topNav img {
-    width: 40px;
-    position: relative;
-
-    top: 16px;
-    left: 10px;
-
-
-}
-
-.topNav button {
-    background: none;
-    border: none;
-}
-
 #fridgeIcon {
     margin-left: 12px;
 }
@@ -296,23 +287,13 @@ li {
 
 /* mobile responsive CSS */
 
-@media screen and (min-width: 330px) and (max-width: 500px) {
+/*@media screen and (min-width: 330px) and (max-width: 500px) {*/
 
+    /*#container {*/
+        /*width: 90vw;*/
+        /*height: 90vh;*/
+        /*margin-left: auto;*/
+        /*margin-right: auto;*/
 
-    .center {
-
-    }
-
-    #panel {
-
-    }
-
-    #container {
-        width:90vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .slideout-menu {
-
-    }
-}
+    /*}*/
+/*}*/

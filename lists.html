@@ -123,7 +123,7 @@
             el: '#accordion',
             data: {
                 newTodoText: '',
-                lunch: [{
+                fridge: [{
                     quantity: 3,
                     item: "Apples",
                     checked: false
@@ -139,7 +139,7 @@
             },
             methods: {
                 checkIt: function(index) {
-                    this.lunch[index].checked = !this.lunch[index].checked;
+                    this.fridge[index].checked = !this.fridge[index].checked;
                 },
                 addItem: function() {
                     var obj = {
@@ -147,19 +147,19 @@
                         item: this.newTodoText,
                         checked: false
                     }
-                    this.lunch.push(obj)
+                    this.fridge.push(obj)
                     this.newTodoText = '';
                 },
                 anyChecked: function() {
                     var vm = this;
-                    for (i = 0; i < vm.lunch.length; i++) {
-                        if (vm.lunch[i].checked) return true;
+                    for (i = 0; i < vm.fridge.length; i++) {
+                        if (vm.fridge[i].checked) return true;
                     }
                 },
                 checkAll: function(){
                     var vm = this;
-                    for (i = 0; i < vm.lunch.length; i++) {
-                        vm.lunch[i].checked = true;
+                    for (i = 0; i < vm.fridge.length; i++) {
+                        vm.fridge[i].checked = true;
                         
                 }
                 },
@@ -167,9 +167,9 @@
                 addToFridge: function() {},
                 remove: function() {
                     var vm = this;
-                    for (i = 0; i < vm.lunch.length; i++) {
-                        if (vm.lunch[i].checked) {
-                            vm.lunch.splice(i, 1)
+                    for (i = 0; i < vm.fridge.length; i++) {
+                        if (vm.fridge[i].checked) {
+                            vm.fridge.splice(i, 1)
                             i--
                         }
                     }

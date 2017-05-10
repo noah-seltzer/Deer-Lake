@@ -32,9 +32,15 @@
     <div id="accordion">
 
         <h2 id="info">Lunch</h2>
+        <div id="">
         <div id="infoText" class="row">
             <div class="center">
-                <input type="text" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item"></div>
+                <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
+                <div hidden="true" id="largeSelector">
+                    <input type="checkbox" hidden="true" id="largebox" checked="false">
+                    <i class="fa fa-square-o" id="largeboxUI" @click="setLargeBox"></i>Large fruit or vegetable?
+                </div>
+            </div>
 
 
             <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
@@ -47,16 +53,16 @@
         </ul></div>
 
         <div class="col-xs-6" v-for="(i,k) in fridge" class="center" id="quantityManager">
-            <span v-if="i.checked" >{{i.item}} <br></span>
-            <span v-if="i.checked" > Quantity: {{i.quantity}}<br></span>
+            <span v-if="i.checked" >{{i.item}}<br></span>
+            <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}</span><br></span>
 
             <span v-if="isCheckedAndSmall(k)" >
                 <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
                 <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
             </span>
-            <span v-if="isCheckedAndLarge(k)" id="">
-                {{quantity}}
-                <input type="range" min="0" max="100" v-model="quantity">
+            <span v-if="isCheckedAndLarge(k)">
+                <div id="quantitySlider"></div>
+                <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)">
             </span>
 
 
@@ -69,7 +75,7 @@
         <button v-if="anyChecked()" type="button" class="offset-xs-1 btn btn-success " >Add To Fridge</button>
 
     </div>
-
+        </div>
 
 
 
@@ -107,9 +113,8 @@
     //Slider for large fruits
 
 
-</script>
 
-<script>
+
     $(function() {
         $("#accordion").accordion({
             collapsible: true,
@@ -118,11 +123,7 @@
             clearStyle: true,
         });
     });
-    $(function() {
-        $("#slider").slider({
 
-        });
-    });
 </script>
 
 <script type="text/javascript">
@@ -141,7 +142,7 @@
                 checked: false,
                 large: false
             },{
-                quantity:45,
+                quantity:10,
                 item: "Eggplant",
                 checked:false,
                 large:true
@@ -150,7 +151,7 @@
                 item: "Bananas",
                 checked: false,
                 large: false
-            }],
+            }]
         },
         methods: {
             checkIt: function(index) {
@@ -163,12 +164,20 @@
                 }
             },
             addItem: function() {
+                if(document.getElementById("largebox").checked){
+                    var bool = true;
+                    var num = 100;
+                }else{
+                    var bool = false;
+                    var num = 0;
+                }
                 var obj = {
-                    quantity: 0,
+                    quantity: num,
                     item: this.newTodoText,
                     checked: false,
-                    large:false
+                    large: bool
                 }
+
                 this.fridge.push(obj)
                 this.newTodoText = '';
             },
@@ -208,12 +217,31 @@
                 this.fridge[index].quantity = 0;
                 //TODO back end stuff
             },
-            updateLargeQuantity: function(index, val) {
+            updateLargeQuantity: function(index) {
+                val = document.getElementById("largeQuantitySlider").value;
               this.fridge[index].quantity = val;
             },
-
-            //TODO
-            addToFridge: function() {},
+            getLargeQuantity: function(index) {
+                return this.fridge[index].quantity;
+            },
+            updateSlider:function (index) {
+                var val = this.fridge[index].quantity;
+                var slider = document.getElementById("largeQuantitySlider");
+                slider.value = val;
+            },
+            showLarge: function() {
+              var checkboxdiv = document.getElementById("largeSelector");
+              checkboxdiv.removeAttribute('hidden');
+            },
+            setLargeBox: function() {
+                if(document.getElementById("largebox").checked === false) {
+                    document.getElementById("largeboxUI").className = "fa fa-check-square-o";
+                    document.getElementById("largebox").checked = true;
+                }else{
+                    document.getElementById("largeboxUI").className = "fa fa-square-o";
+                    document.getElementById("largebox").checked = false;
+                }
+            },
             remove: function() {
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {

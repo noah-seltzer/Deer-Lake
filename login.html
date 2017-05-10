@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Waste Watcher - Login</title>
+    <!-- Bootstrap 4 alpha CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style/login.css" rel="stylesheet">
+  <link href="style/base.css" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="initial-scale=1.0" charset="UTF-8">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("form").submit(function(event){
+	  var formData = {
+	    Username : $("#username").val(),
+		Password : $("#password").val()
+	  };
+	  
+	  $.ajax({
+	    type : "POST",
+		url : "login.php",
+		data : formData,
+		dataType : 'json',
+		encode : true
+	  })
+	  
+	  .done(function(data) {
+		if(data['success'] == false) {
+		  $("#message").html("Email or password is incorrect!");
+		  console.log(data);
+		}
+		else {
+		  $("#message").html("");
+		  window.location.replace("index.html");
+		}
+	  });
+	  
+	  event.preventDefault();
+	});
+  }); 
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+	
+	<div class="col-xs-12">
+	  <div id="content">
+	    <img src="images/Asset2.png" alt="Logo" id="logo">
+		<div id="message"></div>
+        <form id="login" action="login.php" method="post">
+        <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required><br>
+        <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required><br>
+        <input type="submit" value="Login">
+        </form>
+	  </div>
+	</div>
+	
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Waste Watcher - Registration</title>
+    <!-- Bootstrap 4 alpha CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style/login.css" rel="stylesheet">
+  <link href="style/base.css" rel="stylesheet" type="text/css">
+  <meta name="viewport" content="initial-scale=1.0" charset="UTF-8">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $("form").submit(function(event){
+	  var formData = {
+	    Username : $("#username").val(),
+		Password : $("#password").val(),
+		DisplayName : $("#displayname").val(),
+		PasswordConfirm : $("#passwordconfirm").val()
+	  };
+	  
+	  $.ajax({
+	    type : "POST",
+		url : "register.php",
+		data : formData,
+		dataType : 'json',
+		encode : true
+	  })
+	  
+	  .done(function(data) {
+	    console.log(data);
+		if(data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
+		  $("#message").html("");
+		  window.location.replace("index.html");
+		}
+		else {
+		  if(data['taken'] == true && data['passwordvalid'] == false) {
+		    $("#message").html("Email is taken!<br>Passwords do not match!");
+		  } else if(data['taken'] == true) {
+		    $("#message").html("Email is taken!");
+		  } else if(data['emailvalid'] == false) {
+			$("#message").html("Email is invalid!");
+		  } else {
+		    $("#message").html("Passwords do not match!");
+		  }
+		}
+	  });
+	  
+	  event.preventDefault();
+	});
+  }); 
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+	
+	<div class="col-xs-12">
+	  <div id="content">
+	    <img src="images/Asset2.png" alt="Logo" id="logo">
+		<div id="message"></div>
+        <form id="register" action="register.php" method="post">
+		<input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required><br>
+        <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required><br>
+        <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required><br>
+		<input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required><br>
+        <input type="submit" value="Register">
+        </form>
+	  </div>
+	</div>
+	
+  </div>
+</div>
+</body>
+</html>

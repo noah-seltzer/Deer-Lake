@@ -5,7 +5,7 @@ html {
 }
 
 body {
-    background-color: #9ECAA9;
+    /* background-color: #9ECAA9; */
     margin: 0px;
     padding: 0px;
 }
@@ -29,10 +29,10 @@ nav {
 
 #container {
     margin: 20px;
-    background-color: #5CBF74;
-    padding: 10px;
+    background-color: #00CC58;
     max-width: 100%;
-    padding-bottom: 30px;
+    padding: 10px 10px 30px;
+
 }
 
 .col {
@@ -71,6 +71,11 @@ nav {
 .hvr-grow:focus,
 .hvr-grow:active {
     transform: scale(1.07);
+}
+
+/* Index Styles */
+#panel {
+    background-color: #f0f0f0;
 }
 
 /** Lists **/
@@ -174,7 +179,8 @@ li {
     width: 300px;
     min-height: 100vh;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
 }
@@ -220,7 +226,7 @@ li {
 }
 
 .menuVertical {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .menuVertical li {
@@ -251,8 +257,9 @@ li {
 .topNav img {
     width: 50px;
     position: relative;
-    top: 10px;
+    top: 15px;
     left: 10px;
+
 
 }
 
@@ -277,3 +284,13 @@ li {
     margin-left: 10px;
 }
 
+/* mobile responsive CSS */
+
+@media screen and (min-width: 330px) and (max-width: 500px) {
+
+    .center {
+
+    }
+
+
+}

@@ -39,5 +39,11 @@
 
 #quantityManager{
     text-align: center;
+    margin-top:1px;
+
+}
+
+#largebutton{
+    width:25%;
 }
 

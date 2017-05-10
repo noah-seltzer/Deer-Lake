@@ -51,8 +51,8 @@
       <file leaf-file-name="fridge.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fridge.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="44" column="101" lean-forward="true" selection-start-line="44" selection-start-column="101" selection-end-line="44" selection-end-column="101" />
+            <state relative-caret-position="181">
+              <caret line="61" column="88" lean-forward="false" selection-start-line="61" selection-start-column="73" selection-end-line="61" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -71,8 +71,8 @@
       <file leaf-file-name="fridge.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/style/fridge.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+            <state relative-caret-position="435">
+              <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -135,6 +135,9 @@
       <find>@click</find>
       <find>v-bind</find>
       <find>offset</find>
+      <find>largebutton</find>
+      <find>largebutto</find>
+      <find>quantitymanager</find>
       <find>addAnItem</find>
     </findStrings>
   </component>
@@ -315,15 +318,15 @@
       <workItem from="1493915864537" duration="12109000" />
       <workItem from="1494304770285" duration="7389000" />
       <workItem from="1494351201379" duration="5544000" />
-      <workItem from="1494391917995" duration="3951000" />
+      <workItem from="1494391917995" duration="5151000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34726000" />
+    <option name="totallyTimeSpent" value="35926000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1104" height="735" extended-state="0" />
+    <frame x="-7" y="0" width="1104" height="735" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2913603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -578,18 +581,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fridge.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="44" column="101" lean-forward="true" selection-start-line="44" selection-start-column="101" selection-end-line="44" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fridge.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="61" column="88" lean-forward="false" selection-start-line="61" selection-start-column="73" selection-end-line="61" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -604,8 +607,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/style/fridge.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="40" column="23" lean-forward="true" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+        <state relative-caret-position="435">
+          <caret line="41" column="19" lean-forward="true" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
           <folding />
         </state>
       </provider>

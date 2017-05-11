@@ -13,11 +13,63 @@
 	<link href="style/base.css" rel="stylesheet" type="text/css">
 	<meta charset="utf-8">
     <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
 </head>
 <body>
-<nav>
-    <h1 id="navTitle"><i class="fa fa-info-circle" aria-hidden="true"></i> Information & Tips</h1>
+ <!-- Slideout menu -->
+    <nav id="menu">
+        <header>
+            <ul class="menuVertical">
+                <div class="menuLinks">
+                    <a href="index.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="lists.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="fridge.html">
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="stats.html">
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="info.html">
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="login.html">
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
+                    </a>
+                </div>
+                <hr> </ul>
+        </header>
     </nav>
+    <!-- main page content area -->
+    <!-- header -->
+    <main id="panel">
+        <header>
+            <div class="topNav">
+                <div class="menuButton">
+                    <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
+                </div>
+                <div class="menuTitle">
+                    <h1 id="navTitle"><i class="fa fa-info-circle" aria-hidden="true"></i> Info & Tips</h1> </div>
+            </div>
+        </header>
 <div id="container">
     
 <div id="accordion">
@@ -74,7 +126,19 @@ Canning is a great way to preserve food (especially fruit) and increase its shel
         <h2 id="info">About</h2>
   <div id="infoText">
    <p> We are a group of five students of BCIT that are commited to reducing food waste. We developed this app for a project course. If you have any suggestions or comments please email us at waste23@gmail.com</p>
-    </div></div></div>
+    </div>
+    
+      <h2 id="info">Affiliated Apps</h2>
+  <div id="infoText">
+ <ul id="light-sliderApps">
+      <li> 
+          <img src="http://placehold.it/50x50" style=float:left>Fub3r is an app to help you find recipes by ingredient. Enter 2 or more recipes and be given hundreds of recipes to explore</li>
+         <li> <img src="http://placehold.it/50x50" style=float:left>Take2</li>
+      </ul>
+    </div>
+    
+    
+    </div></div>
     
  
     
@@ -113,18 +177,6 @@ $(function () {
 })
 </script>
     
-    <script>
-        /**
-  $( function() {
-    $( "#accordion" ).accordion({
-      collapsible: true,
-        heightStyle: "content",
-            autoHeight: false,
-        clearStyle: true,  
-    });
-  } );
-  **/
-  </script>
     <script type="text/javascript">
     $(document).ready(function() {
         $("#light-slider").lightSlider();
@@ -133,7 +185,7 @@ $(function () {
     
     <script type="text/javascript">
     $(document).ready(function() {
-        $("#light-sliderTips").lightSlider({
+        $("#light-sliderTips, #light-sliderRev, #light-sliderApps, #light-sliderStore" ).lightSlider({
             item: 1,
             autoWidth: false,
             slideMove: 1, // slidemove will be 1 if loop is true
@@ -187,118 +239,17 @@ $(function () {
         });
     });
 </script>
-    
-       <script type="text/javascript">
-    $(document).ready(function() {
-        $("#light-sliderStore").lightSlider({
-            item: 1,
-            autoWidth: false,
-            slideMove: 1, // slidemove will be 1 if loop is true
-            slideMargin: 10,
-
-            addClass: '',
-            mode: "slide",
-            useCSS: true,
-            cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
-            easing: 'linear', //'for jquery animation',////
-
-            speed: 400, //ms'
-            auto: false,
-            pauseOnHover: false,
-            loop: false,
-            slideEndAnimation: true,
-            pause: 2000,
-
-            keyPress: false,
-            controls: false,
-            prevHtml: '',
-            nextHtml: '',
-
-            rtl:false,
-            adaptiveHeight:false,
-
-            vertical:false,
-            verticalHeight:500,
-            vThumbWidth:100,
-
-            thumbItem:10,
-            pager: true,
-            gallery: false,
-            galleryMargin: 5,
-            thumbMargin: 5,
-            currentPagerPosition: 'middle',
-
-            enableTouch:true,
-            enableDrag:true,
-            freeMove:true,
-            swipeThreshold: 40,
-
-            responsive : [],
-
-            onBeforeStart: function (el) {},
-            onSliderLoad: function (el) {},
-            onBeforeSlide: function (el) {},
-            onAfterSlide: function (el) {},
-            onBeforeNextSlide: function (el) {},
-            onBeforePrevSlide: function (el) {}
-        });
+     
+<script src="dist/slideout.min.js"></script>
+<script>
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': 300
+        , 'tolerance': 70
     });
-</script>
-    
-          <script type="text/javascript">
-    $(document).ready(function() {
-        $("#light-sliderRev").lightSlider({
-            item: 1,
-            autoWidth: false,
-            slideMove: 1, // slidemove will be 1 if loop is true
-            slideMargin: 10,
-
-            addClass: '',
-            mode: "slide",
-            useCSS: true,
-            cssEasing: 'ease', //'cubic-bezier(0.25, 0, 0.25, 1)',//
-            easing: 'linear', //'for jquery animation',////
-
-            speed: 400, //ms'
-            auto: false,
-            pauseOnHover: false,
-            loop: false,
-            slideEndAnimation: true,
-            pause: 2000,
-
-            keyPress: false,
-            controls: false,
-            prevHtml: '',
-            nextHtml: '',
-
-            rtl:false,
-            adaptiveHeight:false,
-
-            vertical:false,
-            verticalHeight:500,
-            vThumbWidth:100,
-
-            thumbItem:10,
-            pager: true,
-            gallery: false,
-            galleryMargin: 5,
-            thumbMargin: 5,
-            currentPagerPosition: 'middle',
-
-            enableTouch:true,
-            enableDrag:true,
-            freeMove:true,
-            swipeThreshold: 40,
-
-            responsive : [],
-
-            onBeforeStart: function (el) {},
-            onSliderLoad: function (el) {},
-            onBeforeSlide: function (el) {},
-            onAfterSlide: function (el) {},
-            onBeforeNextSlide: function (el) {},
-            onBeforePrevSlide: function (el) {}
-        });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
     });
 </script>
 

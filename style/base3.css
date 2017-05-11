@@ -13,7 +13,7 @@ body {
 /* top nav header */
 
 .topNav {
-    background-color: #5CBF74;
+    background-color: #386324;
     height: 70px;
 }
 
@@ -56,13 +56,11 @@ body {
 
 #container {
     margin: 20px;
-    background-color: #5CBF74;
+    background-color: #f8f8f8;
     max-width: 100%;
     padding: 10px 10px 30px;
-     box-shadow: 0 4px 8px 0 #197F53, 0 6px 20px 0 #197F53;
+     box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
     border-radius: 5px;
-    
-
 }
 
 .col {
@@ -76,7 +74,7 @@ body {
 }
 
 #quickTip {
-    background-color: #197F53;
+    background-color: #386324;
     
     margin: 30px;
     color: white;
@@ -105,7 +103,7 @@ body {
 
 /* Index Styles */
 #panel {
-    background-color: ;
+    background-color: #e0e7ef;
     /*0background-color: #f0f0f0;*/
     
     height: 100%;
@@ -217,7 +215,7 @@ li {
     /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
-    background-color: #5CBF74;
+    background-color: #386324;
 }
 
 .slideout-menu-left {
@@ -271,10 +269,10 @@ li {
 .menuVertical hr {
     border: 0;
     height: 2px;
-    background-image: -webkit-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -moz-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -ms-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -o-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
+    background-image: -webkit-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -moz-linear-gradient(left, #386324, #f0f0f0,#386324);
+    background-image: -ms-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -o-linear-gradient(left, #386324, #f0f0f0, #386324);
     position: relative;
     left: -40px;
     width: 300px;

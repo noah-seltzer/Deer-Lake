@@ -80,7 +80,7 @@
                 class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
             </div>
             <div class="menuTitle">
-            <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> My List</h1>
+            <h1 id="navTitle"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</h1>
             </div>
         </div>
     </header>
@@ -116,11 +116,11 @@
               
               </div>
                   
-                  <div id="right" style="float:right" ><a @click="removeList(index)" href="#"><i class="fa fa-times" aria-hidden="true"></i> Remove List</a></div>
+                  <div id="right" ><a @click="removeList(index)" id="removeList"href="#"><i class="fa fa-times" aria-hidden="true"></i> Remove List</a></div>
                   
                   
               <div v-if="list.lunch.length > 0" >
-                    <a @click="checkAll(index)" href="#"><i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All</a>
+                    <a @click="checkAll(index)" href="#" id="selectAll"><i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All</a>
                 </div>
                   
               <template > 
@@ -152,8 +152,8 @@
       
               </template>
                   <div id="buttons">
-            <button v-if="anyChecked(index)" type="button" class="btn btn-success btn-sm">Add To Fridge</button>
-            <button v-if="anyChecked(index)" type="button" class="btn btn-danger btn-sm" @click="remove(index)">Remove</button>
+            <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
+            <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
 <!--                  <button v-if="anyChecked(index)" @click="removeList(index)" type="button" class="btn btn-warning btn-sm"> Remove List</button><br></div>-->
                   
                 </div>

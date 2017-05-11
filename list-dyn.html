@@ -229,7 +229,6 @@
                                 checked: false
                             }]
                         }
-
                     ],
 
                 },
@@ -326,3 +325,18 @@
             });
 
         </script>
+
+
+<!-- slideout menu component -->
+<script src="dist/slideout.min.js"></script>
+<script>
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 300,
+        'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
+    });
+</script>

@@ -192,17 +192,6 @@
 
         </script>
 
-        <script>
-            $(function() {
-                $("#accordion").accordion({
-                    collapsible: true,
-                    heightStyle: "content",
-                    autoHeight: false,
-                    clearStyle: true,
-                });
-            });
-
-        </script>
 
         <script type="text/javascript">
             new Vue({
@@ -211,7 +200,9 @@
                     newTodoText0: '',
 
                     newListText: '',
-
+                    /**
+                     * Users Lists
+                     */
                     lists: [{
                             name: "Shopping List",
                             lunch: [{
@@ -234,14 +225,28 @@
                 },
             
                 methods: {
+                    /**
+                     * Checks that is clicked
+                     * @param index
+                     * @param index2
+                     */
                     checkIt: function(index, index2) {
                         this.lists[index].lunch[index2].checked = !this.lists[index].lunch[index2].checked;
                     },
+                    /**
+                     * Don't collapse the first list
+                     * @param i
+                     * @returns {*}
+                     */
                       noCollapse: function(i) {
                         if (i == 0)
                             return "in";
                           else return '';
                     },
+                    /**
+                     * Add an item to the current list
+                     * @param index
+                     */
                     addItem: function(index) {
                         var obj = {
                             quantity: 0,
@@ -252,7 +257,9 @@
                         this.newTodoText = '';
 
                     },
-
+                    /**
+                     * Create and add a new list with empty items
+                     */
                     addList: function() {
                         var obj = {
                             name: this.newListText,
@@ -267,12 +274,22 @@
 
 
                     },
+                    /**
+                     * Checks if any items in the current list has been selected
+                     * @param index
+                     * @returns {boolean}
+                     */
                     anyChecked: function(index) {
                         var vm = this;
                         for (i = 0; i < vm.lists[index].lunch.length; i++) {
                             if (vm.lists[index].lunch[i].checked) return true;
                         }
                     },
+                    /**
+                     * Checks if all the items in the current list are selected
+                     * @param index
+                     * @returns {boolean}
+                     */
                     allChecked: function(index) {
                         var vm = this;
                         for (i = 0; i < vm.lists[index].lunch.length; i++) {
@@ -303,8 +320,13 @@
                         }
                     },
                     //TODO
+
                     addToFridge: function() {},
-                    
+
+                    /**
+                     * Remove the selected list
+                     * @param index
+                     */
                     removeList:function(index){
                         var vm =this;
                         vm.lists.splice(index, 1);

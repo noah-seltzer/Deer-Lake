@@ -10,21 +10,45 @@ body {
     padding: 0px;
 }
 
-nav {
-    background-color: #5CBF74;
+/* top nav header */
+
+.topNav {
+    background-color: #386324;
+    height: 70px;
 }
 
-.title {
-    position: relative;
-    background-color: #5CBF74;
-    top: -10px;
+.menuButton {
+    width:70px;
+    height:70px;
+    display: block; 
+    
 }
-
-#navTitle {
-    color: white;
-    padding: 7px;
+.menuTitle {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -65px;
+       color: white;
+    
     text-align: center;
 }
+
+.topNav img {
+    width: 40px;
+    position: relative;
+    top: -2px;
+
+}
+
+.topNav button {
+    background: none;
+    border: none;
+    width:100%;
+    height: 100%;
+
+}
+
 
 .icon {
     width: 90%;
@@ -32,9 +56,14 @@ nav {
 
 #container {
     margin: 20px;
-    background-color: #5CBF74;
+    background-color: #f8f8f8;
     max-width: 100%;
     padding: 10px 10px 30px;
+     box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
+    border-radius: 5px;
+    
+
+
 }
 
 .col {
@@ -47,7 +76,8 @@ nav {
 }
 
 #quickTip {
-    background-color: #197F53;
+    background-color:  #386324;
+    
     margin: 30px;
     color: white;
     padding: 5px;
@@ -77,9 +107,32 @@ nav {
 /* Index Styles */
 
 #panel {
-    background-color: #f0f0f0;
-    height: 100vh;
+
+    background-color: #e0e7ef;
+
+    height: 100%;
 }
+
+.circle {
+    /* make it responsive */
+    max-width: 100%;
+    display:block;
+    height: 150px;
+    width:150px;
+    background-color:white;
+    border-radius:50%;
+    box-shadow: 0px 1px 10px -10px #A5CFA2, 1px 2px 20px 0px #A5CFA2;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.circle img {
+    position: relative;
+    top: 30px;
+
+}
+
+
 
 /** Lists **/
 
@@ -210,6 +263,7 @@ li {}
     /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
+    background-color:#386324;
 }
 
 .slideout-menu-left {
@@ -263,10 +317,10 @@ li {}
 .menuVertical hr {
     border: 0;
     height: 2px;
-    background-image: -webkit-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -moz-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -ms-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
-    background-image: -o-linear-gradient(left, #5CBF74, #f0f0f0, #5CBF74);
+    background-image: -webkit-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -moz-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -ms-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -o-linear-gradient(left, #386324, #f0f0f0, #386324);
     position: relative;
     left: -40px;
     width: 300px;
@@ -274,23 +328,6 @@ li {}
 
 .menuLinks {
     display: block;
-}
-
-.topNav {
-    background-color: #f0f0f0;
-    height: 70px;
-}
-
-.topNav img {
-    width: 40px;
-    position: relative;
-    top: 16px;
-    left: 10px;
-}
-
-.topNav button {
-    background: none;
-    border: none;
 }
 
 #fridgeIcon {
@@ -313,12 +350,13 @@ li {}
 /* mobile responsive CSS */
 
 @media screen and (min-width: 330px) and (max-width: 500px) {
-    .center {}
-    #panel {}
+
     #container {
         width: 90vw;
-        margin-left: auto;
+       height: 70vh;
+    margin-left: auto;
         margin-right: auto;
+
     }
-    .slideout-menu {}
 }
+

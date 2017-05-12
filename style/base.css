@@ -23,6 +23,11 @@ body {
     display: block; 
     
 }
+.menuButton img {
+     width: 40px;
+    position: relative;
+    top: -2px;
+}
 .menuTitle {
     width: 300px;
     margin-left: auto;
@@ -33,13 +38,20 @@ body {
     
     text-align: center;
 }
-
-.topNav img {
-    width: 40px;
-    position: relative;
-    top: -2px;
-
+.menuRight {
+    width:200px;
+    height:70px;
+    position:relative;
+    float:right;
+    top:-126px;
 }
+.menuRight img {
+ height: 55px;
+    position: relative;
+    top:4px;
+    
+}
+
 
 .topNav button {
     background: none;
@@ -121,7 +133,7 @@ body {
     width:150px;
     background-color:white;
     border-radius:50%;
-    box-shadow: 0px 1px 10px -10px #A5CFA2, 1px 2px 20px 0px #A5CFA2;
+    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;

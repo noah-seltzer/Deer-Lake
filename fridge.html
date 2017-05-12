@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Waste Watcher</title>
+    <title>Vegi-Smart</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -77,36 +77,36 @@
                     <div id="infoText" class="row">
                         <div class="center">
                             <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
-                            <div hidden="true" id="largeSelector" class="row">
-                                <input type="checkbox" hidden="true" id="largebox">
-                                <button type="button" id="largebutton" class="btn btn-success offset-xs-1 col-xs-5" @click="setLargeBox"><i class="fa fa-square-o" id="largeboxUI"></i>Large fruit or vegetable?</button>
-                                <div class=" col-xs-5">
-                                    <button type="button" id="addvegbutton" class="btn btn-success" @click="addItem">Add Item to Fridge</button>
+                            <div hidden id="largeSelector" >
+                                <input type="checkbox" hidden id="largebox">
+                                <div class="row" id="buttonrow">
+                                <button type="button" id="largebutton" class="btn btn-success " @click="setLargeBox"><i class="fa fa-square-o" id="largeboxUI"></i>&nbsp;Large fruit or vegetable?</button>
+                                <button type="button" id="addvegbutton" class="btn btn-success " @click="addItem">Add Item to Fridge <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                 </div>
                             </div>
                         </div>
                         <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
                         <!--<i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All-->
                         <!--</div>-->
-                        <div class="row">
-                            <div class="col-xs-5">
+                        <div class="row" id="fridgeContent">
+                            <div class="col-xs-5" id="fridgeList">
                                 <ul @click="uncheckAll(k);checkIt(k)" v-for="(i, k) in fridge" class="no_bottom listItem">
                                     <li v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
                                     <li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
                                 </ul>
                             </div>
-                            <div class="col-xs-6" v-for="(i,k) in fridge" class="center" id="quantityManager"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
+                            <div class="col-xs-6 center" id="quantityManager">
+                            <div  v-for="(i,k) in fridge" id="quantityManagerContent"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
                                 <br> </span> <span v-if="isCheckedAndSmall(k)">
-                <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
-                <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
-            </span> <span v-if="isCheckedAndLarge(k)">
-
-                <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)">
-                <!--v-on:change="updateLargeQuantity(k)"-->
-            </span>
-                                <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
+                                <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
+                                </span>
+                                <span v-if="isCheckedAndLarge(k)">
+                                    <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)"><br>
+                                </span>
+                                <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             </div>
-                            <button v-if="anyChecked()" type="button" class="offset-xs-1 btn btn-success ">Add To Fridge</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,8 +166,8 @@
                 , checked: true
                 , large: false
             }, {
-                quantity: 0
-                , item: "Eggs"
+                quantity: 1
+                , item: "Dozen Eggs"
                 , checked: false
                 , large: false
             }, {

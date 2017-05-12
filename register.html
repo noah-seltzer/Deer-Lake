@@ -2,17 +2,17 @@
 <html>
 
 <head>
-    <title>VegiSmart | Stats</title>
+    <title>Vegi Smart</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!--StyleSheets -->
+    <!-- Style Sheets-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
+    <link href="style/login.css" rel="stylesheet" type="text/css">
 
-    <link href="style/stat1.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fav Icons-->
@@ -24,12 +24,8 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-
 <body>
-
-
     <!-- Slideout menu -->
-
     <nav id="menu">
         <header>
             <ul class="menuVertical">
@@ -80,150 +76,52 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1>
+                    <h1 id="navTitle"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h1>
                 </div>
             </div>
         </header>
-
-
-
-        <div id="container">
-
-            <h2 id="pageTitle"> Statistics </h2><br>
-            <h6 id="cardTitle"><i> You have wasted this week</i></h6>
-            <div class="row">
-                <div class="card">
-                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}}
-
-                    </div><br><br>
-                    <small>*Cost determined by Superstore's current pricing</small>
-                </div>
-
-            </div>
-
-            <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
-            <div class="row">
-                <div class="card">
-                    <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div>
-                    You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}.
-
-                </div>
-            </div>
-
-            <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
-            <div class="row">
-                <div class="card">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div>
-                    You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div>
-                    You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}.
+        <div class="container-fluid">
+            <div id="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
+                            <div id="message"></div>
+                            <form id="register" action="register.php" method="post">
+                                <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
+                                <br>
+                                <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
+                                <br>
+                                <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
+                                <br>
+                                <input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required>
+                                <br>
+                                <input type="submit" value="Register"> </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
-
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-
 <!-- Tether -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-
 <!-- Bootstrap 4 Alpha JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
-<!--Font Awesome stuff -->
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
-<!--Vue Js-->
-<script src="vue.js"></script>
-
-<script type="text/javascript">
-    new Vue({
-
-        el: '#container',
-
-        data: {
-            //most wasted food
-            max: 0,
-            //second most wasted food
-            secondmax: 0,
-            // third most wasted food... etc.
-            thirdmax: 0,
-            //name of the max wasted food
-            maxname: '',
-            // Total wasted amount(cost)
-            totalWasted: 0,
-            secondname: '',
-            thirdname: '',
-            //objects to be pulled from server
-            items: [{
-                quantityWasted: 5,
-                item: "Apple",
-                cost: 0.87
-            }, {
-                quantityWasted: 1,
-                item: "Egg",
-                cost: 0.3
-            }, {
-                quantityWasted: 4,
-                item: "Banana",
-                cost: 0.71
-            }],
-        },
-
-        computed: {
-            //computes top wasted foods
-            computeTopWasted: function() {
-                for (i = 0; i < this.items.length; i++) {
-                    if (this.items[i].quantityWasted > this.max) {
-                        this.thirdmax = this.secondmax;
-                        this.thirdname = this.secondname;
-                        this.secondmax = this.max;
-                        this.secondname = this.maxname;
-                        this.max = this.items[i].quantityWasted;
-                        this.maxname = this.items[i].item;
-                    } else if (this.items[i].quantityWasted > this.secondmax) {
-                        this.thirdmax = this.secondmax;
-                        this.thirdname = this.secondname;
-                        this.secondmax = this.items[i].quantityWasted;
-                        this.secondname = this.items[i].item;
-                    } else if (this.items[i].quantityWasted > this.thirdmax) {
-                        this.thirdmax = this.items[i].quantityWasted;
-                        this.thirdname = this.items[i].item;
-                    }
-                }
-            },
-
-            // computes total wasted food
-            computeTotalWasted: function() {
-                for (i = 0; i < this.items.length; i++) {
-                    this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
-                }
-                this.totalWasted = this.totalWasted.toFixed(2);
-            },
-        },
-    });
-
-</script>
-
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
-
     // Initialize popover component
     $(function() {
         $('[data-toggle="popover"]').popover()
     })
 
 </script>
-
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
@@ -235,6 +133,56 @@
     });
     document.querySelector('.toggle-button').addEventListener('click', function() {
         slideout.toggle();
+    });
+
+</script>
+<script>
+    //Waits for document to fully load
+    $(document).ready(function() {
+        //Hooks onto the form's submit button
+        $("form").submit(function(event) {
+            var formData = {
+                Username: $("#username").val(),
+                Password: $("#password").val(),
+                DisplayName: $("#displayname").val(),
+                PasswordConfirm: $("#passwordconfirm").val()
+            };
+            //Send user-input to register php on server
+            $.ajax({
+                    type: "POST",
+                    url: "register.php",
+                    data: formData,
+                    dataType: 'json',
+                    encode: true
+                })
+                //Callback for when data is finished being sent and received
+                .done(function(data) {
+                    //Redirects to index if all information is valid
+                    if (data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
+                        $("#message").html("");
+                        window.location.replace("index.html");
+                    } else {
+                        //If email is taken AND passwords do not match, notify of both errors
+                        if (data['taken'] == true && data['passwordvalid'] == false) {
+                            $("#message").html("Email is taken!<br>Passwords do not match!");
+                        }
+                        //If only error is email taken, notify user
+                        else if (data['taken'] == true) {
+                            $("#message").html("Email is taken!");
+                        }
+                        //If email does not match [a-z]@[a-z] then notify of error
+                        else if (data['emailvalid'] == false) {
+                            $("#message").html("Email is invalid!");
+                        }
+                        //If only error is passwords do not match, notify user
+                        else {
+                            $("#message").html("Passwords do not match!");
+                        }
+                    }
+                });
+            //Prevent redirecting the page on submit button clicked
+            event.preventDefault();
+        });
     });
 
 </script>

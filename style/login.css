@@ -1,0 +1,45 @@
+
+
+#content {
+	width: 300px;
+	margin: auto;
+}
+
+form {
+	position: relative;
+	width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+    
+}
+
+.textinput {
+
+	border: 4px solid  #A5CFA2;
+    border-radius: 7px;
+    margin:8px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    height:40px
+}
+.textinput:focus {
+    border: 4px solid #386324;
+}
+
+#logo {
+	width: 100%;
+	height: 73%;
+}
+
+#message {
+	width: 110%;
+}
+.button{
+    background-color: #386324;
+    border-radius: 5px;
+    height:40px;
+    width:90px;
+    color: white;
+    
+}

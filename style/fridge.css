@@ -1,0 +1,81 @@
+.listItem > li{
+    background-color: #386324;
+    color:black;
+    list-style-type: none;
+    margin:1px;
+    width:100%;
+    font-size:140%;
+    padding-left:20px;
+    min-width:175px;
+
+}
+#fridgeList{
+    padding:0px;
+
+}
+#quantityManager{
+    background-color: white;
+    color:black;
+    text-align:center;
+    border-style:solid;
+    border-color:#197F53;
+    min-height:150px;
+
+}
+#quantityManagerContent{
+    color:black;
+    text-align:center;
+}
+
+#selected{
+    background-color: #197F53;
+    color:white;
+
+}
+
+.center{
+    text-align:center;
+}
+
+.no_bottom{
+    margin-bottom: 0px;
+}
+
+#addvegbutton{
+    width:30%;
+
+    min-width:185px;
+}
+#largebutton{
+    min-width:230px;
+    width:25%;
+
+}
+
+#quantityManager{
+    text-align: center;
+    min-width:230px;
+
+
+}
+
+
+#trashbutton{
+    min-width:200px;
+}
+#fridgeList{
+    padding-left:0px;
+
+}
+
+#fridgeContent{
+    align-content: center;
+}
+#largeSelector{
+    padding-right:7%;
+}
+#buttonrow{
+    display:inline-block;
+    align-content: right;
+    margin-bottom:20px;
+}

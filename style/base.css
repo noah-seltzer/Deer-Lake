@@ -39,7 +39,7 @@ body {
     text-align: center;
 }
 .menuRight {
-    width:200px;
+    width:100px;
     height:70px;
     position:relative;
     float:right;
@@ -273,7 +273,10 @@ a:visited {
     ;
 }
 
-li {}
+.affiliated{
+    
+    float:left;
+}
 
 
 /* Slideout Menu */

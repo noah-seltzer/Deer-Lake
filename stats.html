@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Waste Watcher</title>
     <!-- Bootstrap 4 alpha CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
+          rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto"
+          rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link href="style/stat1.css" rel="stylesheet" type="text/css">
+	
+	<link href="style/stat1.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 
 <body>
-    <!-- Slideout menu -->
+
+
+<!-- Slideout menu -->
+
     <nav id="menu">
         <header>
             <ul class="menuVertical">
@@ -69,78 +76,149 @@
                     <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
             </div>
         </header>
-        <div id="container">
-            <div class="row">
-                <div class="col-xs-7 col">
-                    <div class="card"> You have saved
-                        <br> <img id="dollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="bigText" id="savings" onclick="savingsChange()">233</span>
-                        <br>in total. </div>
-                </div>
-                <div class="col-xs-5 col">
-                    <div class="row">
-                        <div class="card">
-                            <br>
-                            <br> </div>
-                    </div>
-                    <div class="row">
-                        <div class="card"> <img id="cartIcon" src="images/shoppingcart.png" alt="Shopping Cart"> <span class="smallText">&nbsp;4 trips</span> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col">
-                    <div class="card"> Top 5 wasted food
-                        <br>
-                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
-                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
-                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
-                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
-                        <div class="foodIcon"><img id="appleIcon" src="images/apple.png" alt="Apple"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6 col">
-                    <div class="card"> <span class="smallText">Saving per week</span>
-                        <br> <img id="smallDollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="mediumText">30</span> </div>
-                    <div class="card"> <span class="smallText">Waste per week</span>
-                        <br> <img id="smallDollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="mediumText">5</span> </div>
-                </div>
-                <div class="col-xs-6 col">
-                    <div class="card"> You have wasted
-                        <br> <img id="dollarSign" src="images/dollarsign.png" alt="Dollar Sign"> <span class="bigText">36</span>
-                        <br>in total. </div>
-                </div>
-            </div>
-        </div>
-    </main>
+
+
+										
+    <div id="container">
+	
+	<h2 id="pageTitle"> Statistics </h2><br>
+	<h6 id="cardTitle"><i> You have wasted this week</i></h6>
+	<div class="row">
+		<div class="card">
+			<div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}}
+                
+            </div><br><br>
+             <small>*Cost determined by Superstore's current pricing</small>
+		</div>  
+     
+	</div>
+	
+	<h6 id="cardTitle"><i> Top Wasted Food </i></h6>
+	<div class="row">
+		<div class="card">
+			<img id="bigFoodIcon" src="images/apple.png" alt="Apple">
+			<div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div>
+			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}.
+			
+		</div>
+	</div>
+	
+	<h6 id="cardTitle"><i> Other Wasted Food </i></h6>
+	<div class="row">
+		<div class="card">
+			<div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div>
+			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
+			<div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div>
+			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}.
+		</div>
+	</div>
+</main>
 </body>
+
+
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
+        integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
+        crossorigin="anonymous"></script>
+
 <!-- Tether -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
+        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
+        crossorigin="anonymous"></script>
+
 <!-- Bootstrap 4 Alpha JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+        integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
+        crossorigin="anonymous"></script>
+
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+<script src="vue.js"></script>
+<script type="text/javascript">
+	new Vue({
+		
+		el: '#container',
+		
+		data: {
+			newTodoText: '',
+			max: 0,
+			secondmax: 0,
+			thirdmax: 0,
+			maxname: '',
+			totalWasted: 0,
+			secondname: '',
+			thirdname: '',
+			
+                items: [{
+                    quantityWasted: 5,
+                    item: "Apple",
+					cost: 0.87
+                }, {
+                    quantityWasted: 1,
+                    item: "Egg",
+					cost: 0.3
+                }, {
+                    quantityWasted: 4,
+                    item: "Banana",
+					cost: 0.71
+                }],
+		},
+		
+		computed: {
+			computeTopWasted: function() {
+				for (i = 0; i < this.items.length; i++)
+				{
+					if (this.items[i].quantityWasted > this.max) {
+						this.thirdmax = this.secondmax;
+						this.thirdname = this.secondname;
+						this.secondmax = this.max;
+						this.secondname = this.maxname;
+						this.max = this.items[i].quantityWasted;
+						this.maxname = this.items[i].item;
+					} else if(this.items[i].quantityWasted > this.secondmax) {
+						this.thirdmax = this.secondmax;
+						this.thirdname = this.secondname;
+						this.secondmax = this.items[i].quantityWasted;
+						this.secondname = this.items[i].item;
+					} else if(this.items[i].quantityWasted > this.thirdmax) {
+						this.thirdmax = this.items[i].quantityWasted;
+						this.thirdname = this.items[i].item;
+					} 
+				}
+			},
+			
+			
+			computeTotalWasted: function() {
+				for (i = 0; i<this.items.length; i++) {
+					this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
+				}
+				this.totalWasted = this.totalWasted.toFixed(2);
+			},
+		},
+	});
+</script>
+
 <!-- Initialize Bootstrap functionality -->
 <script>
+
     // Initialize tooltip component
     $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        // Initialize popover component
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    // Initialize popover component
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
+
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': 300
-        , 'tolerance': 70
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 300,
+        'tolerance': 70
     });
     document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();

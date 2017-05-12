@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <title>VegiSmart | Lists</title>
+    <title>VegiSmart | Lists</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -21,95 +21,100 @@
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
+
 </head>
 
 <body>
 
 
-<!-- Slideout menu -->
-<nav id="menu">
-    <header>
-        <ul class="menuVertical">
-            <div class="menuLinks"><a href="index.html">
-                <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png">
-                    <span class="menuPageNames">Home</span>
-                </li>
-            </a>
+    <!-- Slideout menu -->
+    <nav id="menu">
+        <header>
+            <ul class="menuVertical">
+                <div class="menuLinks">
+                    <a href="index.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png">
+                            <span class="menuPageNames">Home</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="lists.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png">
+                            <span class="menuPageNames">My List</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="fridge.html">
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png">
+                            <span class="menuPageNames">My Fridge</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="stats.html">
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png">
+                            <span class="menuPageNames">Reports</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="info.html">
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png">
+                            <span class="menuPageNames">Info &amp; Tips</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="login.html">
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png">
+                            <span class="menuPageNames">Login</span>
+                        </li>
+                    </a>
+                </div>
+                <hr>
+            </ul>
+
+        </header>
+    </nav>
+
+    <!-- main page content area -->
+
+    <!-- header -->
+    <main id="panel">
+        <header>
+            <div class="topNav">
+                <div class="menuButton">
+                    <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
+                </div>
+                <div class="menuTitle">
+                    <h1 id="navTitle"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</h1>
+                </div>
             </div>
-            <hr>
-            <div class="menuLinks"><a href="lists.html">
-                <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png">
-                    <span class="menuPageNames">My List</span>
-                </li>
-            </a>
-            </div>
-            <hr>
-            <div class="menuLinks"><a href="fridge.html">
-                <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png">
-                    <span class="menuPageNames">My Fridge</span>
-                </li>
-            </a>
-            </div>
-            <hr>
-            <div class="menuLinks"><a href="stats.html">
-                <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png">
-                    <span class="menuPageNames">Reports</span>
-                </li>
-            </a>
-            </div>
-            <hr>
-            <div class="menuLinks"><a href="info.html">
-                <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png">
-                    <span class="menuPageNames">Info & Tips</span>
-                </li>
-            </a>
-            </div>
-            <hr>
-            <div class="menuLinks"><a href="login.html">
-                <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png">
-                    <span class="menuPageNames">Login</span>
-                </li>
-            </a>
-            </div>
-            <hr>
-        </ul>
-
-    </header>
-</nav>
-
-<!-- main page content area -->
-        
-<!-- header -->
-<main id="panel">
-    <header>
-        <div class="topNav">
-            <div class="menuButton">
-                <button
-                class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
-            </div>
-            <div class="menuTitle">
-            <h1 id="navTitle"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</h1>
-            </div>
-        </div>
-    </header>
+        </header>
 
 
-    <div id="container">
-<div class="contentWrap">
-        <div id="center">
-<i class="fa fa-plus" aria-hidden="true"></i>
-            <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" placeholder= "Add A List"> </div>
+        <div id="container">
+            <div class="contentWrap">
+                <div id="center">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" placeholder="Add A List"> </div>
 
-        <div id="infoText">
-
-
-  
+                <div id="infoText">
 
 
-            <template v-for="(list,index) in lists">
+
+
+
+                    <template v-for="(list,index) in lists">
               
            <a :href="'#' + 'my'+ index" class="" data-toggle="collapse"> <h3 id="info" >
                
@@ -162,204 +167,204 @@
             
       
               </template>
-                  <div id="buttons">
-            <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
-            <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
-<!--                  <button v-if="anyChecked(index)" @click="removeList(index)" type="button" class="btn btn-warning btn-sm"> Remove List</button><br></div>-->
-                  
-                  </div></div>
-            </template>
+                    <div id="buttons">
+                        <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
+                        <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
+
+
+                    </div>
+                </div>
+                </template>
+            </div>
         </div>
-    </div>
-    </div>
-    </div>
-</main>
+        </div>
+
+    </main>
 </body>
 
 
 
 
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <!-- Tether -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Tether -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
 
-        <!-- Bootstrap 4 Alpha JS -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<!-- Bootstrap 4 Alpha JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 
-        <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+<script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
 <script src="vue.js"></script>
-        <!-- Initialize Bootstrap functionality -->
-        <script>
-            // Initialize tooltip component
-            $(function() {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
+<!-- Initialize Bootstrap functionality -->
+<script>
+    // Initialize tooltip component
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
-            // Initialize popover component
-            $(function() {
-                $('[data-toggle="popover"]').popover()
-            })
+    // Initialize popover component
+    $(function() {
+        $('[data-toggle="popover"]').popover()
+    })
 
-        </script>
+</script>
 
 
-        <script type="text/javascript">
-            new Vue({
-                el: '#container',
-                data: {
-                    newTodoText0: '',
+<script type="text/javascript">
+    new Vue({
+        el: '#container',
+        data: {
+            newTodoText0: '',
 
-                    newListText: '',
-                    /**
-                     * Users Lists
-                     */
-                    lists: [{
-                            name: "Shopping List",
-                            lunch: [{
-                                quantity: 4,
-                                item: "Apples",
-                                checked: false
-                            }]
-                        },
-                        {
-                            name: "Vegetables",
-
-                            lunch: [{
-                                quantity: 1,
-                                item: "Bacons",
-                                checked: false
-                            }]
-                        }
-                    ],
-
+            newListText: '',
+            /**
+             * Users Lists
+             */
+            lists: [{
+                    name: "Shopping List",
+                    lunch: [{
+                        quantity: 4,
+                        item: "Apples",
+                        checked: false
+                    }]
                 },
-            
-                methods: {
-                    /**
-                     * Checks that is clicked
-                     * @param index
-                     * @param index2
-                     */
-                    checkIt: function(index, index2) {
-                        this.lists[index].lunch[index2].checked = !this.lists[index].lunch[index2].checked;
-                    },
-                    /**
-                     * Don't collapse the first list
-                     * @param i
-                     * @returns {*}
-                     */
-                      noCollapse: function(i) {
-                        if (i == 0)
-                            return "in";
-                          else return '';
-                    },
-                    /**
-                     * Add an item to the current list
-                     * @param index
-                     */
-                    addItem: function(index) {
-                        var obj = {
-                            quantity: 0,
-                            item: this.newTodoText,
-                            checked: false
-                        }
-                        this.lists[index].lunch.push(obj)
-                        this.newTodoText = '';
+                {
+                    name: "Vegetables",
 
-                    },
-                    /**
-                     * Create and add a new list with empty items
-                     */
-                    addList: function() {
-                        var obj = {
-                            name: this.newListText,
-                            lunch: []
-                        }
+                    lunch: [{
+                        quantity: 1,
+                        item: "Bacons",
+                        checked: false
+                    }]
+                }
+            ],
 
+        },
 
+        methods: {
+            /**
+             * Checks that is clicked
+             * @param index
+             * @param index2
+             */
+            checkIt: function(index, index2) {
+                this.lists[index].lunch[index2].checked = !this.lists[index].lunch[index2].checked;
+            },
+            /**
+             * Don't collapse the first list
+             * @param i
+             * @returns {*}
+             */
+            noCollapse: function(i) {
+                if (i == 0)
+                    return "in";
+                else return '';
+            },
+            /**
+             * Add an item to the current list
+             * @param index
+             */
+            addItem: function(index) {
+                var obj = {
+                    quantity: 0,
+                    item: this.newTodoText,
+                    checked: false
+                }
+                this.lists[index].lunch.push(obj)
+                this.newTodoText = '';
 
-                        this.lists.push(obj);
-                        this.newListText = '';
-
-
-
-                    },
-                    /**
-                     * Checks if any items in the current list has been selected
-                     * @param index
-                     * @returns {boolean}
-                     */
-                    anyChecked: function(index) {
-                        var vm = this;
-                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                            if (vm.lists[index].lunch[i].checked) return true;
-                        }
-                    },
-                    /**
-                     * Checks if all the items in the current list are selected
-                     * @param index
-                     * @returns {boolean}
-                     */
-                    allChecked: function(index) {
-                        var vm = this;
-                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                            if (!vm.lists[index].lunch[i].checked)
-                                return false;
+            },
+            /**
+             * Create and add a new list with empty items
+             */
+            addList: function() {
+                var obj = {
+                    name: this.newListText,
+                    lunch: []
+                }
 
 
-                        }
-                        return true;
-                    },
+
+                this.lists.push(obj);
+                this.newListText = '';
 
 
-                    checkAll: function(index) {
-                        var vm = this;
 
-                        if (this.allChecked(index)) {
-                            for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                                vm.lists[index].lunch[i].checked = false;
+            },
+            /**
+             * Checks if any items in the current list has been selected
+             * @param index
+             * @returns {boolean}
+             */
+            anyChecked: function(index) {
+                var vm = this;
+                for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                    if (vm.lists[index].lunch[i].checked) return true;
+                }
+            },
+            /**
+             * Checks if all the items in the current list are selected
+             * @param index
+             * @returns {boolean}
+             */
+            allChecked: function(index) {
+                var vm = this;
+                for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                    if (!vm.lists[index].lunch[i].checked)
+                        return false;
 
 
-                            }
-                        } else {
-                            for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                                vm.lists[index].lunch[i].checked = true;
-                            }
+                }
+                return true;
+            },
 
 
-                        }
-                    },
-                    //TODO
+            checkAll: function(index) {
+                var vm = this;
 
-                    addToFridge: function() {},
+                if (this.allChecked(index)) {
+                    for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                        vm.lists[index].lunch[i].checked = false;
 
-                    /**
-                     * Remove the selected list
-                     * @param index
-                     */
-                    removeList:function(index){
-                        var vm =this;
-                        vm.lists.splice(index, 1);
-                        
+
                     }
-            ,
+                } else {
+                    for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                        vm.lists[index].lunch[i].checked = true;
+                    }
 
-                    remove: function(index) {
-                        var vm = this;
-                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
-                            if (vm.lists[index].lunch[i].checked) {
-                                vm.lists[index].lunch.splice(i, 1)
-                                i--
-                            }
-                        }
+
+                }
+            },
+            //TODO
+
+            addToFridge: function() {},
+
+            /**
+             * Remove the selected list
+             * @param index
+             */
+            removeList: function(index) {
+                var vm = this;
+                vm.lists.splice(index, 1);
+
+            },
+
+            remove: function(index) {
+                var vm = this;
+                for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                    if (vm.lists[index].lunch[i].checked) {
+                        vm.lists[index].lunch.splice(i, 1)
+                        i--
                     }
                 }
-            });
+            }
+        }
+    });
 
-        </script>
+</script>
 
 
 <!-- slideout menu component -->
@@ -371,7 +376,8 @@
         'padding': 300,
         'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
+    document.querySelector('.toggle-button').addEventListener('click', function() {
         slideout.toggle();
     });
+
 </script>

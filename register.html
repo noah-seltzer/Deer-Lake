@@ -8,11 +8,21 @@
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <!-- Style Sheets-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/login.css" rel="stylesheet" type="text/css">
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fav Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+</head>
 
 <body>
     <!-- Slideout menu -->
@@ -45,7 +55,7 @@
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span> </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
                     </a>
                 </div>
                 <hr>
@@ -66,7 +76,8 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Register</h1> </div>
+                    <h1 id="navTitle"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</h1>
+                </div>
             </div>
         </header>
         <div class="container-fluid">
@@ -102,74 +113,76 @@
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
-    $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        // Initialize popover component
-    $(function () {
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    // Initialize popover component
+    $(function() {
         $('[data-toggle="popover"]').popover()
     })
+
 </script>
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': 300
-        , 'tolerance': 70
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 300,
+        'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
+    document.querySelector('.toggle-button').addEventListener('click', function() {
         slideout.toggle();
     });
+
 </script>
 <script>
-	//Waits for document to fully load
-    $(document).ready(function () {
-		//Hooks onto the form's submit button
-        $("form").submit(function (event) {
+    //Waits for document to fully load
+    $(document).ready(function() {
+        //Hooks onto the form's submit button
+        $("form").submit(function(event) {
             var formData = {
-                Username: $("#username").val()
-                , Password: $("#password").val()
-                , DisplayName: $("#displayname").val()
-                , PasswordConfirm: $("#passwordconfirm").val()
+                Username: $("#username").val(),
+                Password: $("#password").val(),
+                DisplayName: $("#displayname").val(),
+                PasswordConfirm: $("#passwordconfirm").val()
             };
-			//Send user-input to register php on server
+            //Send user-input to register php on server
             $.ajax({
-                type: "POST"
-                , url: "register.php"
-                , data: formData
-                , dataType: 'json'
-                , encode: true
-            })
-			//Callback for when data is finished being sent and received
-			.done(function (data) {
-				//Redirects to index if all information is valid
-                if (data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
-                    $("#message").html("");
-                    window.location.replace("index.html");
-                }
-                else {
-					//If email is taken AND passwords do not match, notify of both errors
-                    if (data['taken'] == true && data['passwordvalid'] == false) {
-                        $("#message").html("Email is taken!<br>Passwords do not match!");
+                    type: "POST",
+                    url: "register.php",
+                    data: formData,
+                    dataType: 'json',
+                    encode: true
+                })
+                //Callback for when data is finished being sent and received
+                .done(function(data) {
+                    //Redirects to index if all information is valid
+                    if (data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
+                        $("#message").html("");
+                        window.location.replace("index.html");
+                    } else {
+                        //If email is taken AND passwords do not match, notify of both errors
+                        if (data['taken'] == true && data['passwordvalid'] == false) {
+                            $("#message").html("Email is taken!<br>Passwords do not match!");
+                        }
+                        //If only error is email taken, notify user
+                        else if (data['taken'] == true) {
+                            $("#message").html("Email is taken!");
+                        }
+                        //If email does not match [a-z]@[a-z] then notify of error
+                        else if (data['emailvalid'] == false) {
+                            $("#message").html("Email is invalid!");
+                        }
+                        //If only error is passwords do not match, notify user
+                        else {
+                            $("#message").html("Passwords do not match!");
+                        }
                     }
-					//If only error is email taken, notify user
-                    else if (data['taken'] == true) {
-                        $("#message").html("Email is taken!");
-                    }
-					//If email does not match [a-z]@[a-z] then notify of error
-                    else if (data['emailvalid'] == false) {
-                        $("#message").html("Email is invalid!");
-                    }
-					//If only error is passwords do not match, notify user
-                    else {
-                        $("#message").html("Passwords do not match!");
-                    }
-                }
-            });
-			//Prevent redirecting the page on submit button clicked
+                });
+            //Prevent redirecting the page on submit button clicked
             event.preventDefault();
         });
     });
+
 </script>

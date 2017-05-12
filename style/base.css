@@ -211,6 +211,7 @@ body {
 }
 #right{
     float:right;
+    margin-right:20px;
 }
 
 #listItem {

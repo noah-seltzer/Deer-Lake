@@ -276,7 +276,27 @@ a:visited {
 .affiliated{
     
     float:left;
+    margin-right:5px;
 }
+li a:visited{
+    color:black;
+    
+}
+li a:hover{
+    color:darkgreen;
+    
+}
+
+
+
+li a:active{
+    color:black;
+    
+}
+a:hover{
+    color:darkgreen;
+}
+
 
 
 /* Slideout Menu */

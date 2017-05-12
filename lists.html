@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="vue.js"></script>
+    
 </head>
 
 <body>
@@ -87,7 +89,7 @@
 
 
     <div id="container">
-
+<div class="contentWrap">
         <div id="center">
 <i class="fa fa-plus" aria-hidden="true"></i>
             <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" placeholder= "Add A List"> </div>
@@ -159,6 +161,8 @@
                 </div>
             </template>
         </div>
+    </div>
+    </div>
     </div>
 </main>
 </body>

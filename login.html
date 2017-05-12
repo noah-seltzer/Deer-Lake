@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Waste Watcher</title>
+    <title>Vegi Smart</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -121,28 +121,36 @@
     });
 </script>
 <script>
+	//Waits for document to fully load
     $(document).ready(function () {
+		//Hooks onto the form's submit button
         $("form").submit(function (event) {
             var formData = {
                 Username: $("#username").val()
                 , Password: $("#password").val()
             };
+			//Send user-input to login php on server
             $.ajax({
                 type: "POST"
                 , url: "login.php"
                 , data: formData
                 , dataType: 'json'
                 , encode: true
-            }).done(function (data) {
+            })
+			//Callback for when data is finished being sent and received
+			.done(function (data) {
+				//If the password does not match or email is not in database, print error
                 if (data['success'] == false) {
                     $("#message").html("Email or password is incorrect!");
                     console.log(data);
                 }
+				//Redirects to index if all information is valid
                 else {
                     $("#message").html("");
                     window.location.replace("index.html");
                 }
             });
+			//Prevent redirecting the page on submit button clicked
             event.preventDefault();
         });
     });

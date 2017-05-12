@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Waste Watcher</title>
+    <title>Vegi Smart</title>
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -73,7 +73,7 @@
             <div id="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div id="content"> <img src="images/Asset2.png" alt="Logo" id="logo">
+                        <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
                             <form id="register" action="register.php" method="post">
                                 <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
@@ -124,7 +124,9 @@
     });
 </script>
 <script>
+	//Waits for document to fully load
     $(document).ready(function () {
+		//Hooks onto the form's submit button
         $("form").submit(function (event) {
             var formData = {
                 Username: $("#username").val()
@@ -132,33 +134,41 @@
                 , DisplayName: $("#displayname").val()
                 , PasswordConfirm: $("#passwordconfirm").val()
             };
+			//Send user-input to register php on server
             $.ajax({
                 type: "POST"
                 , url: "register.php"
                 , data: formData
                 , dataType: 'json'
                 , encode: true
-            }).done(function (data) {
-                console.log(data);
+            })
+			//Callback for when data is finished being sent and received
+			.done(function (data) {
+				//Redirects to index if all information is valid
                 if (data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
                     $("#message").html("");
                     window.location.replace("index.html");
                 }
                 else {
+					//If email is taken AND passwords do not match, notify of both errors
                     if (data['taken'] == true && data['passwordvalid'] == false) {
                         $("#message").html("Email is taken!<br>Passwords do not match!");
                     }
+					//If only error is email taken, notify user
                     else if (data['taken'] == true) {
                         $("#message").html("Email is taken!");
                     }
+					//If email does not match [a-z]@[a-z] then notify of error
                     else if (data['emailvalid'] == false) {
                         $("#message").html("Email is invalid!");
                     }
+					//If only error is passwords do not match, notify user
                     else {
                         $("#message").html("Passwords do not match!");
                     }
                 }
             });
+			//Prevent redirecting the page on submit button clicked
             event.preventDefault();
         });
     });

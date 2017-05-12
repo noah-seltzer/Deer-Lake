@@ -1,21 +1,30 @@
-#container {
-	height: 100vh;
-}
+
 
 #content {
-	padding-top: 10%;
-	width: 206px;
+	width: 300px;
 	margin: auto;
 }
 
 form {
 	position: relative;
-	width: 100%;
+	width: 200px;
+    margin-left:auto;
+    margin-right:auto;
+    
 }
 
 .textinput {
-	border: none;
-	border-bottom: 1px solid #000000;
+
+	border: 4px solid  #A5CFA2;
+    border-radius: 7px;
+    margin:8px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    height:40px
+}
+.textinput:focus {
+    border: 4px solid #386324;
 }
 
 #logo {
@@ -25,4 +34,12 @@ form {
 
 #message {
 	width: 110%;
+}
+.button{
+    background-color: #386324;
+    border-radius: 5px;
+    height:40px;
+    width:90px;
+    color: white;
+    
 }

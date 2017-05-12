@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="fa-events-icons-ready">
 
 <head>
     <title>Vegi-Smart</title>
@@ -14,6 +14,12 @@
     <meta charset="utf-8">
     <script src="vue.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="manifest.json">
+<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
 
 <body>
     <!-- Slideout menu -->
@@ -183,15 +189,26 @@
             }]
         }
         , methods: {
+            /**
+             * checks and unchecks clicked item
+             * @param index number in array of item
+             */
             checkIt: function (index) {
                 this.fridge[index].checked = !this.fridge[index].checked;
             }
+            /**
+             * get which item is checked (only works if one is checked)
+             * @returns {number}
+             */
             , getChecked: function () {
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {
                     if (vm.fridge[i].checked) return i;
                 }
             }
+            /**
+             * adds inputted item to fridge array
+             */
             , addItem: function () {
                 if (document.getElementById("largebox").checked) {
                     var bool = true;
@@ -210,57 +227,83 @@
                 this.fridge.push(obj)
                 this.newTodoText = '';
             }
-            , anyChecked: function () {
-                var vm = this;
-                for (i = 0; i < vm.fridge.length; i++) {
-                    if (vm.fridge[i].checked) return true;
-                }
-            }
+            /**
+             * unchecks all items
+             */
             , uncheckAll: function () {
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {
                     vm.fridge[i].checked = false;
                 }
             }
+            /**
+             * adds 1 to the quantity of a small fruit, denoted by index
+             * @param index
+             */
             , addQuantitySmall: function (index) {
                 var vm = this;
                 vm.fridge[index].quantity += 1;
             }
+            /**
+             * subtracts one from the quantity of a small fruit, denoted by index
+             * @param index
+             */
             , minusQuantitySmall: function (index) {
                 var vm = this;
                 if (vm.fridge[index].quantity !== 0) {
                     vm.fridge[index].quantity -= 1;
                 }
             }
+            /**
+             * returns true if item is checked and small
+             * @param index of item to check
+             * @returns {boolean|*} is item checked and small
+             */
             , isCheckedAndSmall: function (index) {
                 return !this.fridge[index].large && this.fridge[index].checked;
             }
+            /**
+             * returns true if item is checked and large
+             * @param index of item to check
+             * @returns {boolean|*} is item checked and large
+             */
             , isCheckedAndLarge: function (index) {
                 return this.fridge[index].large && this.fridge[index].checked;
             }
+            /**
+             * checks if item is checked and not zero
+             * @param index
+             * @returns {boolean|*}
+             */
             , isCheckedAndNotZero: function (index) {
                 return (this.fridge[index].quantity > 0) && this.fridge[index].checked;
             }
+            /**
+             * sets item at index's quantity to zero
+             * @param index
+             */
             , throwOutRest: function (index) {
                 this.fridge[index].quantity = 0;
                 //TODO back end stuff
             }
+            /**
+             * updates the percentage value of a large fruit based on input of a slider
+             * @param index
+             */
             , updateLargeQuantity: function (index) {
                 val = document.getElementById("largeQuantitySlider").value;
                 this.fridge[index].quantity = val;
             }
-            , getLargeQuantity: function (index) {
-                return this.fridge[index].quantity;
-            }
-            , updateSlider: function (index) {
-                var val = this.fridge[index].quantity;
-                var slider = document.getElementById("largeQuantitySlider");
-                slider.value = val;
-            }
+            /**
+             * sets the hidden buttons to visible
+             */
             , showLarge: function () {
                 var checkboxdiv = document.getElementById("largeSelector");
                 checkboxdiv.removeAttribute('hidden');
             }
+            /**
+             * changes large button depending on whether user clicks
+             */
             , setLargeBox: function () {
                 if (document.getElementById("largebox").checked === false) {
                     document.getElementById("largeboxUI").className = "fa fa-check-square-o";
@@ -271,6 +314,9 @@
                     document.getElementById("largebox").checked = false;
                 }
             }
+            /**
+             * removes item, unused for now.
+             */
             , remove: function () {
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {

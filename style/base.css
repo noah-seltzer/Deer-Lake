@@ -206,13 +206,13 @@ body {
 #removeList{
     color:black;
     margin-bottom:10px;
+    margin-right:30px;
+    position:relative;
 }
 #selectAll{
     color:black;
 }
-#right{
-    float:right;
-}
+
 
 #listItem {
     background-color: #e0e7ef;

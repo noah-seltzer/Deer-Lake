@@ -171,6 +171,8 @@ body {
 
 #buttons {
     margin-bottom: 8px;
+    float:right;
+    margin-right:23px;
 }
 
 #addAnItem {
@@ -188,15 +190,26 @@ body {
 #addAnItem::placeholder {
     text-align: center;
 }
+#removeList{
+    color:black;
+    margin-bottom:10px;
+}
+#selectAll{
+    color:black;
+}
+#right{
+    float:right;
+}
 
 #listItem {
-    background-color: white;
+    background-color: #e0e7ef;
     color: black;
     list-style-type: none;
     margin: 1px;
-    width: 100%;
+    width: 95%;
     font-size: 120%;
     padding-left: 20px;
+    padding-right:20px;
 }
 
 .plus {
@@ -232,16 +245,17 @@ a:visited {
 /** Info **/
 
 #info {
-    background-color: #197F53;
+    background-color: #386324;
     text-align: center;
     color: white;
     padding: 5px;
     margin: 1px;
     border: 1px solid white;
+    clear:both;
 }
 
 #infoText {
-    color: white;
+    color: black;;
     margin-top: 10px;
     margin-bottom: 10px;
     ;

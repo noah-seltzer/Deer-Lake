@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="vue.js"></script>
 </head>
 
@@ -81,60 +80,84 @@
                 class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
             </div>
             <div class="menuTitle">
-            <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Home</h1>
+            <h1 id="navTitle"><i class="fa fa-list-alt" aria-hidden="true"></i> My Lists</h1>
             </div>
         </div>
     </header>
-    
+
+
     <div id="container">
 
-        <div id="accordion">
+        <div id="center">
+<i class="fa fa-plus" aria-hidden="true"></i>
+            <input type="text" v-on:keyup.enter="addList" v-model="newListText" id="addAnItem" placeholder= "Add A List"> </div>
 
-            <h2 id="info">Lunch</h2>
-            <div id="infoText">
-                <div id="center">
-                    <input type="text" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item"></div>
+        <div id="infoText">
+
+
+  
+
+
+            <template v-for="(list,index) in lists">
+              
+           <a :href="'#' + 'my'+ index" class="" data-toggle="collapse"> <h3 id="info" >
+               
+               {{list.name}}
+               <i id="carat" class="fa fa-caret-down" aria-hidden="true"></i>
+               </h3></a><br>
                 
-                <div v-if="lunch.length > 0"@click="checkAll()">
-                    <i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All
+                
+              <div v-bind:id=" 'my' + index" class="collapse" v-bind:class="noCollapse(index)">
+                  
+     
+                 
+              <div id="center">
+                    <input type="text" v-on:keyup.enter="addItem(index)" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
+              
+              </div>
+                  
+                  <div id="right" ><a @click="removeList(index)" id="removeList"href="#"><i class="fa fa-times" aria-hidden="true"></i> Remove List</a></div>
+                  
+                  
+              <div v-if="list.lunch.length > 0" >
+                    <a @click="checkAll(index)" href="#" id="selectAll"><i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All</a>
                 </div>
-                
-                <ul id="">
-                    <li @click="checkIt(k)" id="listItem" v-for="(i, k) in lunch">
-
-                        <i v-if="!i.checked" class="fa fa-square-o" aria-hidden="true"></i>
+                  
+              <template > 
+                  
+                  
+               <ul id="">
+                   
+                   
+                    <li @click="checkIt(index, index2)" id="listItem" v-for="(item,index2) in list.lunch">
+                        
+                         <i v-if="!item.checked" class="fa fa-square-o" aria-hidden="true"></i>
                         <i v-else class="fa fa-check-square-o" aria-hidden="true"></i>
 
+
+                        <span v-if="item.checked"><s>
+                            <span v-if="item.quantity != 0">{{item.quantity}}</span>  {{item.item}}</s></span>
                         
-                        <span v-if="i.checked"><s> <span v-if="i.quantity != 0">{{i.quantity}}</span>  {{i.item}}</s></span>
-                        <span v-else> <span v-if="i.quantity != 0">{{i.quantity}}</span> {{i.item}}</span>
+                        <span v-else> <span v-if="item.quantity != 0">{{item.quantity}}</span> {{item.item}}</span>
                     
                     </li>
                 </ul>
-
-                <button v-if="anyChecked()" type="button" class="btn btn-success">Add To Fridge</button>
-                <button v-if="anyChecked()" type="button" class="btn btn-danger" @click="remove()">Remove</button>
-
-            </div>
-
-
-            <h2 id="info">Mexican Food</h2>
-            <div id="infoText">
-                <ul id="">
-                    <li></li>
-
-
-
-                </ul>
-            </div>
-
-            <h2 id="info">Breakfast Foods</h2>
-            <div id="infoText">
-                <ul id="">
-                    <li></li>
-                </ul>
-            </div>
-
+                  
+                  
+              
+              
+              
+              
+            
+      
+              </template>
+                  <div id="buttons">
+            <button v-if="anyChecked(index)" type="button" class="btn btn-sm">Add To Fridge</button>
+            <button v-if="anyChecked(index)" type="button" class="btn btn-sm" @click="remove(index)">Remove</button>
+<!--                  <button v-if="anyChecked(index)" @click="removeList(index)" type="button" class="btn btn-warning btn-sm"> Remove List</button><br></div>-->
+                  
+                </div>
+            </template>
         </div>
     </div>
 </main>
@@ -144,101 +167,187 @@
 
 
 
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- Tether -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- Tether -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+        <!-- Bootstrap 4 Alpha JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap 4 Alpha JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
 
-    <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+        <!-- Initialize Bootstrap functionality -->
+        <script>
+            // Initialize tooltip component
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
 
-    <!-- Initialize Bootstrap functionality -->
-    <script>
-        // Initialize tooltip component
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+            // Initialize popover component
+            $(function() {
+                $('[data-toggle="popover"]').popover()
+            })
 
-        // Initialize popover component
-        $(function() {
-            $('[data-toggle="popover"]').popover()
-        })
-    </script>
+        </script>
 
-    <script>
-        $(function() {
-            $("#accordion").accordion({
-                collapsible: true,
-                heightStyle: "content",
-                autoHeight: false,
-                clearStyle: true,
-            });
-        });
-    </script>
 
-    <script type="text/javascript">
-        new Vue({
-            el: '#accordion',
-            data: {
-                newTodoText: '',
-                fridge: [{
-                    quantity: 3,
-                    item: "Apples",
-                    checked: false
-                }, {
-                    quantity: 0,
-                    item: "Eggs",
-                    checked: false
-                }, {
-                    quantity: 4,
-                    item: "Bananas",
-                    checked: false
-                }],
-            },
-            methods: {
-                checkIt: function(index) {
-                    this.fridge[index].checked = !this.fridge[index].checked;
+        <script type="text/javascript">
+            new Vue({
+                el: '#container',
+                data: {
+                    newTodoText0: '',
+
+                    newListText: '',
+                    /**
+                     * Users Lists
+                     */
+                    lists: [{
+                            name: "Shopping List",
+                            lunch: [{
+                                quantity: 4,
+                                item: "Apples",
+                                checked: false
+                            }]
+                        },
+                        {
+                            name: "Vegetables",
+
+                            lunch: [{
+                                quantity: 1,
+                                item: "Bacons",
+                                checked: false
+                            }]
+                        }
+                    ],
+
                 },
-                addItem: function() {
-                    var obj = {
-                        quantity: 0,
-                        item: this.newTodoText,
-                        checked: false
-                    }
-                    this.fridge.push(obj)
-                    this.newTodoText = '';
-                },
-                anyChecked: function() {
-                    var vm = this;
-                    for (i = 0; i < vm.fridge.length; i++) {
-                        if (vm.fridge[i].checked) return true;
-                    }
-                },
-                checkAll: function(){
-                    var vm = this;
-                    for (i = 0; i < vm.fridge.length; i++) {
-                        vm.fridge[i].checked = true;
+            
+                methods: {
+                    /**
+                     * Checks that is clicked
+                     * @param index
+                     * @param index2
+                     */
+                    checkIt: function(index, index2) {
+                        this.lists[index].lunch[index2].checked = !this.lists[index].lunch[index2].checked;
+                    },
+                    /**
+                     * Don't collapse the first list
+                     * @param i
+                     * @returns {*}
+                     */
+                      noCollapse: function(i) {
+                        if (i == 0)
+                            return "in";
+                          else return '';
+                    },
+                    /**
+                     * Add an item to the current list
+                     * @param index
+                     */
+                    addItem: function(index) {
+                        var obj = {
+                            quantity: 0,
+                            item: this.newTodoText,
+                            checked: false
+                        }
+                        this.lists[index].lunch.push(obj)
+                        this.newTodoText = '';
+
+                    },
+                    /**
+                     * Create and add a new list with empty items
+                     */
+                    addList: function() {
+                        var obj = {
+                            name: this.newListText,
+                            lunch: []
+                        }
+
+
+
+                        this.lists.push(obj);
+                        this.newListText = '';
+
+
+
+                    },
+                    /**
+                     * Checks if any items in the current list has been selected
+                     * @param index
+                     * @returns {boolean}
+                     */
+                    anyChecked: function(index) {
+                        var vm = this;
+                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                            if (vm.lists[index].lunch[i].checked) return true;
+                        }
+                    },
+                    /**
+                     * Checks if all the items in the current list are selected
+                     * @param index
+                     * @returns {boolean}
+                     */
+                    allChecked: function(index) {
+                        var vm = this;
+                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                            if (!vm.lists[index].lunch[i].checked)
+                                return false;
+
+
+                        }
+                        return true;
+                    },
+
+
+                    checkAll: function(index) {
+                        var vm = this;
+
+                        if (this.allChecked(index)) {
+                            for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                                vm.lists[index].lunch[i].checked = false;
+
+
+                            }
+                        } else {
+                            for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                                vm.lists[index].lunch[i].checked = true;
+                            }
+
+
+                        }
+                    },
+                    //TODO
+
+                    addToFridge: function() {},
+
+                    /**
+                     * Remove the selected list
+                     * @param index
+                     */
+                    removeList:function(index){
+                        var vm =this;
+                        vm.lists.splice(index, 1);
                         
-                }
-                },
-                //TODO
-                addToFridge: function() {},
-                remove: function() {
-                    var vm = this;
-                    for (i = 0; i < vm.fridge.length; i++) {
-                        if (vm.fridge[i].checked) {
-                            vm.fridge.splice(i, 1)
-                            i--
+                    }
+            ,
+
+                    remove: function(index) {
+                        var vm = this;
+                        for (i = 0; i < vm.lists[index].lunch.length; i++) {
+                            if (vm.lists[index].lunch[i].checked) {
+                                vm.lists[index].lunch.splice(i, 1)
+                                i--
+                            }
                         }
                     }
                 }
-            }
-        });
-    </script>
+            });
+
+        </script>
+
 
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>

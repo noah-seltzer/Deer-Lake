@@ -90,8 +90,39 @@
     <div id="container">
 	
 	<h2 id="pageTitle"> Statistics </h2><br>
-	<h6 id="cardTitle"><i> You have wasted this week</i></h6>
+	<h6 id="cardTitle"><i> </i></h6>
 	<div class="row">
+        <div class="card">
+        <div class="lineChart">
+            <div class="lineChartMessage">
+                {{ message }} Average Monthly Consumption
+            </div>
+  <line-chart></line-chart>
+</div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="card">
+        <div class="radarChart">
+  <div class="radarChartMessage">
+                {{ message }} Top 7 Food Consumption
+            </div>
+  <radar-chart></radar-chart>
+</div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="card">
+        <div class="doughnutChart">
+   <div class="doughnutChartMessage">
+                {{ message }} Apple
+            </div>
+  <doughnut-chart></doughnut-chart>
+</div>
+        </div>
+        </div>
+        
+        <div class="row">
 		<div class="card">
 			<div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}}
                 
@@ -120,6 +151,8 @@
 			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}.
 		</div>
 	</div>
+        </div>
+        
 </main>
 </body>
 
@@ -232,3 +265,82 @@
         slideout.toggle();
     });
 </script>
+
+<!-- Chart component -->
+    <script src="dist/Chart.js"></script>
+ <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
+<script>
+ 
+<!-- lineChart -->
+    Vue.component('line-chart', {
+  extends: VueChartJs.Line,
+  mounted () {
+    this.renderChart({
+        //need to make reactive, show only last 3-4months?
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], 
+      datasets: [
+        {
+          label: 'UserName', //need to make reactive
+          backgroundColor: '#386324',
+          data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
+        }
+      ]
+    }, {responsive: true, maintainAspectRatio: false})
+  }
+  
+})
+    Vue.component('radar-chart', {
+  extends: VueChartJs.Radar,
+  mounted () {
+    this.renderChart({
+      labels: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'],
+      datasets: [
+        {
+          label: 'UserName', //need to make reactive
+          backgroundColor:'#386324',
+          data: [0,20, 100] // need to make reactive
+        }
+      ]
+    }, {responsive: true, maintainAspectRatio: false})
+  }
+  
+})
+        Vue.component('doughnut-chart', {
+  extends: VueChartJs.Doughnut,
+  mounted () {
+    this.renderChart({
+      labels: ['Consumed', ''],
+      datasets: [
+        {
+          label: 'UserName',
+          backgroundColor: ['#386324', '#FFFFFF'],
+          data: [70, 30] //need to make reactive
+
+        }
+      ]
+    }, {responsive: true, maintainAspectRatio: false})
+  }
+  
+})
+   
+    
+var vm = new Vue({
+  el: '.lineChart',
+  data: {
+    message: ''
+  }
+})
+var vm = new Vue({
+  el: '.radarChart',
+  data: {
+    message: ''
+  }
+})
+var vm = new Vue({
+  el: '.doughnutChart',
+  data: {
+    message: ''
+  }
+})
+
+    </script>

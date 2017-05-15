@@ -1,36 +1,29 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>VegiSmart | Stats</title>
     <!-- Bootstrap 4 alpha CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
     <!--StyleSheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
-	
-	<link href="style/stat1.css" rel="stylesheet" type="text/css">
+    <link href="style/stat1.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Fav Icons-->
+    <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-</head>
-
+    <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
-
-
-<!-- Slideout menu -->
-
+    <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
@@ -84,263 +77,246 @@
                     <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
             </div>
         </header>
-
-
-										
-    <div id="container">
-	
-	<h2 id="pageTitle"> Statistics </h2><br>
-	<h6 id="cardTitle"><i> </i></h6>
-	<div class="row">
-        <div class="card">
-        <div class="lineChart">
-            <div class="lineChartMessage">
-                {{ message }} Average Monthly Consumption
+        <div id="container">
+            <h2 id="pageTitle"> Statistics </h2>
+            <br>
+            <h6 id="cardTitle"><i> </i></h6>
+            <div class="row">
+                <div class="card">
+                    <div class="lineChart">
+                        <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
+                        <line-chart></line-chart>
+                    </div>
+                </div>
             </div>
-  <line-chart></line-chart>
-</div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="card">
-        <div class="radarChart">
-  <div class="radarChartMessage">
-                {{ message }} Top 7 Food Consumption
+            <div class="row">
+                <div class="card">
+                    <div class="radarChart">
+                        <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
+                        <radar-chart></radar-chart>
+                    </div>
+                </div>
             </div>
-  <radar-chart></radar-chart>
-</div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="card">
-        <div class="doughnutChart">
-   <div class="doughnutChartMessage">
-                {{ message }} Apple
+            <div class="row">
+                <div class="card">
+                    <div class="doughnutChart">
+                        <div class="doughnutChartMessage"> {{ message }} Apple </div>
+                        <doughnut-chart></doughnut-chart>
+                    </div>
+                </div>
             </div>
-  <doughnut-chart></doughnut-chart>
-</div>
+            <div class="row">
+                <div class="card">
+                    <div id="chart" class="noselect">
+                        <canvas id="myChart" height="100%" width="100%"></canvas>
+                    </div>
+                    <div id="chartjs-legend" class="noselect"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
+                    <br>
+                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
+            </div>
+            <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
+            <div class="row">
+                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
+            </div>
+            <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
+            <div class="row">
+                <div class="card">
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
+            </div>
         </div>
-        </div>
-        
-        <div class="row">
-		<div class="card">
-			<div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}}
-                
-            </div><br><br>
-             <small>*Cost determined by Superstore's current pricing</small>
-		</div>  
-     
-	</div>
-	
-	<h6 id="cardTitle"><i> Top Wasted Food </i></h6>
-	<div class="row">
-		<div class="card">
-			<img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-			<div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div>
-			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}.
-			
-		</div>
-	</div>
-	
-	<h6 id="cardTitle"><i> Other Wasted Food </i></h6>
-	<div class="row">
-		<div class="card">
-			<div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div>
-			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-			<div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div>
-			You have wasted <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}.
-		</div>
-	</div>
-        </div>
-        
-</main>
+    </main>
 </body>
-
-
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"
-        integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY"
-        crossorigin="anonymous"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"
-        integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB"
-        crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 Alpha JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
-        integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
-        crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
 <script src="vue.js"></script>
 <script type="text/javascript">
-	new Vue({
-		
-		el: '#container',
-		
-		data: {
-			newTodoText: '',
-			max: 0,
-			secondmax: 0,
-			thirdmax: 0,
-			maxname: '',
-			totalWasted: 0,
-			secondname: '',
-			thirdname: '',
-			
-                items: [{
-                    quantityWasted: 5,
-                    item: "Apple",
-					cost: 0.87
+    new Vue({
+        el: '#container'
+        , data: {
+            newTodoText: ''
+            , max: 0
+            , secondmax: 0
+            , thirdmax: 0
+            , maxname: ''
+            , totalWasted: 0
+            , secondname: ''
+            , thirdname: ''
+            , items: [{
+                quantityWasted: 5
+                , item: "Apple"
+                , cost: 0.87
                 }, {
-                    quantityWasted: 1,
-                    item: "Egg",
-					cost: 0.3
+                quantityWasted: 1
+                , item: "Egg"
+                , cost: 0.3
                 }, {
-                    quantityWasted: 4,
-                    item: "Banana",
-					cost: 0.71
-                }],
-		},
-		
-		computed: {
-			computeTopWasted: function() {
-				for (i = 0; i < this.items.length; i++)
-				{
-					if (this.items[i].quantityWasted > this.max) {
-						this.thirdmax = this.secondmax;
-						this.thirdname = this.secondname;
-						this.secondmax = this.max;
-						this.secondname = this.maxname;
-						this.max = this.items[i].quantityWasted;
-						this.maxname = this.items[i].item;
-					} else if(this.items[i].quantityWasted > this.secondmax) {
-						this.thirdmax = this.secondmax;
-						this.thirdname = this.secondname;
-						this.secondmax = this.items[i].quantityWasted;
-						this.secondname = this.items[i].item;
-					} else if(this.items[i].quantityWasted > this.thirdmax) {
-						this.thirdmax = this.items[i].quantityWasted;
-						this.thirdname = this.items[i].item;
-					} 
-				}
-			},
-			
-			
-			computeTotalWasted: function() {
-				for (i = 0; i<this.items.length; i++) {
-					this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
-				}
-				this.totalWasted = this.totalWasted.toFixed(2);
-			},
-		},
-	});
+                quantityWasted: 4
+                , item: "Banana"
+                , cost: 0.71
+                }]
+        , }
+        , computed: {
+            computeTopWasted: function () {
+                for (i = 0; i < this.items.length; i++) {
+                    if (this.items[i].quantityWasted > this.max) {
+                        this.thirdmax = this.secondmax;
+                        this.thirdname = this.secondname;
+                        this.secondmax = this.max;
+                        this.secondname = this.maxname;
+                        this.max = this.items[i].quantityWasted;
+                        this.maxname = this.items[i].item;
+                    }
+                    else if (this.items[i].quantityWasted > this.secondmax) {
+                        this.thirdmax = this.secondmax;
+                        this.thirdname = this.secondname;
+                        this.secondmax = this.items[i].quantityWasted;
+                        this.secondname = this.items[i].item;
+                    }
+                    else if (this.items[i].quantityWasted > this.thirdmax) {
+                        this.thirdmax = this.items[i].quantityWasted;
+                        this.thirdname = this.items[i].item;
+                    }
+                }
+            }
+            , computeTotalWasted: function () {
+                for (i = 0; i < this.items.length; i++) {
+                    this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
+                }
+                this.totalWasted = this.totalWasted.toFixed(2);
+            }
+        , }
+    , });
 </script>
-
 <!-- Initialize Bootstrap functionality -->
 <script>
-
     // Initialize tooltip component
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-
-    // Initialize popover component
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        // Initialize popover component
     $(function () {
         $('[data-toggle="popover"]').popover()
     })
 </script>
-
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('menu'),
-        'padding': 300,
-        'tolerance': 70
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': 300
+        , 'tolerance': 70
     });
     document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();
     });
 </script>
-
 <!-- Chart component -->
-    <script src="dist/Chart.js"></script>
- <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
+
+<script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
 <script>
- 
-<!-- lineChart -->
+    <!-- lineChart -->
     Vue.component('line-chart', {
-  extends: VueChartJs.Line,
-  mounted () {
-    this.renderChart({
-        //need to make reactive, show only last 3-4months?
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], 
-      datasets: [
-        {
-          label: 'UserName', //need to make reactive
-          backgroundColor: '#386324',
-          data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
+        extends: VueChartJs.Line
+        , mounted() {
+            this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+            this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
+            this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+            this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+            this.renderChart({
+                //need to make reactive, show only last 3-4months?
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+                , datasets: [
+                    {
+                        label: 'UserName', //need to make reactive
+                        pointBackgroundColor: 'white'
+                        , borderWidth: 1
+                        , pointBorderColor: 'white'
+                        , backgroundColor: this.gradient
+                        , data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false})
-  }
-  
-})
+            }, {
+                responsive: true
+                , maintainAspectRatio: false
+            })
+        }
+    })
     Vue.component('radar-chart', {
-  extends: VueChartJs.Radar,
-  mounted () {
-    this.renderChart({
-      labels: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7'],
-      datasets: [
-        {
-          label: 'UserName', //need to make reactive
-          backgroundColor:'#386324',
-          data: [0,20, 100] // need to make reactive
+        extends: VueChartJs.Radar
+        , mounted() {
+            this.renderChart({
+                labels: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
+                , datasets: [
+                    {
+                        label: 'UserName', //need to make reactive
+                        backgroundColor: '#386324'
+                        , data: [0, 20, 100] // need to make reactive
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false})
-  }
-  
-})
-        Vue.component('doughnut-chart', {
-  extends: VueChartJs.Doughnut,
-  mounted () {
-    this.renderChart({
-      labels: ['Consumed', ''],
-      datasets: [
-        {
-          label: 'UserName',
-          backgroundColor: ['#386324', '#FFFFFF'],
-          data: [70, 30] //need to make reactive
-
+            }, {
+                responsive: true
+                , maintainAspectRatio: false
+            })
+        }
+    })
+    Vue.component('doughnut-chart', {
+        extends: VueChartJs.Doughnut
+        , mounted() {
+            this.renderChart({
+                labels: ['Consumed', '']
+                , datasets: [
+                    {
+                        label: 'UserName'
+                        , backgroundColor: ['#386324', '#FFFFFF']
+                        , data: [70, 30] //need to make reactive
+                        , cutoutPercentage: '90'
+                        , borderColor: ['black', 'red']
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false})
-  }
-  
-})
-   
+            }, {
+                responsive: true
+                , maintainAspectRatio: false
+            })
+        }
+    })
+    var vm = new Vue({
+        el: '.lineChart'
+        , data: {
+            message: ''
+        }
+    })
+    var vm = new Vue({
+        el: '.radarChart'
+        , data: {
+            message: ''
+        }
+    })
+    var vm = new Vue({
+        el: '.doughnutChart'
+        , data: {
+            message: ''
+        }
+    })
+</script>
     
-var vm = new Vue({
-  el: '.lineChart',
-  data: {
-    message: ''
-  }
-})
-var vm = new Vue({
-  el: '.radarChart',
-  data: {
-    message: ''
-  }
-})
-var vm = new Vue({
-  el: '.doughnutChart',
-  data: {
-    message: ''
-  }
-})
+    
+    
 
-    </script>
+    
+<!-- Chart js pie chart Script -->

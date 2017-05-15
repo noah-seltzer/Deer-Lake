@@ -1,10 +1,15 @@
 <?php
+	//Connecting to database using information stored on external file
 	$db_array = parse_ini_file($_SERVER["DOCUMENT_ROOT"]."/cfg/db.ini");
 	$conn = mysqli_connect($db_array['dbhost'], $db_array['dbuser'], $db_array['dbpass'], $db_array['dbname']);
+	
+	//Retrieving username, password, displayname and confirmed password from ajax's POST method
 	$username = mysqli_real_escape_string($conn, $_POST['Username']);
 	$password = mysqli_real_escape_string($conn, $_POST['Password']);
 	$displayname = mysqli_real_escape_string($conn, $_POST['DisplayName']);
 	$passwordconfirm = mysqli_real_escape_string($conn, $_POST['PasswordConfirm']);
+	
+	//Execute query on database to check if email is taken
 	$query = "SELECT * FROM accounts WHERE username='$username'";
 	$result = mysqli_query($conn, $query);
 	$data = array();

@@ -27,6 +27,12 @@
 	margin: 10px;
 }
 
+.card .lineChart {
+      background: #212733; /*chart background color*/
+  border-radius: 15px; /*chart border*/
+  box-shadow: 0px 2px 15px rgba(25, 25, 25, 0.27);
+  margin:  25px 0;
+}
 
 #bigFoodIcon {
 	height: 100px;
@@ -48,3 +54,7 @@
 	display: inline;
 }
 
+
+
+
+/* Chart JS pie chart + custom legends + update onlick */

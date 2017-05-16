@@ -73,8 +73,6 @@ body {
     padding: 10px 10px 30px;
      box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
     border-radius: 5px;
-    
-
 
 }
 
@@ -375,6 +373,20 @@ a:visited {
     margin-left: 10px;
 }
 
+.menuHeader {
+    height: 150px;
+    width: 300px;
+    background-color: white;
+    position: relative;
+    top: -15px;
+    left:-40px;
+}
+.menuHeader img {
+    width:300px;
+    margin-top: 10px;
+    margin-left: 20px;
+    
+}
 
 /* mobile responsive CSS */
 
@@ -385,11 +397,18 @@ a:visited {
     margin-left: auto;
         margin-right: auto;
         display:block;
-  
+  padding: 10px 10px 15px;
     }
     .contentWrap {
      
     }
+    
+    #quickTip {
+    
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+}
     .circle {
     /* make it responsive */
     max-width: 100%;
@@ -401,7 +420,7 @@ a:visited {
     box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .circle .size1 {
     position: relative;
@@ -425,5 +444,65 @@ a:visited {
     top: 20px;
     height:60px;
     width:35px;
+}
+}
+
+@media screen and (min-width: 200px) and (max-width: 380px) {
+     
+    
+    #container {
+        width: 90vw;
+    margin-left: auto;
+        margin-right: auto;
+        display:block;
+  padding: 10px 10px 15px;
+    }
+    .contentWrap {
+     
+    }
+    
+    #quickTip {
+    
+    margin: 10px;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+}
+    
+    .circle {
+    /* make it responsive */
+    max-width: 100%;
+    display:block;
+    height: 80px;
+    width:80px;
+    background-color:white;
+    border-radius:50%;
+    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+.circle .size1 {
+    position: relative;
+    top: 18px;
+    width:50px;
+}
+.circle .size2 {
+    position: relative;
+    top: 18px;
+    height:50px;
+    width:13px;
+}
+.circle .size3 {
+    position: relative;
+    top: 15px;
+    height:55px;
+    width:45px;
+}
+  .circle .size4 {
+    position: relative;
+    top: 13px;
+    height:55px;
+    width:30px;
 }
 }

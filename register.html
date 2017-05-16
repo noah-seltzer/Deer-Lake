@@ -150,31 +150,43 @@
 
 </script>
 <script>
-	//Redirect to index if already logged in
-	firebase.auth().onAuthStateChanged(function(user) {
-	if(user) {
-		window.location.replace("index.html");
-	}
-		
+	firebase.auth().signOut();
+	
 	function signUp() {
+		
+		var isTaken = false;
 		var email = $('#username').val();
 		var password = $('#password').val();
+		var displayname = $('#displayname').val();
 		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;
-			$('#message').html(errorMessage);
+			$('#message').val(errorMessage);
 		});
 		
 		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;
-			$('#message').html(errorMessage);
+			$('#message').val(errorMessage);
 		});
-		
+				
 		firebase.auth().onAuthStateChanged(function(user) {
-		if(user) {
-			window.location.replace("index.html");
-		}
-	});
+			if(user) {
+				var id = user.uid;
+				firebase.database().ref('users/' + id).set({
+					email: email,
+					displayname: displayname,
+					lists: {
+						list1: {
+							name: 'Default List',
+							items: {
+								apple: 1
+							}
+						}
+					}
+				});
+				//window.location.replace("index.html");
+			}
+		});
 	}
 </script>

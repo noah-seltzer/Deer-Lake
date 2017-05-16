@@ -86,16 +86,15 @@
                     <div class="col-xs-12">
                         <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
-                            <form id="register" action="register.php" method="post">
                                 <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
                                 <br>
-                                <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
+                                <input type="email" id="username" class="textinput" name="Username" placeholder="Email" required>
                                 <br>
                                 <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
                                 <br>
                                 <input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required>
                                 <br>
-                                <input type="submit" value="Register"> </form>
+                                <input type="button" value="Register" onclick="signUp()"> </form>
                         </div>
                     </div>
                 </div>
@@ -103,6 +102,20 @@
         </div>
     </main>
 </body>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+    authDomain: "vegismart-9265b.firebaseapp.com",
+    databaseURL: "https://vegismart-9265b.firebaseio.com",
+    projectId: "vegismart-9265b",
+    storageBucket: "vegismart-9265b.appspot.com",
+    messagingSenderId: "37856046364"
+  };
+  firebase.initializeApp(config);
+</script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -137,52 +150,25 @@
 
 </script>
 <script>
-    //Waits for document to fully load
-    $(document).ready(function() {
-        //Hooks onto the form's submit button
-        $("form").submit(function(event) {
-            var formData = {
-                Username: $("#username").val(),
-                Password: $("#password").val(),
-                DisplayName: $("#displayname").val(),
-                PasswordConfirm: $("#passwordconfirm").val()
-            };
-            //Send user-input to register php on server
-            $.ajax({
-                    type: "POST",
-                    url: "register.php",
-                    data: formData,
-                    dataType: 'json',
-                    encode: true
-                })
-                //Callback for when data is finished being sent and received
-                .done(function(data) {
-                    //Redirects to index if all information is valid
-                    if (data['taken'] == false && data['passwordvalid'] == true && data['emailvalid'] == true) {
-                        $("#message").html("");
-                        window.location.replace("index.html");
-                    } else {
-                        //If email is taken AND passwords do not match, notify of both errors
-                        if (data['taken'] == true && data['passwordvalid'] == false) {
-                            $("#message").html("Email is taken!<br>Passwords do not match!");
-                        }
-                        //If only error is email taken, notify user
-                        else if (data['taken'] == true) {
-                            $("#message").html("Email is taken!");
-                        }
-                        //If email does not match [a-z]@[a-z] then notify of error
-                        else if (data['emailvalid'] == false) {
-                            $("#message").html("Email is invalid!");
-                        }
-                        //If only error is passwords do not match, notify user
-                        else {
-                            $("#message").html("Passwords do not match!");
-                        }
-                    }
-                });
-            //Prevent redirecting the page on submit button clicked
-            event.preventDefault();
-        });
-    });
-
+	//If user is already logged in, redirect to index
+	firebase.auth().onAuthStateChanged(function(user) {
+		if(user) {
+			window.location.replace("index.html");
+		}
+	});
+	
+	function signUp() {
+		var email = $('#username').val();
+		var password = $('#password').val();
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			$('#message').html(errorMessage);
+		});
+		
+		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+		});
+	}
 </script>

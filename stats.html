@@ -11,130 +11,131 @@
     <!--StyleSheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link href="style/stat1.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Fav Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="manifest.json">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff"> </head>
+        <link href="style/stat1.css" rel="stylesheet" type="text/css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Fav Icons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="manifest.json">
+        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
-    <!-- Slideout menu -->
-    <nav id="menu">
-        <header>
-            <ul class="menuVertical">
-                <div class="menuLinks">
-                    <a href="index.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
-                    </a>
+  
+        <!-- Slideout menu -->
+        <nav id="menu">
+            <header>
+                <ul class="menuVertical">
+                    <div class="menuLinks">
+                        <a href="index.html">
+                            <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="menuLinks">
+                        <a href="lists.html">
+                            <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="menuLinks">
+                        <a href="fridge.html">
+                            <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="menuLinks">
+                        <a href="stats.html">
+                            <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="menuLinks">
+                        <a href="info.html">
+                            <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="menuLinks">
+                        <a href="login.html">
+                            <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
+                        </a>
+                    </div>
+                    <hr> </ul>
+            </header>
+        </nav>
+        <!-- main page content area -->
+        <!-- header -->
+        <main id="panel">
+            <header>
+                <div class="topNav">
+                    <div class="menuButton">
+                        <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
+                    </div>
+                    <div class="menuTitle">
+                        <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
                 </div>
-                <hr>
-                <div class="menuLinks">
-                    <a href="lists.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
-                    </a>
-                </div>
-                <hr>
-                <div class="menuLinks">
-                    <a href="fridge.html">
-                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
-                    </a>
-                </div>
-                <hr>
-                <div class="menuLinks">
-                    <a href="stats.html">
-                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
-                    </a>
-                </div>
-                <hr>
-                <div class="menuLinks">
-                    <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span> </li>
-                    </a>
-                </div>
-                <hr>
-                <div class="menuLinks">
-                    <a href="login.html">
-                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
-                    </a>
-                </div>
-                <hr> </ul>
-        </header>
-    </nav>
-    <!-- main page content area -->
-    <!-- header -->
-    <main id="panel">
-        <header>
-            <div class="topNav">
-                <div class="menuButton">
-                    <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
-                </div>
-                <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
-            </div>
-        </header>
-        <div id="container">
-            <h2 id="pageTitle"> Statistics </h2>
-            <br>
-            <h6 id="cardTitle"><i> </i></h6>
-            <div class="row">
-                <div class="card">
-                    <div class="lineChart">
-                        <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
-                        <line-chart></line-chart>
+            </header>
+            <div id="container">
+                <h2 id="pageTitle"> Statistics </h2>
+                <br>
+                <h6 id="cardTitle"><i> </i></h6>
+                <div class="row">
+                    <div class="card">
+                        <div class="lineChart">
+                            <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
+                            <line-chart></line-chart>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="radarChart">
-                        <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
-                        <radar-chart></radar-chart>
+                <div class="row">
+                    <div class="card">
+                        <div class="radarChart">
+                            <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
+                            <radar-chart></radar-chart>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="doughnutChart">
-                        <div class="doughnutChartMessage"> {{ message }} Apple </div>
-                        <doughnut-chart></doughnut-chart>
+                <div class="row">
+                    <div class="card">
+                        <div class="doughnutChart">
+                            <div class="doughnutChartMessage"> {{ message }} Apple </div>
+                            <doughnut-chart></doughnut-chart>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div id="chart" class="noselect">
-                        <canvas id="myChart" height="100%" width="100%"></canvas>
+                <div class="row">
+                    <div class="card">
+                        <div id="chart" class="noselect">
+                            <canvas id="myChart" height="100%" width="100%"></canvas>
+                        </div>
+                        <div id="chartjs-legend" class="noselect"></div>
                     </div>
-                    <div id="chartjs-legend" class="noselect"></div>
+                </div>
+                <div class="row">
+                    <div class="card">
+                        <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
+                        <br>
+                        <br> <small>*Cost determined by Superstore's current pricing</small> </div>
+                </div>
+                <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
+                <div class="row">
+                    <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
+                        <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
+                        <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
+                </div>
+                <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
+                <div class="row">
+                    <div class="card">
+                        <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
+                        <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
+                        <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
+                        <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="card">
-                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
-                    <br>
-                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
-            </div>
-            <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
-            <div class="row">
-                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
-            </div>
-            <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
-            <div class="row">
-                <div class="card">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
-            </div>
-        </div>
-    </main>
+        </main>
 </body>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
@@ -142,35 +143,66 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
 <!-- Bootstrap 4 Alpha JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<!--Font Awesome stuff -->
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+
+    
+    
+<!--Firebase component-->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDjVWFBKcF7ejoYy-CM_F-FbRlC37O1yWI",
+    authDomain: "vegismarttest.firebaseapp.com",
+    databaseURL: "https://vegismarttest.firebaseio.com",
+    projectId: "vegismarttest",
+    storageBucket: "vegismarttest.appspot.com",
+    messagingSenderId: "359697113922"
+  };
+  firebase.initializeApp(config);
+</script>   
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--Vue Js-->
 <script src="vue.js"></script>
 <script type="text/javascript">
     new Vue({
         el: '#container'
         , data: {
-            newTodoText: ''
-            , max: 0
-            , secondmax: 0
-            , thirdmax: 0
-            , maxname: ''
-            , totalWasted: 0
+            //most wasted food
+            max: 0, //second most wasted food
+            secondmax: 0, // third most wasted food... etc.
+            thirdmax: 0, //name of the max wasted food
+            maxname: '', // Total wasted amount(cost)
+            totalWasted: 0
             , secondname: ''
-            , thirdname: ''
-            , items: [{
+            , thirdname: '', //objects to be pulled from server
+            items: [{
                 quantityWasted: 5
                 , item: "Apple"
                 , cost: 0.87
-                }, {
+            }, {
                 quantityWasted: 1
                 , item: "Egg"
                 , cost: 0.3
-                }, {
+            }, {
                 quantityWasted: 4
                 , item: "Banana"
                 , cost: 0.71
-                }]
+            }]
         , }
         , computed: {
+            //computes top wasted foods
             computeTopWasted: function () {
                 for (i = 0; i < this.items.length; i++) {
                     if (this.items[i].quantityWasted > this.max) {
@@ -192,8 +224,8 @@
                         this.thirdname = this.items[i].item;
                     }
                 }
-            }
-            , computeTotalWasted: function () {
+            }, // computes total wasted food
+            computeTotalWasted: function () {
                 for (i = 0; i < this.items.length; i++) {
                     this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
                 }
@@ -227,7 +259,6 @@
     });
 </script>
 <!-- Chart component -->
-
 <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
 <script>
     <!-- lineChart -->
@@ -285,8 +316,9 @@
                         label: 'UserName'
                         , backgroundColor: ['#386324', '#FFFFFF']
                         , data: [70, 30] //need to make reactive
+                            
                         , cutoutPercentage: '90'
-                        , borderColor: ['black', 'red']
+                        , borderColor: ['#386324', 'white']
         }
       ]
             }, {
@@ -316,7 +348,3 @@
 </script>
     
     
-    
-
-    
-<!-- Chart js pie chart Script -->

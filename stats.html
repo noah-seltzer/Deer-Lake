@@ -3,24 +3,25 @@
 
 <head>
     <title>VegiSmart | Stats</title>
-    <!-- Bootstrap 4 alpha CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <!--StyleSheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/stat1.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 4 alpha CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">   
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff"> </head>
+    </head>
 
 <body>
     <!-- Slideout menu -->
@@ -84,7 +85,7 @@
                     <!--<div id="account-details"></div>--></div>
             </div>
         </header>
-        <div id="container">
+        <div class="container" id="container">
             <h2 id="pageTitle"> Statistics </h2>
             <br>
             <h6 id="cardTitle"><i> </i></h6>
@@ -154,16 +155,16 @@
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
-    authDomain: "vegismart-9265b.firebaseapp.com",
-    databaseURL: "https://vegismart-9265b.firebaseio.com",
-    projectId: "vegismart-9265b",
-    storageBucket: "vegismart-9265b.appspot.com",
-    messagingSenderId: "37856046364"
-  };
-  firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
+        , authDomain: "vegismart-9265b.firebaseapp.com"
+        , databaseURL: "https://vegismart-9265b.firebaseio.com"
+        , projectId: "vegismart-9265b"
+        , storageBucket: "vegismart-9265b.appspot.com"
+        , messagingSenderId: "37856046364"
+    };
+    firebase.initializeApp(config);
 </script>
 <!-- firebaseUI for user authentication -->
 <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>

@@ -5,10 +5,10 @@
     <title>VegiSmart | Home</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/homeNav.css" />
-    <link rel="stylesheet" type="text/css" href="style/base.css" />
     <!--Stylesheets-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link rel="stylesheet" type="text/css" href="style/homeNav.css" />
+    <link rel="stylesheet" type="text/css" href="style/base.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -78,7 +78,7 @@
                     <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Home</h1></div>
                 <div class="menuRight">
                     <div id="sign-in-status"></div>
-                    <button class="signOutButton" onclick="toggleSignIn()">
+                    <button id="signOutButton">
                         <div id="sign-in"></div>
                     </button>
                     <!--<div id="account-details"></div>--></div>
@@ -257,3 +257,10 @@
         initApp();
     };
 </script>
+    <!-- jQuery button functions -->
+    <script>$(document).ready(function(){
+  $("#signOutButton").on('click touchstart',function(){
+    toggleSignIn ();
+  });
+});</script>
+    

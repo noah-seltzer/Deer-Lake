@@ -3,24 +3,25 @@
 
 <head>
     <title>Vegi Smart | Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Style Sheets-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="style/base.css" rel="stylesheet" type="text/css">
+    <link href="style/login.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!-- Style Sheets-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link href="style/login.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff"> </head>
+    </head>
 
 <body>
     <!-- Slideout menu -->
@@ -85,10 +86,10 @@
             </div>
         </header>
         <div class="container-fluid">
-            <div id="container">
+             <div class="container" id="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div id="content"> <img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
+                        <div class="formContent"> <img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
                             <input type="text" id="displayname" class="textinput" name="DisplayName" placeholder="Display Name" required>
                             <br>
@@ -98,7 +99,7 @@
                             <br>
                             <input type="password" id="passwordconfirm" class="textinput" name="PasswordConfirm" placeholder="Confirm Password" required>
                             <br>
-                            <input class="button" value="Register" onclick="handleSignUp()"> </div>
+                            <input class="button" type="button" value="Register" onclick="handleSignUp()"> </div>
                     </div>
                 </div>
             </div>

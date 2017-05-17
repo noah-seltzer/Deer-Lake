@@ -3,25 +3,26 @@
 
 <head>
     <title>VegiSmart | Fridge</title>
+    <!--Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+     <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="style/base.css" rel="stylesheet" type="text/css">
+    <link href="style/fridge.css" rel="stylesheet" type="text/css">
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link href="style/fridge.css" rel="stylesheet" type="text/css">
-    <!--Meta Tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--Req for Fav -->
+    <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff"> </head>
+     </head>
 
 <body>
     <!-- Slideout menu -->
@@ -85,44 +86,45 @@
                     <!--<div id="account-details"></div>--></div>
             </div>
         </header>
-        <div id="container">
-            <div id="accordion">
-                <h2 id="info">Fridge</h2>
-                <div id="">
-                    <div id="infoText" class="row">
-                        <div class="center">
-                            <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
-                            <div hidden id="largeSelector">
-                                <input type="checkbox" hidden id="largebox">
-                                <div class="row" id="buttonrow">
-                                    <button type="button" id="largebutton" class="btn btn-success " @click="setLargeBox"><i class="fa fa-square-o" id="largeboxUI"></i>&nbsp;Large fruit or vegetable?</button>
-                                    <button type="button" id="addvegbutton" class="btn btn-success " @click="addItem">Add Item to Fridge <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+        <div class="container" id="container">
+                <div id="accordion">
+                    <h2 id="info">Fridge</h2>
+                    <div id="">
+                        <div id="infoText" class="row">
+                            <div class="center">
+                                <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
+                                <div hidden id="largeSelector">
+                                    <input type="checkbox" hidden id="largebox">
+                                    <div class="row" id="buttonrow">
+                                        <button type="button" id="largebutton" class="btn btn-success " @click="setLargeBox"><i class="fa fa-square-o" id="largeboxUI"></i>&nbsp;Large fruit or vegetable?</button>
+                                        <button type="button" id="addvegbutton" class="btn btn-success " @click="addItem">Add Item to Fridge <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
-                        <!--<i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All-->
-                        <!--</div>-->
-                        <div class="row" id="fridgeContent">
-                            <div class="col-xs-5" id="fridgeList">
-                                <ul @click="uncheckAll(k);checkIt(k)" v-for="(i, k) in fridge" class="no_bottom listItem">
-                                    <li v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
-                                    <li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
-                                </ul>
-                            </div>
-                            <div class="col-xs-6 center" id="quantityManager">
-                                <div v-for="(i,k) in fridge" id="quantityManagerContent"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
-                                    <br> </span> <span v-if="isCheckedAndSmall(k)">
+                            <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
+                            <!--<i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All-->
+                            <!--</div>-->
+                            <div class="row" id="fridgeContent">
+                                <div class="col-xs-5" id="fridgeList">
+                                    <ul @click="uncheckAll(k);checkIt(k)" v-for="(i, k) in fridge" class="no_bottom listItem">
+                                        <li v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
+                                        <li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-6 center" id="quantityManager">
+                                    <div v-for="(i,k) in fridge" id="quantityManagerContent"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
+                                        <br> </span> <span v-if="isCheckedAndSmall(k)">
                                 <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
                                 <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
                                 </span> <span v-if="isCheckedAndLarge(k)">
                                     <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)"><br>
                                 </span>
-                                    <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+        
                 </div>
             </div>
         </div>
@@ -355,16 +357,16 @@
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
-    authDomain: "vegismart-9265b.firebaseapp.com",
-    databaseURL: "https://vegismart-9265b.firebaseio.com",
-    projectId: "vegismart-9265b",
-    storageBucket: "vegismart-9265b.appspot.com",
-    messagingSenderId: "37856046364"
-  };
-  firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
+        , authDomain: "vegismart-9265b.firebaseapp.com"
+        , databaseURL: "https://vegismart-9265b.firebaseio.com"
+        , projectId: "vegismart-9265b"
+        , storageBucket: "vegismart-9265b.appspot.com"
+        , messagingSenderId: "37856046364"
+    };
+    firebase.initializeApp(config);
 </script>
 <!-- firebaseUI for user authentication -->
 <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>

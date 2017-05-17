@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 
-
 <html>
 
 <head>
     <title>VegiSmart | Info</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <!--Style Sheets -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="style/base.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!--Style Sheets -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link href="style/base.css" rel="stylesheet" type="text/css">
-    <link type="text/css" rel="stylesheet" href="css/lightslider.css" />
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
+    </head>
 
 <body>
-    <!-- Slideout menu -->
+   <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
+                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
                     </a>
                 </div>
                 <hr>
@@ -43,25 +44,25 @@
                 <hr>
                 <div class="menuLinks">
                     <a href="fridge.html">
-                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="stats.html">
-                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="login.html">
-                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span></li>
                     </a>
                 </div>
                 <hr> </ul>
@@ -77,12 +78,18 @@
                 </div>
                 <div class="menuTitle">
                     <h1 id="navTitle"><i class="fa fa-info-circle" aria-hidden="true"></i> Info &amp; Tips</h1>
-                </div>
+                </div><div class="menuRight">
+                    <div id="sign-in-status"></div>
+                    <button id="signOutButton">
+                        <div id="sign-in"></div>
+                    </button>
+                    <!--<div id="account-details"></div>--></div>
             </div>
         </header>
         <!--        Main Content-->
-        <div id="container">
+        <div class="container" id="container">
             <div class="contentWrap">
+                <div class="infoContent">
                 <div id="accordion">
 
                     <h2 id="info">Tips</h2>
@@ -164,7 +171,7 @@
 
                 </div>
             </div>
-
+</div>
         </div>
     </main>
 </body>
@@ -283,3 +290,80 @@
     });
 
 </script>
+
+    
+<!--Firebase component-->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+    authDomain: "vegismart-9265b.firebaseapp.com",
+    databaseURL: "https://vegismart-9265b.firebaseio.com",
+    projectId: "vegismart-9265b",
+    storageBucket: "vegismart-9265b.appspot.com",
+    messagingSenderId: "37856046364"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+<!-- Firebase Auth state track and display on each page-->
+<script type="text/javascript">
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
+
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = user.displayName;
+                    document.getElementById('sign-in').textContent = 'Sign out';
+                    document.getElementById('account-details').textContent = JSON.stringify({
+                        displayName: displayName
+                        , email: email
+                        , emailVerified: emailVerified
+                        , photoURL: photoURL
+                        , uid: uid
+                        , accessToken: accessToken
+                        , providerData: providerData
+                    }, null, '  ');
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    window.onload = function () {
+        initApp();
+    };
+</script>
+    <!-- jQuery button functions -->
+    <script>$(document).ready(function(){
+  $("#signOutButton").on('click touchstart',function(){
+    toggleSignIn ();
+  });
+});</script>

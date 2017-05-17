@@ -21,18 +21,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-</head>
-
+    <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
     <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
+                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
                     </a>
                 </div>
                 <hr>
@@ -44,25 +43,25 @@
                 <hr>
                 <div class="menuLinks">
                     <a href="fridge.html">
-                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="stats.html">
-                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="login.html">
-                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span></li>
                     </a>
                 </div>
                 <hr> </ul>
@@ -77,8 +76,13 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-building" aria-hidden="true"></i> My Fridge</h1>
-                </div>
+                    <h1 id="navTitle"><i class="fa fa-building" aria-hidden="true"></i> My Fridge</h1> </div>
+                <div class="menuRight">
+                    <div id="sign-in-status"></div>
+                    <button class="signOutButton" onclick="toggleSignIn()">
+                        <div id="sign-in"></div>
+                    </button>
+                    <!--<div id="account-details"></div>--></div>
             </div>
         </header>
         <div id="container">
@@ -111,8 +115,7 @@
                                     <br> </span> <span v-if="isCheckedAndSmall(k)">
                                 <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
                                 <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
-                                </span>
-                                    <span v-if="isCheckedAndLarge(k)">
+                                </span> <span v-if="isCheckedAndLarge(k)">
                                     <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)"><br>
                                 </span>
                                     <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -136,23 +139,22 @@
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    // Initialize popover component
-    $(function() {
-        $('[data-toggle="popover"]').popover()
-    })
-    //Slider for large fruits
-    $(function() {
+    $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        // Initialize popover component
+    $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        //Slider for large fruits
+    $(function () {
         $("#accordion").accordion({
-            collapsible: true,
-            heightStyle: "content",
-            autoHeight: false,
-            clearStyle: true,
-        });
+            collapsible: true
+            , heightStyle: "content"
+            , autoHeight: false
+            , clearStyle: true
+        , });
     });
-
 </script>
 <!--    Vue JS-->
 <script src="vue.js"></script>
@@ -160,57 +162,56 @@
 <script src="dist/slideout.min.js"></script>
 <script>
     var slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('menu'),
-        'padding': 300,
-        'tolerance': 70
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': 300
+        , 'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function() {
+    document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();
     });
-
 </script>
 <script type="text/javascript">
     new Vue({
-        el: '#accordion',
-        data: {
-            newTodoText: '',
-            fridge: [{
-                quantity: 3,
-                item: "Apples",
-                checked: true,
-                large: false
+        el: '#accordion'
+        , data: {
+            newTodoText: ''
+            , fridge: [{
+                quantity: 3
+                , item: "Apples"
+                , checked: true
+                , large: false
             }, {
-                quantity: 1,
-                item: "Dozen Eggs",
-                checked: false,
-                large: false
+                quantity: 1
+                , item: "Dozen Eggs"
+                , checked: false
+                , large: false
             }, {
-                quantity: 10,
-                item: "Eggplant",
-                checked: false,
-                large: true
+                quantity: 10
+                , item: "Eggplant"
+                , checked: false
+                , large: true
             }, {
-                quantity: 4,
-                item: "Bananas",
-                checked: false,
-                large: false
+                quantity: 4
+                , item: "Bananas"
+                , checked: false
+                , large: false
             }]
-        },
-        methods: {
+        }
+        , methods: {
             /**
              * checks and unchecks clicked item
              * @param index number in array of item
              */
-            checkIt: function(index) {
+            checkIt: function (index) {
                     this.fridge[index].checked = !this.fridge[index].checked;
                 }
                 /**
                  * get which item is checked (only works if one is checked)
                  * @returns {number}
                  */
-                ,
-            getChecked: function() {
+                
+            , getChecked: function () {
                     var vm = this;
                     for (i = 0; i < vm.fridge.length; i++) {
                         if (vm.fridge[i].checked) return i;
@@ -219,20 +220,21 @@
                 /**
                  * adds inputted item to fridge array
                  */
-                ,
-            addItem: function() {
+                
+            , addItem: function () {
                     if (document.getElementById("largebox").checked) {
                         var bool = true;
                         var num = 100;
-                    } else {
+                    }
+                    else {
                         var bool = false;
                         var num = 0;
                     }
                     var obj = {
-                        quantity: num,
-                        item: this.newTodoText,
-                        checked: false,
-                        large: bool
+                        quantity: num
+                        , item: this.newTodoText
+                        , checked: false
+                        , large: bool
                     }
                     this.fridge.push(obj)
                     this.newTodoText = '';
@@ -240,8 +242,8 @@
                 /**
                  * unchecks all items
                  */
-                ,
-            uncheckAll: function() {
+                
+            , uncheckAll: function () {
                     var vm = this;
                     for (i = 0; i < vm.fridge.length; i++) {
                         vm.fridge[i].checked = false;
@@ -251,8 +253,8 @@
                  * adds 1 to the quantity of a small fruit, denoted by index
                  * @param index
                  */
-                ,
-            addQuantitySmall: function(index) {
+                
+            , addQuantitySmall: function (index) {
                     var vm = this;
                     vm.fridge[index].quantity += 1;
                 }
@@ -260,8 +262,8 @@
                  * subtracts one from the quantity of a small fruit, denoted by index
                  * @param index
                  */
-                ,
-            minusQuantitySmall: function(index) {
+                
+            , minusQuantitySmall: function (index) {
                     var vm = this;
                     if (vm.fridge[index].quantity !== 0) {
                         vm.fridge[index].quantity -= 1;
@@ -272,8 +274,8 @@
                  * @param index of item to check
                  * @returns {boolean|*} is item checked and small
                  */
-                ,
-            isCheckedAndSmall: function(index) {
+                
+            , isCheckedAndSmall: function (index) {
                     return !this.fridge[index].large && this.fridge[index].checked;
                 }
                 /**
@@ -281,8 +283,8 @@
                  * @param index of item to check
                  * @returns {boolean|*} is item checked and large
                  */
-                ,
-            isCheckedAndLarge: function(index) {
+                
+            , isCheckedAndLarge: function (index) {
                     return this.fridge[index].large && this.fridge[index].checked;
                 }
                 /**
@@ -290,16 +292,16 @@
                  * @param index
                  * @returns {boolean|*}
                  */
-                ,
-            isCheckedAndNotZero: function(index) {
+                
+            , isCheckedAndNotZero: function (index) {
                     return (this.fridge[index].quantity > 0) && this.fridge[index].checked;
                 }
                 /**
                  * sets item at index's quantity to zero
                  * @param index
                  */
-                ,
-            throwOutRest: function(index) {
+                
+            , throwOutRest: function (index) {
                     this.fridge[index].quantity = 0;
                     //TODO back end stuff
                 }
@@ -307,28 +309,29 @@
                  * updates the percentage value of a large fruit based on input of a slider
                  * @param index
                  */
-                ,
-            updateLargeQuantity: function(index) {
+                
+            , updateLargeQuantity: function (index) {
                     val = document.getElementById("largeQuantitySlider").value;
                     this.fridge[index].quantity = val;
                 }
                 /**
                  * sets the hidden buttons to visible
                  */
-                ,
-            showLarge: function() {
+                
+            , showLarge: function () {
                     var checkboxdiv = document.getElementById("largeSelector");
                     checkboxdiv.removeAttribute('hidden');
                 }
                 /**
                  * changes large button depending on whether user clicks
                  */
-                ,
-            setLargeBox: function() {
+                
+            , setLargeBox: function () {
                     if (document.getElementById("largebox").checked === false) {
                         document.getElementById("largeboxUI").className = "fa fa-check-square-o";
                         document.getElementById("largebox").checked = true;
-                    } else {
+                    }
+                    else {
                         document.getElementById("largeboxUI").className = "fa fa-square-o";
                         document.getElementById("largebox").checked = false;
                     }
@@ -336,8 +339,8 @@
                 /**
                  * removes item, unused for now.
                  */
-                ,
-            remove: function() {
+                
+            , remove: function () {
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {
                     if (vm.fridge[i].checked) {
@@ -348,5 +351,73 @@
             }
         }
     });
+</script>
+<!--Firebase component-->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+    authDomain: "vegismart-9265b.firebaseapp.com",
+    databaseURL: "https://vegismart-9265b.firebaseio.com",
+    projectId: "vegismart-9265b",
+    storageBucket: "vegismart-9265b.appspot.com",
+    messagingSenderId: "37856046364"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+<!-- Firebase Auth state track and display on each page-->
+<script type="text/javascript">
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
 
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = user.displayName;
+                    document.getElementById('sign-in').textContent = 'Sign out';
+                    document.getElementById('account-details').textContent = JSON.stringify({
+                        displayName: displayName
+                        , email: email
+                        , emailVerified: emailVerified
+                        , photoURL: photoURL
+                        , uid: uid
+                        , accessToken: accessToken
+                        , providerData: providerData
+                    }, null, '  ');
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    window.onload = function () {
+        initApp();
+    };
 </script>

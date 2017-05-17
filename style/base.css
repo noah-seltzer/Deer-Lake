@@ -1,41 +1,43 @@
 html {
     font-family: 'Montserrat', 'Arial', sans-serif;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    /* background-color: #9ECAA9; */
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 /* top nav header */
 
 .topNav {
-    background-color: #386324;
+    background-color: #00b74f;
     height: 70px;
 }
 
 .menuButton {
-    width:70px;
+    width:100%;
     height:70px;
-    display: block; 
-    
+    display: block;
+}
+.menuButton button {
+    position:relative;
+    top:15px;
+    left:15px;
 }
 .menuButton img {
-     width: 40px;
+    width: 40px;
     position: relative;
-    top: -2px;
 }
 .menuTitle {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
     position:relative;
-    top: -65px;
-       color: white;
-    
+    top: -60px;
+    color: white;
+
     text-align: center;
 }
 .menuRight {
@@ -43,22 +45,17 @@ body {
     height:70px;
     position:relative;
     float:right;
-    top:-126px;
+    top:-115px;
+    color:white;
 }
-.menuRight img {
- height: 55px;
-    position: relative;
-    top:4px;
-    
+#sign-in {
+    color:white;
 }
 
 
 .topNav button {
     background: none;
     border: none;
-    width:100%;
-    height: 100%;
-
 }
 
 
@@ -69,79 +66,52 @@ body {
 #container {
     margin: 20px;
     background-color: #f8f8f8;
-    max-width: 100%;
-    padding: 10px 10px 30px;
-     box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
-    border-radius: 5px;
-
+    width: 1000px;
+    box-shadow: 0 4px 8px 0 #7597b3, 0 6px 20px 0 #7597b3;
+    padding:0px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .col {
-    text-align: center;
+   padding:0px;
+    overflow:hidden;
 }
 
 .row {
-    width: 100%;
-    margin-left: 1px;
+    max-width: 100%;
+    max-height:100%;
+    position:relative;
+    left:14px;
+    padding:10px;
+    margin:0px;
 }
 
 #quickTip {
-    background-color:  #386324;
-    
-    margin: 30px;
+    background-color:  #00b74f;
+    width:100%;
+    position:relative;
     color: white;
-    padding: 5px;
-    border-radius: 10px;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
 }
 
 
-/** Animation to grow card on hover **/
 
-.hvr-grow {
-    display: inline-block;
-    vertical-align: middle;
-    transform: translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    backface-visibility: hidden;
-    transition-duration: 0.3s;
-    transition-property: transform;
-}
-
-.hvr-grow:hover,
-.hvr-grow:focus,
-.hvr-grow:active {
-    transform: scale(1.07);
-}
 
 
 /* Index Styles */
 
 #panel {
 
-    background-color: #e0e7ef;
+    background-color: white;
 
     height: 100%;
 }
-
-.circle {
-    /* make it responsive */
-    max-width: 100%;
-    display:block;
-    height: 150px;
-    width:150px;
-    background-color:white;
-    border-radius:50%;
-    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+.contentWrap {
+  
 }
-.circle img {
-    position: relative;
-    top: 30px;
-
-}
-
 
 
 /** Lists **/
@@ -209,7 +179,6 @@ body {
 }
 #right{
     float:right;
-    margin-right:20px;
 }
 
 #listItem {
@@ -269,11 +238,11 @@ a:visited {
     color: black;;
     margin-top: 10px;
     margin-bottom: 10px;
-    ;
+;
 }
 
 .affiliated{
-    
+
     float:left;
 }
 
@@ -291,7 +260,7 @@ a:visited {
     /*-webkit-overflow-scrolling: touch;*/
     z-index: 0;
     display: none;
-    background-color:#386324;
+    background-color:#00b74f;
 }
 
 .slideout-menu-left {
@@ -345,10 +314,10 @@ a:visited {
 .menuVertical hr {
     border: 0;
     height: 2px;
-    background-image: -webkit-linear-gradient(left, #386324, #f0f0f0, #386324);
-    background-image: -moz-linear-gradient(left, #386324, #f0f0f0, #386324);
-    background-image: -ms-linear-gradient(left, #386324, #f0f0f0, #386324);
-    background-image: -o-linear-gradient(left, #386324, #f0f0f0, #386324);
+    background-image: -webkit-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
+    background-image: -moz-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
+    background-image: -ms-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
+    background-image: -o-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
     position: relative;
     left: -40px;
     width: 300px;
@@ -386,7 +355,7 @@ a:visited {
     width:300px;
     margin-top: 10px;
     margin-left: 20px;
-    
+
 }
 
 /* mobile responsive CSS */
@@ -395,115 +364,91 @@ a:visited {
 
     #container {
         width: 90vw;
-    margin-left: auto;
+        margin-left: auto;
         margin-right: auto;
         display:block;
-  padding: 10px 10px 15px;
+        padding: 10px 10px 15px;
     }
     .contentWrap {
-     
+          position:relative;
+    top:-70px;
     }
-    
+
     #quickTip {
-    
-    margin: 10px;
-    padding: 5px;
-    border-radius: 10px;
-}
-    .circle {
-    /* make it responsive */
-    max-width: 100%;
-    display:block;
-    height: 100px;
-    width:100px;
-    background-color:white;
-    border-radius:50%;
-    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-.circle .size1 {
-    position: relative;
-    top: 25px;
-    width:55px;
-}
-.circle .size2 {
-    position: relative;
-    top: 25px;
-    height:55px;
-    width:15px;
-}
-.circle .size3 {
-    position: relative;
-    top: 20px;
-    height:60px;
-    width:50px;
-}
-  .circle .size4 {
-    position: relative;
-    top: 20px;
-    height:60px;
-    width:35px;
-}
+    }
 }
 
-@media screen and (min-width: 200px) and (max-width: 380px) {
-     
-    
+@media screen and (min-width: 330px) and (max-width: 380px) {
+
+
     #container {
         width: 90vw;
-    margin-left: auto;
+        margin-left: auto;
         margin-right: auto;
         display:block;
-  padding: 10px 10px 15px;
     }
     .contentWrap {
-     
+          position:relative;
+    top:-70px;
     }
-    
-    #quickTip {
-    
-    margin: 10px;
-    color: white;
-    padding: 5px;
-    border-radius: 10px;
+
+
 }
-    
-    .circle {
-    /* make it responsive */
-    max-width: 100%;
-    display:block;
-    height: 80px;
-    width:80px;
-    background-color:white;
-    border-radius:50%;
-    box-shadow: 0px 1px 10px -10px #e0e7ef, 1px 2px 20px 0px #e0e7ef;
+
+/* iphone5 and smaller */
+@media screen and (min-width: 270px) and (max-width: 330px) {
+
+
+    #container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display:block;
+        height: 85vh;
+    }
+    .contentWrap {
+          position:relative;
+    top:-70px;
+    }
+    .topNav {
+    height: 50px;
+}
+.menuButton {
+    width:40px;
+    height:40px;
+    display: block;
+
+}
+    .menuButton button {
+    position:relative;
+    top:8px;
+    left:8px;
+}
+.menuButton img {
+    width: 30px;
+}
+.menuTitle {
+    width: 200px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
+    position:relative;
+    top: -35px;
+    color: white;
+    text-align: center;
 }
-.circle .size1 {
-    position: relative;
-    top: 18px;
-    width:50px;
+    #navTitle {
+        font-size: 2em;
+    }
+.menuRight {
+    width:60px;
+    height:70px;
+    position:relative;
+    float:right;
+    font-size:11px;
+    top:-75px;
 }
-.circle .size2 {
-    position: relative;
-    top: 18px;
-    height:50px;
-    width:13px;
-}
-.circle .size3 {
-    position: relative;
-    top: 15px;
-    height:55px;
-    width:45px;
-}
-  .circle .size4 {
-    position: relative;
-    top: 13px;
-    height:55px;
-    width:30px;
-}
+    .signOutButton {
+        padding:0px;
+    }
+
 }

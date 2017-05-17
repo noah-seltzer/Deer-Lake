@@ -11,131 +11,137 @@
     <!--StyleSheets -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
-        <link href="style/stat1.css" rel="stylesheet" type="text/css">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Fav Icons-->
-        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-        <link rel="manifest" href="manifest.json">
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="theme-color" content="#ffffff"> </head>
+    <link href="style/stat1.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fav Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
-  
-        <!-- Slideout menu -->
-        <nav id="menu">
-            <header>
-                <ul class="menuVertical">
-                    <div class="menuLinks">
-                        <a href="index.html">
-                            <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
-                        </a>
-                    </div>
-                    <hr>
-                    <div class="menuLinks">
-                        <a href="lists.html">
-                            <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
-                        </a>
-                    </div>
-                    <hr>
-                    <div class="menuLinks">
-                        <a href="fridge.html">
-                            <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
-                        </a>
-                    </div>
-                    <hr>
-                    <div class="menuLinks">
-                        <a href="stats.html">
-                            <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
-                        </a>
-                    </div>
-                    <hr>
-                    <div class="menuLinks">
-                        <a href="info.html">
-                            <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info &amp; Tips</span> </li>
-                        </a>
-                    </div>
-                    <hr>
-                    <div class="menuLinks">
-                        <a href="login.html">
-                            <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
-                        </a>
-                    </div>
-                    <hr> </ul>
-            </header>
-        </nav>
-        <!-- main page content area -->
-        <!-- header -->
-        <main id="panel">
-            <header>
-                <div class="topNav">
-                    <div class="menuButton">
-                        <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
-                    </div>
-                    <div class="menuTitle">
-                        <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
+    <!-- Slideout menu -->
+    <nav id="menu">
+        <header>
+            <ul class="menuVertical">
+                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div class="menuLinks">
+                    <a href="index.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
+                    </a>
                 </div>
-            </header>
-            <div id="container">
-                <h2 id="pageTitle"> Statistics </h2>
-                <br>
-                <h6 id="cardTitle"><i> </i></h6>
-                <div class="row">
-                    <div class="card">
-                        <div class="lineChart">
-                            <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
-                            <line-chart></line-chart>
-                        </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="lists.html">
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="fridge.html">
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span></li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="stats.html">
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span></li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="info.html">
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span></li>
+                    </a>
+                </div>
+                <hr>
+                <div class="menuLinks">
+                    <a href="login.html">
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span></li>
+                    </a>
+                </div>
+                <hr> </ul>
+        </header>
+    </nav>
+    <!-- main page content area -->
+    <!-- header -->
+    <main id="panel">
+        <header>
+            <div class="topNav">
+                <div class="menuButton">
+                    <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
+                </div>
+                <div class="menuTitle">
+                    <h1 id="navTitle"><i class="fa fa-line-chart" aria-hidden="true"></i> My Stats</h1> </div>
+                <div class="menuRight">
+                    <div id="sign-in-status"></div>
+                    <button class="signOutButton" onclick="toggleSignIn()">
+                        <div id="sign-in"></div>
+                    </button>
+                    <!--<div id="account-details"></div>--></div>
+            </div>
+        </header>
+        <div id="container">
+            <h2 id="pageTitle"> Statistics </h2>
+            <br>
+            <h6 id="cardTitle"><i> </i></h6>
+            <div class="row">
+                <div class="card">
+                    <div class="lineChart">
+                        <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
+                        <line-chart></line-chart>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="card">
-                        <div class="radarChart">
-                            <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
-                            <radar-chart></radar-chart>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card">
-                        <div class="doughnutChart">
-                            <div class="doughnutChartMessage"> {{ message }} Apple </div>
-                            <doughnut-chart></doughnut-chart>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card">
-                        <div id="chart" class="noselect">
-                            <canvas id="myChart" height="100%" width="100%"></canvas>
-                        </div>
-                        <div id="chartjs-legend" class="noselect"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="card">
-                        <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
-                        <br>
-                        <br> <small>*Cost determined by Superstore's current pricing</small> </div>
-                </div>
-                <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
-                <div class="row">
-                    <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-                        <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
-                        <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
-                </div>
-                <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
-                <div class="row">
-                    <div class="card">
-                        <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
-                        <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-                        <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
-                        <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
                 </div>
             </div>
-        </main>
+            <div class="row">
+                <div class="card">
+                    <div class="radarChart">
+                        <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
+                        <radar-chart></radar-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="doughnutChart">
+                        <div class="doughnutChartMessage"> {{ message }} Apple </div>
+                        <doughnut-chart></doughnut-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div id="chart" class="noselect">
+                        <canvas id="myChart" height="100%" width="100%"></canvas>
+                    </div>
+                    <div id="chartjs-legend" class="noselect"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
+                    <br>
+                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
+            </div>
+            <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
+            <div class="row">
+                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
+            </div>
+            <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
+            <div class="row">
+                <div class="card">
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
+                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
+                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
+            </div>
+        </div>
+    </main>
 </body>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
@@ -145,35 +151,76 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 <!--Font Awesome stuff -->
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
-
-    
-    
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDjVWFBKcF7ejoYy-CM_F-FbRlC37O1yWI",
-    authDomain: "vegismarttest.firebaseapp.com",
-    databaseURL: "https://vegismarttest.firebaseio.com",
-    projectId: "vegismarttest",
-    storageBucket: "vegismarttest.appspot.com",
-    messagingSenderId: "359697113922"
+    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+    authDomain: "vegismart-9265b.firebaseapp.com",
+    databaseURL: "https://vegismart-9265b.firebaseio.com",
+    projectId: "vegismart-9265b",
+    storageBucket: "vegismart-9265b.appspot.com",
+    messagingSenderId: "37856046364"
   };
   firebase.initializeApp(config);
-</script>   
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+<!-- Firebase Auth state track and display on each page-->
+<script type="text/javascript">
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--Vue Js-->
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = user.displayName;
+                    document.getElementById('sign-in').textContent = 'Sign out';
+                    document.getElementById('account-details').textContent = JSON.stringify({
+                        displayName: displayName
+                        , email: email
+                        , emailVerified: emailVerified
+                        , photoURL: photoURL
+                        , uid: uid
+                        , accessToken: accessToken
+                        , providerData: providerData
+                    }, null, '  ');
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    window.onload = function () {
+        initApp();
+    };
+</script>
+<!--Vue Js-->
 <script src="vue.js"></script>
 <script type="text/javascript">
     new Vue({
@@ -346,5 +393,3 @@
         }
     })
 </script>
-    
-    

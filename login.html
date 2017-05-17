@@ -14,14 +14,13 @@
     <link href="style/login.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-        <!-- Fav Icons-->
+    <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff"></head>
+    <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
     <!-- Slideout menu -->
@@ -30,7 +29,7 @@
             <ul class="menuVertical">
                 <div class="menuLinks">
                     <a href="index.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span> </li>
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
                     </a>
                 </div>
                 <hr>
@@ -42,25 +41,25 @@
                 <hr>
                 <div class="menuLinks">
                     <a href="fridge.html">
-                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span> </li>
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="stats.html">
-                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span> </li>
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span> </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="login.html">
-                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span> </li>
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span></li>
                     </a>
                 </div>
                 <hr> </ul>
@@ -70,32 +69,41 @@
     <!-- header -->
     <main id="panel">
         <header>
+            <!-- Top Navigation -->
             <div class="topNav">
                 <div class="menuButton">
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-user-o" aria-hidden="true"></i> Login</h1> </div>
+                    <h1 id="navTitle"><i class="fa fa-user-o" aria-hidden="true"></i> Login</h1></div>
+                <div class="menuRight">
+                    <div id="sign-in-status"></div>
+                    <button class="signOutButton" onclick="toggleSignIn()">
+                        <div id="sign-in"></div>
+                    </button>
+                    <!--<div id="account-details"></div>--></div>
             </div>
         </header>
         <div class="container-fluid">
             <div id="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div id="content"> <img src="images/Icon%20Assets/logo5Shadowxhdpi.png" alt="Logo" id="logo">
+                        <div id="content"><img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
-                                <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
-                                <br>
-                                <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
-                                <br>
-                                <input class="button" type="submit" value="Login" onclick="login()">
-                        </div>
+                            <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
+                            <br>
+                            <input type="password" id="password" class="textinput" name="Password" placeholder="Password" required>
+                            <br>
+                            <input class="button" type="submit" value="Login" onclick="login()">
+                            <input class="button" type="button" value="Register" onclick="register()"> </div>
+                        <div id="firebaseui-auth-container"></div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
+<!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -108,6 +116,70 @@
     messagingSenderId: "37856046364"
   };
   firebase.initializeApp(config);
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+<script type="text/javascript">
+    function signOut() {
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+        });
+    };
+    // FirebaseUI config.
+    var uiConfig = {
+        signInSuccessUrl: 'index.html'
+        , signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            
+        , ]
+        , // Terms of service url.
+        tosUrl: '<your-tos-url>'
+    };
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+    initApp = function () {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = user.displayName;
+                    document.getElementById('sign-in').textContent = 'Sign Out';
+                    document.getElementById('account-details').textContent = JSON.stringify({
+                        displayName: displayName
+                        , email: email
+                        , emailVerified: emailVerified
+                        , photoURL: photoURL
+                        , uid: uid
+                        , accessToken: accessToken
+                        , providerData: providerData
+                    }, null, '  ');
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+                document.getElementById('account-details').textContent = 'null';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    window.addEventListener('load', function () {
+        initApp()
+    });
 </script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
@@ -141,19 +213,34 @@
     });
 </script>
 <script>
-	function login() {
-		var email = $('#username').val();
-		var password = $('#password').val();
-		firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			$('#message').html(errorMessage);
-		});
-		
-		firebase.auth().onAuthStateChanged(function(user) {
-		if(user) {
-			window.location.replace("index.html");
-		}
-	});
-	}
+    function login() {
+        var email = $('#username').val();
+        var password = $('#password').val();
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            $('#message').html(errorMessage);
+        });
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                window.location.replace("index.html");
+            }
+        });
+    }
+
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
+
+    function register() {
+        window.location.replace("register.html");
+    }
 </script>

@@ -185,25 +185,27 @@
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
     ui.start('#firebaseui-auth-container', uiConfig);
-    initApp = function () {
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var emailVerified = user.emailVerified;
-                var photoURL = user.photoURL;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                user.getToken().then(function (accessToken) {
-                    document.getElementById('sign-in-status').textContent = user.displayName;
-                    document.getElementById('sign-in').textContent = 'Sign Out';
-                });
-                firebase.database().ref('users/' + uid).update({
-                    displayName: displayName
-                });
-                firebase.database().ref('users/' + uid).update({
-                    email: email
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                    var displayName = snapshot.val();
+                    var email = user.email;
+                    uid = user.uid;
+                    var providerData = user.providerData;
+                    user.getToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = user.displayName;
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        $('#sign-in-status').text(displayName);
+                    });
+                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
+                        consumed = snapshot.val();
+                        initCharts();
+                        beginReadStats();
+                    });
                 });
             }
             else {
@@ -214,10 +216,7 @@
         }, function (error) {
             console.log(error);
         });
-    };
-    window.addEventListener('load', function () {
-        initApp()
-    });
+    }
 </script>
 
 <script>

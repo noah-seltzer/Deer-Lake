@@ -161,13 +161,16 @@
 </script>
 <!--    Vue JS-->
 <script src="vue.js"></script>
-<!-- slideout menu component-->
+ <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
+    var element = document.getElementById('menuHeader'),
+    style = window.getComputedStyle(element),
+    size = style.getPropertyValue('width');
     var slideout = new Slideout({
         'panel': document.getElementById('panel')
         , 'menu': document.getElementById('menu')
-        , 'padding': 300
+        , 'padding': size
         , 'tolerance': 70
     });
     document.querySelector('.toggle-button').addEventListener('click', function () {

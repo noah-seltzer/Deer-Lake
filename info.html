@@ -30,7 +30,7 @@
     <nav id="menu">
         <header>
             <ul class="menuVertical">
-                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
                         <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
@@ -296,16 +296,16 @@
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
-    authDomain: "vegismart-9265b.firebaseapp.com",
-    databaseURL: "https://vegismart-9265b.firebaseio.com",
-    projectId: "vegismart-9265b",
-    storageBucket: "vegismart-9265b.appspot.com",
-    messagingSenderId: "37856046364"
-  };
-  firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
+        , authDomain: "vegismart-9265b.firebaseapp.com"
+        , databaseURL: "https://vegismart-9265b.firebaseio.com"
+        , projectId: "vegismart-9265b"
+        , storageBucket: "vegismart-9265b.appspot.com"
+        , messagingSenderId: "37856046364"
+    };
+    firebase.initializeApp(config);
 </script>
 <!-- firebaseUI for user authentication -->
 <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
@@ -323,6 +323,9 @@
         }
         document.getElementById('sign-in').disabled = true;
     }
+    $('document').ready(function () {
+        initApp();
+    });
 
     function initApp() {
         // Listening for auth state changes.
@@ -330,37 +333,38 @@
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                user.getToken().then(function (accessToken) {
-                    document.getElementById('sign-in-status').textContent = user.displayName;
-                    document.getElementById('sign-in').textContent = 'Sign out';
-                    document.getElementById('account-details').textContent = JSON.stringify({
-                        displayName: displayName
-                        , email: email
-                        , emailVerified: emailVerified
-                        , photoURL: photoURL
-                        , uid: uid
-                        , accessToken: accessToken
-                        , providerData: providerData
-                    }, null, '  ');
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                    var displayName = snapshot.val();
+                    var email = user.email;
+                    uid = user.uid;
+                    var providerData = user.providerData;
+                    user.getToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = user.displayName;
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        $('#sign-in-status').text(displayName);
+                    });
+                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
+                        consumed = snapshot.val();
+                        initCharts();
+                        beginReadStats();
+                    });
                 });
             }
             else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
-                document.getElementById('account-details').textContent = 'null';
             }
         }, function (error) {
             console.log(error);
         });
     }
-    window.onload = function () {
-        initApp();
-    };
+
+    function beginReadStats() {
+        firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function (snapshot) {
+            consumed = snapshot.val();
+        });
+    }
 </script>
     <!-- jQuery button functions -->
     <script>$(document).ready(function(){

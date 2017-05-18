@@ -29,7 +29,7 @@
     <nav id="menu">
         <header>
             <ul class="menuVertical">
-                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
                         <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
@@ -106,6 +106,42 @@
         </div>
     </main>
 </body>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+<!-- Tether -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+<!-- Bootstrap 4 Alpha JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
+<!-- Initialize Bootstrap functionality -->
+<script>
+    // Initialize tooltip component
+    $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        // Initialize popover component
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+<!-- slideout menu component -->
+<script src="dist/slideout.min.js"></script>
+<script>
+    var element = document.getElementById('menuHeader'),
+    style = window.getComputedStyle(element),
+    size = style.getPropertyValue('width');
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': size
+        , 'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
+    });
+</script>
+
+    
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <script>
@@ -131,6 +167,9 @@
             // An error happened.
         });
     };
+    $('document').ready(function () {
+        initApp();
+    });
     // FirebaseUI config.
     var uiConfig = {
         signInSuccessUrl: 'index.html'
@@ -159,15 +198,6 @@
                 user.getToken().then(function (accessToken) {
                     document.getElementById('sign-in-status').textContent = user.displayName;
                     document.getElementById('sign-in').textContent = 'Sign Out';
-                    document.getElementById('account-details').textContent = JSON.stringify({
-                        displayName: displayName
-                        , email: email
-                        , emailVerified: emailVerified
-                        , photoURL: photoURL
-                        , uid: uid
-                        , accessToken: accessToken
-                        , providerData: providerData
-                    }, null, '  ');
                 });
                 firebase.database().ref('users/' + uid).update({
                     displayName: displayName
@@ -180,7 +210,6 @@
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
-                document.getElementById('account-details').textContent = 'null';
             }
         }, function (error) {
             console.log(error);
@@ -190,37 +219,7 @@
         initApp()
     });
 </script>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-<!-- Tether -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-<!-- Bootstrap 4 Alpha JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
-<script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
-<!-- Initialize Bootstrap functionality -->
-<script>
-    // Initialize tooltip component
-    $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        // Initialize popover component
-    $(function () {
-        $('[data-toggle="popover"]').popover()
-    })
-</script>
-<!-- slideout menu component -->
-<script src="dist/slideout.min.js"></script>
-<script>
-    var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': 300
-        , 'tolerance': 70
-    });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
-        slideout.toggle();
-    });
-</script>
+
 <script>
     function login() {
         var email = $('#username').val();

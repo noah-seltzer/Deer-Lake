@@ -15,21 +15,20 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    </head>
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5"> </head>
 
 <body>
     <!-- Slideout menu -->
     <nav id="menu">
         <header>
             <ul class="menuVertical">
-                <div class="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
+                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
                         <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
@@ -87,7 +86,6 @@
             </div>
         </header>
         <div class="container" id="container">
-         
             <div class="row">
                 <div class="card">
                     <div class="lineChart">
@@ -118,13 +116,11 @@
                     <br>
                     <br> <small>*Cost determined by Superstore's current pricing</small> </div>
             </div>
-         
             <div class="row">
                 <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
                     <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
                     <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
             </div>
-        
             <div class="row">
                 <div class="card">
                     <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
@@ -135,6 +131,22 @@
         </div>
     </main>
 </body>
+    <!-- slideout menu component -->
+<script src="dist/slideout.min.js"></script>
+<script>
+    var element = document.getElementById('menuHeader'),
+    style = window.getComputedStyle(element),
+    size = style.getPropertyValue('width');
+    var slideout = new Slideout({
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': size
+        , 'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        slideout.toggle();
+    });
+</script>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -173,6 +185,9 @@
         }
         document.getElementById('sign-in').disabled = true;
     }
+    $('document').ready(function () {
+        initApp();
+    });
 
     function initApp() {
         // Listening for auth state changes.
@@ -180,41 +195,37 @@
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var uid = user.uid;
-                var providerData = user.providerData;
-                user.getToken().then(function (accessToken) {
-                    document.getElementById('sign-in-status').textContent = user.displayName;
-                    document.getElementById('sign-in').textContent = 'Sign out';
-                    document.getElementById('account-details').textContent = JSON.stringify({
-                        displayName: displayName
-                        , email: email
-                        , emailVerified: emailVerified
-                        , photoURL: photoURL
-                        , uid: uid
-                        , accessToken: accessToken
-                        , providerData: providerData
-                    }, null, '  ');
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                    var displayName = snapshot.val();
+                    var email = user.email;
+                    uid = user.uid;
+                    var providerData = user.providerData;
+                    user.getToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = user.displayName;
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        $('#sign-in-status').text(displayName);
+                    });
+                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
+                        consumed = snapshot.val();
+                        initCharts();
+                        beginReadStats();
+                    });
                 });
             }
             else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
-                document.getElementById('account-details').textContent = 'null';
             }
         }, function (error) {
             console.log(error);
         });
     }
+
     function beginReadStats() {
-		firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function(snapshot) {
-			consumed = snapshot.val();
-		});
-    }
-    window.onload = function () {
-        initApp();
+        firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function (snapshot) {
+            consumed = snapshot.val();
+        });
     }
 </script>
 <!--Vue Js-->
@@ -289,22 +300,11 @@
         $('[data-toggle="popover"]').popover()
     })
 </script>
-<!-- slideout menu component -->
-<script src="dist/slideout.min.js"></script>
-<script>
-    var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': 300
-        , 'tolerance': 70
-    });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
-        slideout.toggle();
-    });
-</script>
+
 <!-- Chart component -->
 <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
 <script>
+    function initCharts() {
     <!-- lineChart -->
     Vue.component('line-chart', {
         extends: VueChartJs.Line
@@ -351,7 +351,7 @@
         }
     })
     var numConsumed = consumed;
-	var numWasted = 100 - numConsumed;
+    var numWasted = 100 - numConsumed;
     Vue.component('doughnut-chart', {
         extends: VueChartJs.Doughnut
         , mounted() {
@@ -391,4 +391,5 @@
             message: ''
         }
     })
+    }
 </script>

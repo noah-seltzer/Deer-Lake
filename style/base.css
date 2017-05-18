@@ -291,27 +291,38 @@ a:visited {
 }
 
 .menuVertical {
-    margin-top: 15px;
+    padding:0px;
+    width:100%;
+    
 }
 
 .menuVertical li {
     list-style-type: none;
+    height:100%;
 }
 
 .menuVertical hr {
     border: 0;
-    height: 2px;
+    height: 3px;
     background-image: -webkit-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
     background-image: -moz-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
     background-image: -ms-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
     background-image: -o-linear-gradient(left, #00b74f, #f0f0f0, #00b74f);
-    position: relative;
-    left: -40px;
-    width: 300px;
+    width: 100%;
+    margin:0;
 }
 
 .menuLinks {
     display: block;
+    width:100%
+        height:100%;
+    padding:20px;
+}
+.menuLinks:hover,
+.menuLinks:active,
+.menuLinks:focus
+{
+    background-color:#449e6a;
 }
 
 #fridgeIcon {
@@ -334,13 +345,10 @@ a:visited {
     height: 150px;
     width: 300px;
     background-color: white;
-    position: relative;
-    top: -15px;
-    left:-40px;
+    padding:20px;
+
 }
 #menuHeader img {
-    width:300px;
-    margin-top: 10px;
-    margin-left: 20px;
+    width:100%;
 
 }

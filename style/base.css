@@ -74,33 +74,20 @@ body {
     margin-right:auto;
 }
 
-.col {
-   padding:0px;
-    overflow:hidden;
-}
-
 .row {
-    max-width: 100%;
-    max-height:100%;
-    position:relative;
-    left:14px;
-    padding:10px;
-    margin:0px;
+    padding:20px;
+    width:100%;
+    margin:0px !important; 
 }
 
 #quickTip {
     background-color:  #00b74f;
     width:100%;
-    position:relative;
     color: white;
-        color: white;
         padding: 15px;
         border-radius: 10px;
+    margin: 0 auto;
 }
-
-
-
-
 
 /* Index Styles */
 
@@ -132,9 +119,14 @@ body {
 }
 
 #buttons {
-    margin-bottom: 8px;
-    float:right;
-    margin-right:23px;
+   width:60%;
+    margin-left:auto;
+    margin-right:2%;
+    margin-bottom:2%;
+    display:block;
+}
+.btn {
+    margin:2px;
 }
 
 #addAnItem {
@@ -219,7 +211,6 @@ a:visited {
     padding: 5px;
     margin: 1px;
     border: 1px solid white;
-    clear:both;
 }
 
 #infoText {

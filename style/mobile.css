@@ -9,8 +9,14 @@
             padding: 10px 10px 35px;
         }
         .contentWrap {
-            position: relative;
-            top: -30px;
+            width:100%;
+        }
+        .row {
+            padding:10px;
+        }
+        .col-xs-12 {
+            float:none !important;
+            padding: 0px !important;
         }
         .topNav {
             height: 50px;
@@ -96,8 +102,14 @@
             padding: 10px 10px 35px;
         }
         .contentWrap {
-            position: relative;
-            top: -30px;
+            width:100%;
+        }
+        .row {
+            padding:10px;
+        }
+        .col-xs-12 {
+            float:none !important;
+            padding: 0px !important;
         }
         .topNav {
             height: 50px;

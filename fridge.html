@@ -76,41 +76,26 @@
                 <hr> </ul>
         </header>
     </nav>
-    <!-- main page content area -->
-    <!-- header -->
+
+
+<!-- main page content area -->
     <main id="panel">
         <header>
+            <!-- Top Navigation -->
             <div class="topNav">
                 <div class="menuButton">
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-building" aria-hidden="true"></i> My Fridge</h1> </div>
+                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Home</h1></div>
                 <div class="menuRight">
                     <div id="sign-in-status"></div>
-                    <button class="signOutButton" onclick="toggleSignIn()">
+                    <button id="signOutButton">
                         <div id="sign-in"></div>
                     </button>
                     <!--<div id="account-details"></div>--></div>
             </div>
         </header>
-        
-
-<!-- Slideout menu -->
-
-<!-- main page content area -->
-<!-- header -->
-<main id="panel">
-    <header>
-        <div class="topNav">
-            <div class="menuButton">
-                <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
-            </div>
-            <div class="menuTitle">
-                <h1 id="navTitle"><i class="fa fa-building" aria-hidden="true"></i> My Fridge</h1>
-            </div>
-        </div>
-    </header>
     <div id="container">
         <div id="accordion">
             <h2 id="info">Fridge</h2>
@@ -223,7 +208,51 @@
 </script>
 <script type="text/javascript">
 
-    //JOHN EDIT
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
+    $('document').ready(function () {
+        initApp();
+    });
+
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                    var displayName = snapshot.val();
+                    var email = user.email;
+                    var uid = user.uid;
+                    var providerData = user.providerData;
+                    user.getToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = user.displayName;
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        $('#sign-in-status').text(displayName);
+                    });
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+    
+    
+    
     var dbuser;
     firebase.auth().onAuthStateChanged(function(user) {
         if(user) {
@@ -482,4 +511,13 @@
     }
 
 
+</script>
+    
+    <!-- jQuery button functions -->
+<script>
+    $(document).ready(function () {
+        $("#signOutButton").on('click touchstart', function () {
+            toggleSignIn();
+        });
+    });
 </script>

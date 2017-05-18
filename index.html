@@ -131,7 +131,6 @@
         </div>
     </main>
 </body>
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
 <!-- Tether -->
@@ -153,9 +152,9 @@
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
-    var element = document.getElementById('menuHeader'),
-    style = window.getComputedStyle(element),
-    size = style.getPropertyValue('width');
+    var element = document.getElementById('menuHeader')
+        , style = window.getComputedStyle(element)
+        , size = style.getPropertyValue('width');
     var slideout = new Slideout({
         'panel': document.getElementById('panel')
         , 'menu': document.getElementById('menu')
@@ -166,7 +165,7 @@
         slideout.toggle();
     });
 </script>
- <!-- index menu component -->
+<!-- index menu component -->
 <script src="js/polyfills.js"></script>
 <script src="js/modernizr-2.6.2.min.js"></script>
 <script>
@@ -193,8 +192,7 @@
             classie.remove(wrapper, 'opened-nav');
         }
     })();
-</script>   
-    
+</script>
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
@@ -245,11 +243,6 @@
                         document.getElementById('sign-in').textContent = 'Sign out';
                         $('#sign-in-status').text(displayName);
                     });
-                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
-                        consumed = snapshot.val();
-                        initCharts();
-                        beginReadStats();
-                    });
                 });
             }
             else {
@@ -261,17 +254,12 @@
             console.log(error);
         });
     }
-
-    function beginReadStats() {
-        firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function (snapshot) {
-            consumed = snapshot.val();
-        });
-    }
 </script>
-    <!-- jQuery button functions -->
-    <script>$(document).ready(function(){
-  $("#signOutButton").on('click touchstart',function(){
-    toggleSignIn ();
-  });
-});</script>
-    
+<!-- jQuery button functions -->
+<script>
+    $(document).ready(function () {
+        $("#signOutButton").on('click touchstart', function () {
+            toggleSignIn();
+        });
+    });
+</script>

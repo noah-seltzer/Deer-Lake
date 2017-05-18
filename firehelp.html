@@ -22,13 +22,13 @@
     https://jsfiddle.net/posva/wtyop5jy/
     -->
 
-    <div id="app">
+    <div id="app" class="row">
       <input
         v-model.trim="newTodoText"
         @keyup.enter="addTodo"
         placeholder="Add new todo"
       >
-      <ul>
+      <ul class="col-xs-5">
         <li v-for="todo in todos">
           <input
             :value="todo.text"
@@ -37,28 +37,42 @@
           <button @click="removeTodo(todo)">X</button>
         </li>
       </ul>
+      <div class="col-xs-5">
+
+      </div>
     </div>
 
     <script>
+
       /* global Vue, firebase */
-      var db = firebase.initializeApp({
-        databaseURL: "https://vegismart-9265b.firebaseio.com"
-      }).database()
-      var todosRef = db.ref('todos')
+      var config = {
+          apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+          authDomain: "vegismart-9265b.firebaseapp.com",
+          databaseURL: "https://vegismart-9265b.firebaseio.com",
+          projectId: "vegismart-9265b",
+          storageBucket: "vegismart-9265b.appspot.com",
+          messagingSenderId: "37856046364"
+      };
+      firebase.initializeApp(config)
+      var db = firebase.database()
+      var todosRef = db.ref('Fridge/Items')
+      var quantitiesref = db.ref('Fridge/Quantities')
       new Vue({
         el: '#app',
         data: {
-          newTodoText: ''
+          newTodoText: '',
         },
         firebase: {
-          todos: todosRef.limitToLast(25)
+          todos: todosRef.limitToLast(25),
+          quantities: quantitiesref.limitToLast(25)
         },
         methods: {
           addTodo: function () {
             if (this.newTodoText) {
               todosRef.push({
-                text: this.newTodoText
-              })
+                  text: this.newTodoText,
+                  quantity:100
+              });
               this.newTodoText = ''
             }
           },

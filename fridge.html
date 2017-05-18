@@ -22,6 +22,10 @@
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
+    <script src="vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.2/vuefire.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+
 </head>
 
 
@@ -87,7 +91,7 @@
                 <div id="">
                     <div id="infoText" class="row">
                         <div class="center">
-                            <input type="text" @click="showLarge" v-on:keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
+                            <input type="text" @click="showLarge" @keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
                             <div hidden id="largeSelector">
                                 <input type="checkbox" hidden id="largebox">
                                 <div class="row" id="buttonrow">
@@ -99,24 +103,27 @@
                         <!--<div v-if="fridge.length > 0"@click="checkAll()">-->
                         <!--<i class="fa fa-check-square checkAll" aria-hidden="true"></i> Select All-->
                         <!--</div>-->
+
                         <div class="row" id="fridgeContent">
                             <div class="col-xs-5" id="fridgeList">
-                                <ul @click="uncheckAll(k);checkIt(k)" v-for="(i, k) in fridge" class="no_bottom listItem">
-                                    <li v-if="i.checked" id="selected"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
-                                    <li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
+                                <ul @click="uncheckAll(k);checkIt(k)"  class="no_bottom listItem">
+                                    <li v-for="todo in todos">{{item.text}}</li>
                                 </ul>
-                            </div>
-                            <div class="col-xs-6 center" id="quantityManager">
-                                <div v-for="(i,k) in fridge" id="quantityManagerContent"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
-                                    <br> </span> <span v-if="isCheckedAndSmall(k)">
-                                <i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>
-                                <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
-                                </span>
-                                    <span v-if="isCheckedAndLarge(k)">
-                                    <input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)"><br>
-                                </span>
-                                    <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                </div>
+                                    <!--<li v-if="i.checked" id="selected"> <span v-if="item.quantity != 0">{{item.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>-->
+                                    <!--<li v-else> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-6 center" id="quantityManager">-->
+                                <!--<div v-for="(i,k) in fridge" id="quantityManagerContent"> <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>-->
+                                    <!--<br> </span> <span v-if="isCheckedAndSmall(k)">-->
+                                <!--<i class="fa fa-plus-circle fa-2x" @click="addQuantitySmall(k)"></i>-->
+                                <!--<i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>-->
+                                <!--</span>-->
+                                    <!--<span v-if="isCheckedAndLarge(k)">-->
+                                    <!--<input id="largeQuantitySlider" type="range" min="0" max="100" v-on:change="updateLargeQuantity(k)"><br>-->
+                                <!--</span>-->
+                                    <!--<button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
@@ -155,7 +162,7 @@
 
 </script>
 <!--    Vue JS-->
-<script src="vue.js"></script>
+
 <!-- slideout menu component-->
 <script src="dist/slideout.min.js"></script>
 <script>
@@ -171,32 +178,23 @@
 
 </script>
 <script type="text/javascript">
+
+
+
+    // Initialize Firebase
+    var db = firebase.initializeApp({
+        databaseURL: "https://vegismart-9265b.firebaseio.com"
+    }).database()
+    var todosRef = db.ref('Fridge/Items')
     new Vue({
         el: '#accordion',
         data: {
-            newTodoText: '',
-            fridge: [{
-                quantity: 3,
-                item: "Apples",
-                checked: true,
-                large: false
-            }, {
-                quantity: 1,
-                item: "Dozen Eggs",
-                checked: false,
-                large: false
-            }, {
-                quantity: 10,
-                item: "Eggplant",
-                checked: false,
-                large: true
-            }, {
-                quantity: 4,
-                item: "Bananas",
-                checked: false,
-                large: false
-            }]
+            newTodoText: ''
         },
+            firebase:{
+                todos: todosRef.limitToLast(25)
+            },
+
         methods: {
             /**
              * checks and unchecks clicked item
@@ -221,26 +219,36 @@
                  */
                 ,
             addItem: function() {
-                    if (document.getElementById("largebox").checked) {
-                        var bool = true;
-                        var num = 100;
-                    } else {
-                        var bool = false;
-                        var num = 0;
-                    }
-                    var obj = {
-                        quantity: num,
-                        item: this.newTodoText,
-                        checked: false,
-                        large: bool
-                    }
-                    this.fridge.push(obj)
-                    this.newTodoText = '';
+                var new_text = this.newTodoText;
+                if (document.getElementById("largebox").checked) {
+                    var bool = true;
+                    var num = 100;
+                } else {
+                    var bool = false;
+                    var num = 0;
                 }
+                this.fridge.push(obj);
+                db.ref('Fridge/Items').push({
+                    text:new_text,
+                    quantity:num
+                })
+            }
                 /**
                  * unchecks all items
                  */
                 ,
+            getquantity: function(index) {
+                    var i = 0;
+
+                for (quantities in firebase.fridgequantities){
+                    if(i === index){
+                        return quantities;
+                    }
+                    i++;
+                }
+            },
+
+
             uncheckAll: function() {
                     var vm = this;
                     for (i = 0; i < vm.fridge.length; i++) {
@@ -341,12 +349,14 @@
                 var vm = this;
                 for (i = 0; i < vm.fridge.length; i++) {
                     if (vm.fridge[i].checked) {
-                        vm.fridge.splice(i, 1)
+                        vm.fridge.splice(i, 1);
                         i--
                     }
                 }
             }
         }
     });
+
+
 
 </script>

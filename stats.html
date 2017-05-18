@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/stat1.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="style/mobile.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -86,9 +87,7 @@
             </div>
         </header>
         <div class="container" id="container">
-            <h2 id="pageTitle"> Statistics </h2>
-            <br>
-            <h6 id="cardTitle"><i> </i></h6>
+         
             <div class="row">
                 <div class="card">
                     <div class="lineChart">
@@ -115,25 +114,17 @@
             </div>
             <div class="row">
                 <div class="card">
-                    <div id="chart" class="noselect">
-                        <canvas id="myChart" height="100%" width="100%"></canvas>
-                    </div>
-                    <div id="chartjs-legend" class="noselect"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card">
                     <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
                     <br>
                     <br> <small>*Cost determined by Superstore's current pricing</small> </div>
             </div>
-            <h6 id="cardTitle"><i> Top Wasted Food </i></h6>
+         
             <div class="row">
                 <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
                     <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
                     <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
             </div>
-            <h6 id="cardTitle"><i> Other Wasted Food </i></h6>
+        
             <div class="row">
                 <div class="card">
                     <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
@@ -217,9 +208,14 @@
             console.log(error);
         });
     }
+    function beginReadStats() {
+		firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function(snapshot) {
+			consumed = snapshot.val();
+		});
+    }
     window.onload = function () {
         initApp();
-    };
+    }
 </script>
 <!--Vue Js-->
 <script src="vue.js"></script>
@@ -332,7 +328,7 @@
       ]
             }, {
                 responsive: true
-                , maintainAspectRatio: false
+                , maintainAspectRatio: true
             })
         }
     })
@@ -350,10 +346,12 @@
       ]
             }, {
                 responsive: true
-                , maintainAspectRatio: false
+                , maintainAspectRatio: true
             })
         }
     })
+    var numConsumed = consumed;
+	var numWasted = 100 - numConsumed;
     Vue.component('doughnut-chart', {
         extends: VueChartJs.Doughnut
         , mounted() {
@@ -363,7 +361,7 @@
                     {
                         label: 'UserName'
                         , backgroundColor: ['#386324', '#FFFFFF']
-                        , data: [70, 30] //need to make reactive
+                        , data: [numConsumed, numWasted] //need to make reactive
                             
                         , cutoutPercentage: '90'
                         , borderColor: ['#386324', 'white']

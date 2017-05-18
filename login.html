@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/login.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="style/mobile.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -89,7 +90,7 @@
         <div class="container-fluid">
             <div class="container" id="container">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 colAdjust">
                         <div class="formContent"><img src="images/Icon%20Assets/logo_ver3xhdpi.png" alt="Logo" id="logo">
                             <div id="message"></div>
                             <input type="text" id="username" class="textinput" name="Username" placeholder="Email" required>
@@ -106,7 +107,7 @@
     </main>
 </body>
 <!--Firebase component-->
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -167,6 +168,12 @@
                         , accessToken: accessToken
                         , providerData: providerData
                     }, null, '  ');
+                });
+                firebase.database().ref('users/' + uid).update({
+                    displayName: displayName
+                });
+                firebase.database().ref('users/' + uid).update({
+                    email: email
                 });
             }
             else {

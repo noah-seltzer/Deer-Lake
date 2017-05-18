@@ -40,19 +40,19 @@ body {
     text-align: center;
 }
 .menuRight {
-    width:120px;
+    width:200px;
     height:100%;
     position:relative;
     margin-left:auto;
     top:-122px;
     color:white;
-    text-align:center;
+    text-align:right;
     padding:10px;
+    padding-right:20px;
 }
 #sign-in {
     color:white;
 }
-
 
 .topNav button {
     background: none;
@@ -110,10 +110,6 @@ body {
 
     height: 100%;
 }
-.contentWrap {
-  
-}
-
 
 /** Lists **/
 
@@ -334,7 +330,7 @@ a:visited {
     margin-left: 10px;
 }
 
-.menuHeader {
+#menuHeader {
     height: 150px;
     width: 300px;
     background-color: white;
@@ -342,188 +338,9 @@ a:visited {
     top: -15px;
     left:-40px;
 }
-.menuHeader img {
+#menuHeader img {
     width:300px;
     margin-top: 10px;
     margin-left: 20px;
-
-}
-
-/* mobile responsive CSS */
-
-@media screen and (min-width: 370px) and (max-width: 500px) {
-
-    #container {
-        width: 90vw;
-        margin-left: auto;
-        margin-right: auto;
-        display:block;
-        padding: 10px 10px 35px;
-    }
-    .contentWrap {
-          position:relative;
-top:-30px;
-    }
- .topNav {
-    height: 50px;
-}
-    .menuButton {
-        width:60px;
-        height:100%;
-    }
-.menuButton img {
-    width: 30px;
-    position:relative;
-    top:-3px;
-}
-.menuTitle {
-    width: 170px;
-    margin-left: auto;
-    margin-right: auto;
-    position:relative;
-    top: -40px;
-    color: white;
-    text-align: center;
-    height:100%;
-}
-    #navTitle {
-        font-size: 1.5em;
-    }
-.menuRight {
-    width:80px;
-    height:100%;
-    position:relative;
-    float:right;
-    font-size:11px;
-    top:-100px;
-}
-    #signOutButton {
-        padding:0px;
-    }
-    .myListContent {
-        position:relative;
-        margin-top:-30px;
-    }
-    #infoText{
-        font-size:.9em;
-        padding: 0 10px;
-    }
-
-}
-
-@media screen and (min-width: 330px) and (max-width: 370px) {
-
-
-    #container {
-        width: 90vw;
-        margin-left: auto;
-        margin-right: auto;
-        display:block;
-   padding: 10px 10px 35px;
-    }
-    .contentWrap {
-          position:relative;
-top:-30px;
-    }
-.topNav {
-    height: 50px;
-}
-    .menuButton {
-        width:60px;
-        height:100%;
-    }
-.menuButton img {
-    width: 30px;
-    position:relative;
-    top:-3px;
-}
-.menuTitle {
-    width: 170px;
-    margin-left: auto;
-    margin-right: auto;
-    position:relative;
-    top: -40px;
-    color: white;
-    text-align: center;
-    height:100%;
-}
-    #navTitle {
-        font-size: 1.5em;
-    }
-.menuRight {
-    width:80px;
-    height:100%;
-    position:relative;
-    float:right;
-    font-size:11px;
-    top:-100px;
-}
-    #signOutButton {
-        padding:0px;
-    }
-.myListContent {
-        position:relative;
-        margin-top:-30px;
-    }
-    #infoText{
-        font-size:.9em;
-        padding: 0 10px;
-    }
-}
-
-/* iphone5 and smaller */
-@media screen and (min-width: 270px) and (max-width: 330px) {
-
-
-    #container {
-        width: 90vw;
-        margin-left: auto;
-        margin-right: auto;
-        display:block;
-    }
-    .contentWrap {
-          position:relative;
-    top:-30px;
-    }
-    .topNav {
-    height: 50px;
-}
-    .menuButton {
-        width:60px;
-        height:100%;
-    }
-.menuButton img {
-    width: 30px;
-    position:relative;
-    top:-3px;
-}
-.menuTitle {
-    width: 170px;
-    margin-left: auto;
-    margin-right: auto;
-    position:relative;
-    top: -40px;
-    color: white;
-    text-align: center;
-    height:100%;
-}
-    #navTitle {
-        font-size: 1.5em;
-    }
-.menuRight {
-    width:80px;
-    height:100%;
-    position:relative;
-    float:right;
-    font-size:11px;
-    top:-100px;
-}
-    #signOutButton {
-        padding:0px;
-    }
-    #infoText{
-        font-size:.9em;
-        padding: 0 20px;
-    }
 
 }

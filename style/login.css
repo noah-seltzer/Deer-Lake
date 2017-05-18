@@ -43,20 +43,11 @@ form {
 	width: 110%;
 }
 .button{
-    background-color: #386324;
+    background-color: #00b74f;
     border-radius: 5px;
     height:40px;
     width:90px;
     color: white;
     position:relative;
     left:60px;
-}
-/* mobile responsive CSS */
-
-@media screen and (min-width: 370px) and (max-width: 500px) {
-}
-@media screen and (min-width: 330px) and (max-width: 370px) {
-}
-/* iphone5 and smaller */
-@media screen and (min-width: 270px) and (max-width: 330px) {
 }

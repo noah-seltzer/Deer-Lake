@@ -1,0 +1,414 @@
+/* mobile responsive CSS */
+/* mobile responsive CSS */
+@media screen and (min-width: 400px) and (max-width: 500px) {
+
+    #container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display:block;
+        padding: 10px 10px 35px;
+    }
+    .contentWrap {
+          position:relative;
+top:-30px;
+    }
+ .topNav {
+    height: 50px;
+}
+    .menuButton {
+        width:60px;
+        height:100%;
+    }
+.menuButton img {
+    width: 30px;
+    position:relative;
+    top:-3px;
+}
+.menuTitle {
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -40px;
+    color: white;
+    text-align: center;
+    height:100%;
+}
+    #navTitle {
+        font-size: 1.5em;
+    }
+.menuRight {
+    width:140px;
+    height:100%;
+    position:relative;
+    float:right;
+    font-size:11px;
+    top:-100px;
+}
+    #signOutButton {
+        padding:0px;
+    }
+    
+/* My List */
+    .myListContent {
+        position:relative;
+        margin-top:-30px;
+    }
+    #infoText{
+        font-size:.9em;
+        padding: 0 10px;
+    }
+    
+/* My Fridge */
+    .myFridgeContent {
+        position:relative;
+        top:-25px;
+        padding:0;
+    }
+    #fridgeList {
+        position:relative;
+        left:15px;
+    }
+    #largebutton {
+        margin-bottom:10px;
+    }
+    #fridgeContent {
+        position:relative;
+        top:-20px;
+}
+    #quantityManager {
+        position:relative;
+        left:30px;
+    }
+/* My Stats*/
+/* Info & Tips */
+/* Login/Register */
+
+    .colAdjust {
+        position:relative;
+        top:-50px;
+    }
+}
+
+@media screen and (min-width: 370px) and (max-width: 400px) {
+
+    #container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display:block;
+        padding: 10px 10px 35px;
+    }
+    .contentWrap {
+          position:relative;
+top:-30px;
+    }
+ .topNav {
+    height: 50px;
+}
+    .menuButton {
+        width:60px;
+        height:100%;
+    }
+.menuButton img {
+    width: 30px;
+    position:relative;
+    top:-3px;
+}
+.menuTitle {
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -40px;
+    color: white;
+    text-align: center;
+    height:100%;
+}
+    #navTitle {
+        font-size: 1.5em;
+    }
+.menuRight {
+    width:140px;
+    height:100%;
+    position:relative;
+    float:right;
+    font-size:11px;
+    top:-100px;
+}
+    #signOutButton {
+        padding:0px;
+    }
+    
+/* My List */
+    .myListContent {
+        position:relative;
+        margin-top:-30px;
+    }
+    #infoText{
+        font-size:.9em;
+        padding: 0 10px;
+    }
+    
+/* My Fridge */
+    .myFridgeContent {
+        position:relative;
+        top:-25px;
+        padding:0;
+    }
+    #fridgeList {
+        position:relative;
+        left:-15px;
+    }
+    #largebutton {
+        margin-bottom:10px;
+    }
+    #fridgeContent {
+        position:relative;
+        top:-20px;
+
+}
+/* My Stats*/
+/* Info & Tips */
+/* Login/Register */
+    .textinput {
+        left:35px;
+    }
+    .button {
+        left:40px;
+    }
+    #logo {
+        left:-5px;
+}
+    .colAdjust {
+        position:relative;
+        top:-50px;
+    }
+}
+
+@media screen and (min-width: 330px) and (max-width: 370px) {
+
+
+    #container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display:block;
+   padding: 10px 10px 35px;
+    }
+    .contentWrap {
+          position:relative;
+top:-30px;
+    }
+.topNav {
+    height: 50px;
+}
+    .menuButton {
+        width:60px;
+        height:100%;
+    }
+.menuButton img {
+    width: 30px;
+    position:relative;
+    top:-3px;
+}
+.menuTitle {
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -40px;
+    color: white;
+    text-align: center;
+    height:100%;
+}
+    #navTitle {
+        font-size: 1.5em;
+    }
+.menuRight {
+    width:140px;
+    height:100%;
+    position:relative;
+    float:right;
+    font-size:11px;
+    top:-100px;
+}
+    #signOutButton {
+        padding:0px;
+    }
+    
+/* My List */
+.myListContent {
+        position:relative;
+        margin-top:-30px;
+    }
+    #infoText{
+        font-size:.9em;
+        padding: 0 10px;
+    }
+    
+/* My Fridge */
+    .myFridgeContent {
+        position:relative;
+        top:-25px;
+        padding:0;
+    }
+    #fridgeList {
+        position:relative;
+        left:-15px;
+    }
+    #largebutton {
+        margin-bottom:10px;
+    }
+    #fridgeContent {
+        position:relative;
+        top:-20px;
+}
+/* My Stats*/
+/* Info & Tips */
+/* Login/Register */
+    .textinput {
+        left:25px;
+    }
+    .button {
+        left:30px;
+    }
+    #logo {
+        left:-20px;
+}
+    .colAdjust {
+        position:relative;
+        top:-50px;
+    }
+    
+}
+
+/* iphone5 and smaller */
+@media screen and (min-width: 270px) and (max-width: 330px) {
+
+/* All pages */
+    #container {
+        width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+        display:block;
+    }
+    .contentWrap {
+          position:relative;
+    top:-30px;
+    }
+    .topNav {
+    height: 50px;
+}
+    .menuButton {
+        width:60px;
+        height:100%;
+    }
+.menuButton img {
+    width: 30px;
+    position:relative;
+    top:-3px;
+}
+.menuTitle {
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    top: -40px;
+    color: white;
+    text-align: center;
+    height:100%;
+}
+    #navTitle {
+        font-size: 1.5em;
+    }
+.menuRight {
+    width:120px;
+    height:100%;
+    position:relative;
+    float:right;
+    font-size:11px;
+    top:-100px;
+    padding-right:10px;
+}
+    #signOutButton {
+        padding:0px;
+    }
+/* My List */
+    #infoText{
+        font-size:.9em;
+        padding: 0 10px;
+    }
+    #right {
+        margin-right:10px;
+    }
+    .checkAll {
+        margin-left:10px;
+    }
+    #listItem {
+        position:relative;
+        left:-15px;
+    }
+/* My Fridge */
+    .myFridgeContent {
+        position:relative;
+        top:-25px;
+        padding:0;
+    }
+    #fridgeList {
+        position:relative;
+        left:-15px;
+    }
+    #largebutton {
+        margin-bottom:10px;
+    }
+    #fridgeContent {
+        position:relative;
+        top:-20px;
+}
+/* My Stats*/
+/* Info & Tips */
+/* Login/Register */
+    .textinput {
+        left:25px;
+    }
+    .button {
+        left:30px;
+    }
+    #logo {
+        left:-20px;
+}
+    .colAdjust {
+        position:relative;
+        top:-50px;
+    }
+/* vertNav */
+    .menuIcon {
+    height: 30px;
+}
+    .menuPageNames {
+    color: white;
+    font-size: 1.25em;
+    position: relative;
+top:-0.5px;
+    float: right;
+    margin-right: 60px;
+}
+    .slideout-menu {
+        width:250px;
+    }
+    .menuVertical hr {
+        width:250px;
+    }
+    #menuHeader {
+        width:250px;
+
+    }
+    #menuHeader img {
+        width:250px;
+        margin-top:20px;
+        margin-left:10px;
+        
+    }
+}

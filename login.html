@@ -194,7 +194,7 @@
                 firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
                     var displayName = snapshot.val();
                     var email = user.email;
-                    uid = user.uid;
+                    var uid = user.uid;
                     var providerData = user.providerData;
                     user.getToken().then(function (accessToken) {
                         document.getElementById('sign-in-status').textContent = user.displayName;

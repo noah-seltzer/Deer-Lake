@@ -2,16 +2,14 @@
     background-color: #00b74f;
     color:white;
     list-style-type: none;
-    margin:1px;
     width:100%;
     font-size:140%;
-    padding-left:20px;
-    min-width:175px;
-
+    padding-left:10%;
+    margin-bottom:
 }
 #fridgeList{
     padding:0px;
-
+  margin: 0 auto;
 }
 #quantityManager{
     background-color: white;
@@ -25,63 +23,56 @@
 #quantityManagerContent{
     color:black;
     text-align:center;
+    width:100%;
+    margin-top:10px;
 }
 
 #selected{
     background-color: #197F53;
     color:white;
-
-}
-
-.center{
-    text-align:center;
+    width:100%;
 }
 
 .no_bottom{
     margin-bottom: 0px;
+    width:100%;
+    padding-left: 0px !important;
 }
 
 #addvegbutton{
-    width:30%;
-
-    min-width:185px;
+    width:90%;
+    white-space: normal;
+   
 }
 #largebutton{
-    min-width:230px;
-    width:25%;
-
+    
+    width:100% !important;
+    white-space: normal;
+    
 }
-
-#quantityManager{
-    text-align: center;
-    min-width:230px;
-
-
-}
-
 
 #trashbutton{
-    min-width:200px;
-}
-#fridgeList{
-    padding-left:0px;
-
+    min-width:100%;
+    white-space: normal;
 }
 
 #fridgeContent{
-    position:relative;
-    left:30px;
-    top:-10px;
+    width:100%;
+    
 }
 #largeSelector{
-    padding-right:7%;
 }
 #buttonrow{
-    display:inline-block;
-    align-content: right;
-    margin-bottom:20px;
+    width:100%;
+    margin: 0 auto;
+    padding:0;
 }
 .myFridgeContent {
     padding:30px 0;
-        
+    width:100%;
+ margin: 0 auto;
+}
+.center {
+    text-align:center;
+    
 }

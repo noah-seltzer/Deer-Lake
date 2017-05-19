@@ -99,7 +99,7 @@
     <div id="container">
         <div id="accordion">
             <h2 id="info">Fridge</h2>
-            <div id="">
+            <div class="myFridgeContent">
                 <div id="infoText" class="row">
                     <div class="center">
                         <input type="text" @click="showLarge" @keyup.enter="addItem" v-model="newTodoText" id="addAnItem" placeholder="Add An Item">
@@ -116,13 +116,13 @@
                     <!--</div>-->
 
                     <div class="row" id="fridgeContent">
-                    <div class="col-xs-5" id="fridgeList">
+                    <div class="col-md-6" id="fridgeList">
                     <ul v-for="(i, k) in fridge"  class="no_bottom listItem">
                     <li  v-if="i.checked" id="selected" @click="uncheckAll(k);checkIt(k)"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
                     <li  v-else @click="uncheckAll(k);checkIt(k)"> <span v-if="i.quantity != 0">{{i.quantity}}<span v-if="i.large">%</span></span> {{i.item}}</li>
                     </ul>
                     </div>
-                    <div class="col-xs-6 center" id="quantityManager">
+                    <div class="col-md-6" id="quantityManager">
                     <div v-for="(i,k) in fridge" id="quantityManagerContent">
                         <span v-if="i.checked">{{i.item}}<br></span> <span v-if="i.checked"> Quantity: <span id="currentQuantity">{{i.quantity}}<span v-if="i.large">%</span></span>
                     <br> </span> <span v-if="isCheckedAndSmall(k)">

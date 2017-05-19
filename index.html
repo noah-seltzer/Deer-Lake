@@ -1,184 +1,265 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
 
 <head>
     <title>VegiSmart | Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Stylesheets-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link rel="stylesheet" type="text/css" href="style/homeNav.css" />
+    <link rel="stylesheet" type="text/css" href="style/base.css" />
+    <link rel="stylesheet" type="text/css" href="style/mobile.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
-    <!--Stylesheets-->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
-    <link href="style/base.css" rel="stylesheet" type="text/css">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-</head>
+    <meta name="theme-color" content="#ffffff"> </head>
 
 <body>
-
     <!-- Slideout menu -->
-
     <nav id="menu">
         <header>
             <ul class="menuVertical">
+                <div id="menuHeader"><img src="images/Icon%20Assets/logo_ver3xhdpi.png"></div>
                 <div class="menuLinks">
                     <a href="index.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png">
-                            <span class="menuPageNames">Home</span>
-                        </li>
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuHome.png"> <span class="menuPageNames">Home</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="lists.html">
-                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png">
-                            <span class="menuPageNames">My List</span>
-                        </li>
+                        <li><img class="menuIcon" src="images/Icon%20Assets/menuList.png"> <span class="menuPageNames">My List</span> </li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="fridge.html">
-                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png">
-                            <span class="menuPageNames">My Fridge</span>
-                        </li>
+                        <li><img class="menuIcon" id="fridgeIcon" src="images/Icon%20Assets/menuFridge.png"> <span class="menuPageNames">My Fridge</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="stats.html">
-                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png">
-                            <span class="menuPageNames">Reports</span>
-                        </li>
+                        <li><img class="menuIcon" id="statsIcon" src="images/Icon%20Assets/menuStats.png"> <span class="menuPageNames">Reports</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="info.html">
-                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png">
-                            <span class="menuPageNames">Info &amp; Tips</span>
-                        </li>
+                        <li><img class="menuIcon" id="infoIcon" src="images/Icon%20Assets/menuInfo.png"> <span class="menuPageNames">Info & Tips</span></li>
                     </a>
                 </div>
                 <hr>
                 <div class="menuLinks">
                     <a href="login.html">
-                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png">
-                            <span class="menuPageNames">Login</span>
-                        </li>
+                        <li><img class="menuIcon" id="loginIcon" src="images/Icon%20Assets/menuLogin.png"> <span class="menuPageNames">Login</span></li>
                     </a>
                 </div>
-                <hr>
-            </ul>
-
+                <hr> </ul>
         </header>
     </nav>
-
     <!-- main page content area -->
     <main id="panel">
         <header>
+            <!-- Top Navigation -->
             <div class="topNav">
                 <div class="menuButton">
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Home</h1>
-                </div>
-                <div class="menuRight"><img src="images/Icon%20Assets/logo5xhdpi.png"></div>
+                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> Home</h1></div>
+                <div class="menuRight">
+                    <div id="sign-in-status"></div>
+                    <button id="signOutButton">
+                        <div id="sign-in"></div>
+                    </button>
+                    <!--<div id="account-details"></div>--></div>
             </div>
         </header>
-
-        <div class="container center" id="container">
+        <div class="container" id="container">
             <div class="contentWrap">
-            <div id="quickTip">
-                <h5>Quick Tip:</h5>
-                <p> Beautifying produce means the ugly produce gets left behind and later thrown away because they can't sell. Be a hero and buy the ugly fruits sometimes.
-                </p>
-
-            </div>
-
-            <div class="row">
-                <div class="col-xs-6 col-sm-4 col">
-                    <div class="circle">
-                        <a class="hvr-grow" href="lists.html"><img class="icon size1" src="images/Icon%20Assets/list5.png"></a>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col">
+                        <div id="quickTip">
+                            <h5>Quick Tip:</h5>
+                            <p> Beautifying produce means the ugly produce gets left behind and later thrown away because they can't sell. Be a hero and buy the ugly fruits sometimes. </p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-xs-6 col-sm-4 col">
-                    <div class="circle">
-                        <a class="hvr-grow" href="fridge.html"><img class="icon size4" src="images/Icon%20Assets/fridge5.png"></a>
+                <div class="component">
+                    <button class="cn-button" id="cn-button">Menu</button>
+                    <div class="cn-wrapper" id="cn-wrapper">
+                        <ul>
+                            <li>
+                                <a href="info.html">
+                                    <div class="menuWrapper"><img class="icon sizeInfo" src="images/Icon%20Assets/menuInfo.svg"><span>Info & Tips</span></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="lists.html">
+                                    <div class="menuWrapper"><img class="icon sizeLists" src="images/Icon%20Assets/menuList.svg"><span>My Lists</span></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="fridge.html">
+                                    <div class="menuWrapper"><img class="icon sizeFridge" src="images/Icon%20Assets/menuFridge.svg"><span>My Fridge</span></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="stats.html">
+                                    <div class="menuWrapper"><img class="icon sizeStats" src="images/Icon%20Assets/menuStats.svg"><span>My Stats</span></div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="login.html">
+                                    <div class="menuWrapper"><img class="icon sizeLogin" src="images/Icon%20Assets/menuLogin.svg"><span>Login</span></div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-4 col">
-                    <div class="circle">
-                        <a href="stats.html" class="hvr-grow"><img class="icon size1" src="images/Icon%20Assets/stats5.png"></a>
-                    </div>
-                </div>
-
-                <div class="col-xs-6 col-sm-6 col">
-                    <div class="circle">
-                        <a class="hvr-grow" href="info.html"><img class="icon size2" src="images/Icon%20Assets/info5.png"></a>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col">
-                    <div class="circle">
-                        <a href="login.html" class="hvr-grow"><img class="icon size3" src="images/Icon%20Assets/login5.png"></a>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
     </main>
 </body>
-
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-
 <!-- Tether -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-
 <!-- Bootstrap 4 Alpha JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
-
 <script src="https://use.fontawesome.com/26ec5e6edd.js"></script>
-
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-
-    // Initialize popover component
-    $(function() {
+    $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        // Initialize popover component
+    $(function () {
         $('[data-toggle="popover"]').popover()
     })
-
 </script>
-
-
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
+    var element = document.getElementById('menuHeader')
+        , style = window.getComputedStyle(element)
+        , size = style.getPropertyValue('width');
     var slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('menu'),
-        'padding': 300,
-        'tolerance': 70
+        'panel': document.getElementById('panel')
+        , 'menu': document.getElementById('menu')
+        , 'padding': size
+        , 'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function() {
+    document.querySelector('.toggle-button').addEventListener('click', function () {
         slideout.toggle();
     });
+</script>
+<!-- index menu component -->
+<script src="js/polyfills.js"></script>
+<script src="js/modernizr-2.6.2.min.js"></script>
+<script>
+    (function () {
+        var button = document.getElementById('cn-button')
+            , wrapper = document.getElementById('cn-wrapper');
+        //open and close menu when the button is clicked
+        var open = false;
+        button.addEventListener('click', handler, false);
 
+        function handler() {
+            if (!open) {
+                this.innerHTML = "Close";
+                classie.add(wrapper, 'opened-nav');
+            }
+            else {
+                this.innerHTML = "Menu";
+                classie.remove(wrapper, 'opened-nav');
+            }
+            open = !open;
+        }
+
+        function closeWrapper() {
+            classie.remove(wrapper, 'opened-nav');
+        }
+    })();
+</script>
+<!--Firebase component-->
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
+        , authDomain: "vegismart-9265b.firebaseapp.com"
+        , databaseURL: "https://vegismart-9265b.firebaseio.com"
+        , projectId: "vegismart-9265b"
+        , storageBucket: "vegismart-9265b.appspot.com"
+        , messagingSenderId: "37856046364"
+    };
+    firebase.initializeApp(config);
+</script>
+<!-- firebaseUI for user authentication -->
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+<!-- Firebase Auth state track and display on each page-->
+<script type="text/javascript">
+    function toggleSignIn() {
+        if (firebase.auth().currentUser) {
+            // [START signout]
+            firebase.auth().signOut();
+            // [END signout]
+        }
+        else {
+            window.location.replace("login.html");
+        }
+        document.getElementById('sign-in').disabled = true;
+    }
+    $('document').ready(function () {
+        initApp();
+    });
+
+    function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                    var displayName = snapshot.val();
+                    var email = user.email;
+                    var uid = user.uid;
+                    var providerData = user.providerData;
+                    user.getToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = user.displayName;
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        $('#sign-in-status').text(displayName);
+                    });
+                });
+            }
+            else {
+                // User is signed out.
+                document.getElementById('sign-in-status').textContent = 'Signed out';
+                document.getElementById('sign-in').textContent = 'Sign in';
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    }
+</script>
+<!-- jQuery button functions -->
+<script>
+    $(document).ready(function () {
+        $("#signOutButton").on('click touchstart', function () {
+            toggleSignIn();
+        });
+    });
 </script>

@@ -201,11 +201,6 @@
                         document.getElementById('sign-in').textContent = 'Sign out';
                         $('#sign-in-status').text(displayName);
                     });
-                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
-                        consumed = snapshot.val();
-                        initCharts();
-                        beginReadStats();
-                    });
                 });
             }
             else {

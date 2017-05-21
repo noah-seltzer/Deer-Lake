@@ -293,13 +293,16 @@
                     listsRef = firebase.database().ref('users/' + uid + '/Lists');
                     vegRef = firebase.database().ref('users/' + uid + '/Lists/Vegetables');
                     createVue();
+                    
+                       fridgeRef = firebase.database().ref('users/' + uid + '/fridge');
+                    createVue();
                 });
             }
             else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
-                createVueOffline();
+                //createVueOffline();
             }
         }, function (error) {
             console.log(error);
@@ -372,7 +375,17 @@
                     todosRef.child(todo['.key']).child('text').set(newText)
                 }
                 , //TODO
-                addToFridge: function () {}
+                addToFridge: function (items, ref) {
+                    for(i=0; i< items.length; i++) {
+                        if (items[i].checked) {
+                            var v = items[i]
+                            vegRef.update(v)
+                            
+                        }
+                    }
+                    
+                    
+                }
             }
         });
     }

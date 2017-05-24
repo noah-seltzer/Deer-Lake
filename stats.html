@@ -88,6 +88,11 @@
         <div class="container" id="container">
             <div class="row">
                 <div class="card">
+                    <div id="testing"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
                     <div class="lineChart">
                         <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
                         <line-chart></line-chart>
@@ -246,6 +251,17 @@
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
 <!-- Firebase Auth state track and display on each page-->
 <script type="text/javascript">
+    // Global variables for reference
+    var statsRef;
+    var totalQuantityRef;
+    var vegRef;
+    var uid;
+    var displayName;
+    var email;
+    var key;
+    var topFruitKey;
+    var topFruitVal;
+
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
             // [START signout]
@@ -257,38 +273,28 @@
         }
         document.getElementById('sign-in').disabled = true;
     }
-    $('document').ready(function () {
-        initApp();
-    });
-
-    function initApp() {
-        // Listening for auth state changes.
-        // [START authstatelistener]
+    initApp = function () {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 // User is signed in.
-                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
-                    var displayName = snapshot.val();
-                    var email = user.email;
-                    var uid = user.uid;
-                    var providerData = user.providerData;
-                    user.getToken().then(function (accessToken) {
-                        document.getElementById('sign-in-status').textContent = user.displayName;
-                        document.getElementById('sign-in').textContent = 'Sign out';
-                        $('#sign-in-status').text(displayName);
+                displayName = user.displayName;
+                email = user.email;
+                uid = user.uid;
+                //stat references
+                totalQuantityRef = firebase.database().ref('users/' + uid + '/Stat2/totalQuantity');
+                // Sort, search top fruit bought
+                totalQuantityRef.orderByValue().limitToLast(1).once('value').then(function (data) {
+                    data.forEach(function (data) {
+                        topFruitKey = data.key;
+                        topFruitVal = data.val();
+                        console.log(data.key + ": " + data.val());
+                        document.getElementById('testing').textContent = topFruitKey;
                     });
-                    firebase.database().ref('users/' + uid + '/stats/consumed').once('value').then(function (snapshot) {
-                        consumed = snapshot.val();
-                        initCharts();
-                        beginReadStats();
-                    });
-                    firebase.database().ref('users/' + uid + '/stats/radarChart/').once('value').then(function (snapshot) {
-                    item1= snapshot.val();
-                     
-                    });
-                    //iterate through the items in fridge, and monthly, weekly, yearly consumption rate + wasted rate
-                    //iterate through the items and calculate wasted amount * price,
-                    //iterate through and find the most consumed + most wasted and pull data in to doughtnut
+                    console.log(topFruitKey);
+                });
+                user.getToken().then(function (accessToken) {
+                    document.getElementById('sign-in-status').textContent = email;
+                    document.getElementById('sign-in').textContent = 'Sign out';
                 });
             }
             else {
@@ -299,19 +305,17 @@
         }, function (error) {
             console.log(error);
         });
-    }
-
-    function beginReadStats() {
-        firebase.database().ref('users/' + uid + '/stats/consumed').on('value', function (snapshot) {
-            consumed = snapshot.val();
-        });
-    }
+    };
+    window.addEventListener('load', function () {
+        initApp();
+        initCharts();
+    });
 </script>
 <!-- Chart component -->
 <script src="https://unpkg.com/vue-chartjs@2.6.0/dist/vue-chartjs.full.min.js"></script>
 <script>
     function initCharts() {
-        <!-- lineChart -->
+        //        lineChart
         Vue.component('line-chart', {
             extends: VueChartJs.Line
             , mounted() {
@@ -321,7 +325,7 @@
                 this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
                 this.renderChart({
                     //need to make reactive, show only last 3-4months?
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+                    labels: [topFruitKey, 'February', 'March', 'April', 'May', 'June', 'July']
                     , datasets: [
                         {
                             label: 'UserName', //need to make reactive
@@ -329,7 +333,7 @@
                             , borderWidth: 1
                             , pointBorderColor: 'white'
                             , backgroundColor: this.gradient
-                            , data: [40, 39, 10, 40, 39, 80, 40] //need to make reactive
+                            , data: [topFruitVal, 39, 10, 40, 39, 80, 40] //need to make reactive
         }
       ]
                 }, {
@@ -343,11 +347,11 @@
             extends: VueChartJs.Radar
             , mounted() {
                 this.renderChart({
-                    labels: [item1, 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
+                    labels: [null, 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
                     , datasets: [
                         {
-                            label: 'UserName', //need to make reactive
-                            backgroundColor: '#386324'
+                            label: '', //need to make reactive
+                            backgroundColor: '#00b74f'
                             , data: [0, 20, 100] // need to make reactive
         }
       ]
@@ -357,7 +361,7 @@
                 })
             }
         })
-        var numConsumed = consumed;
+        var numConsumed = topFruitVal;
         var numWasted = 100 - numConsumed;
         Vue.component('doughnut-chart', {
             extends: VueChartJs.Doughnut
@@ -367,11 +371,11 @@
                     , datasets: [
                         {
                             label: 'UserName'
-                            , backgroundColor: ['#386324', '#FFFFFF']
+                            , backgroundColor: ['#00b74f', '#FFFFFF']
                             , data: [numConsumed, numWasted] //need to make reactive
                                 
                             , cutoutPercentage: '90'
-                            , borderColor: ['#386324', 'white']
+                            , borderColor: ['#00b74f', 'white']
         }
       ]
                 }, {

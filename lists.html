@@ -178,7 +178,7 @@
                 <template v-for="todo in fruits">
                     <li @click="checkIt(todo, fruitsRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
                 </template>
-                <div id="buttons">
+                <div id="buttons" >
                     <button v-if="anyChecked(fruitsRef)" type="button" @click="addToFridge(fruits)" class="btn btn-sm">Add To Fridge</button>
                     <button v-if="anyChecked(fruitsRef)" type="button" class="btn btn-sm" @click="removeChecked(fruits, fruitsRef)">Remove</button>
                 </div>
@@ -293,16 +293,13 @@
                     listsRef = firebase.database().ref('users/' + uid + '/Lists');
                     vegRef = firebase.database().ref('users/' + uid + '/Lists/Vegetables');
                     createVue();
-                    
-                       fridgeRef = firebase.database().ref('users/' + uid + '/fridge');
-                    createVue();
                 });
             }
             else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
-                //createVueOffline();
+                createVueOffline();
             }
         }, function (error) {
             console.log(error);
@@ -375,7 +372,6 @@
                     todosRef.child(todo['.key']).child('text').set(newText)
                 }
                 , //TODO
-<<<<<<< HEAD
                 addToFridge: function (items) {
                     var added = [];
                       for(i=0; i< items.length; i++) {
@@ -386,7 +382,6 @@
                             var q = this.getQuantity(v['.key'])
                             var l = this.getLarge(q)
                             var name = this.getName(l, v['.key'])
-                            //NEED TO CHECK IF ITEM EXISTS, ADD TO QUANTITY
                              firebase.database().ref('users/' + uid + '/fridge/' + name).update(
                                  {
                             
@@ -398,7 +393,7 @@
                         }
                          
                     }
-                     alert("These items have sucessfully been added:\n" + added.toString())
+                     alert("These items have been added:\n" + added.toString())
                     
                    
                 },
@@ -413,17 +408,6 @@
                 getName: function(l, name) {
                     if (l) {return name}
                     else {return name.split(' ').slice(1).toString()}
-=======
-                addToFridge: function (items, ref) {
-                    for(i=0; i< items.length; i++) {
-                        if (items[i].checked) {
-                            var v = items[i]
-                            vegRef.update(v)
-                            
-                        }
-                    }
-                    
->>>>>>> a2767433cc5b1ef6c8cb2f52d0edeb402c0de83c
                     
                 }
             }

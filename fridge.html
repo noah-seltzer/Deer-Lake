@@ -130,7 +130,12 @@
                     <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
                     </span>
                     <span v-if="isCheckedAndLarge(k)">
-                    <input id="largeQuantitySlider" type="range" min="0" max="100" :value="i.quantity" v-on:change="updateLargeQuantity(k)"><br>
+                    <!--<input id="largeQuantitySlider" type="range" min="0" max="100" :value="i.quantity" v-on:change="updateLargeQuantity(k)"><br>-->
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 0)">0%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 25)">25%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 50)">50%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 75)">75%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 100)">100%</button>
                     </span>
 					
                     <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -215,7 +220,7 @@
     });
 </script>
 <script type="text/javascript">
-
+    var grease = false;
 	function easterEggTest(){
 		if (document.getElementById('easterToggle').checked){
 		
@@ -353,8 +358,8 @@
         data: {
             newTodoText: '',
             fridge: [{
-                quantity: 3,
-                item: "X",
+                quantity: 0,
+                item: "",
                 checked: true,
                 large: false
             }],
@@ -411,7 +416,15 @@
                         large: bool
 
                     }
-                })
+                });
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
+                    [new_text]: 1
+                });
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
+                    [new_text]: 1
+                });
+
+
             }
             /**
              * unchecks all items
@@ -446,12 +459,23 @@
             ,
             addQuantitySmall: function(index) {
                 var vm = this;
+                var total;
                 vm.fridge[index].quantity += 1;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
                     quantity: vm.fridge[index].quantity
                 });
 
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity/' + vm.fridge[index].item).on('value',
+                    function(snapshot){
+                        total = snapshot.val()
+                    }
+                );
 
+                    total++;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
+                        [vm.fridge[index].item]: total
+                    });
 
             }
             /**
@@ -461,12 +485,27 @@
             ,
             minusQuantitySmall: function(index) {
                 var vm = this;
+                var consumed = null;
                 if (vm.fridge[index].quantity !== 0) {
                     vm.fridge[index].quantity -= 1;
                 }
-                firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
-                    quantity: vm.fridge[index].quantity
-                });
+
+                    var item = vm.fridge[index].item;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
+                        quantity: vm.fridge[index].quantity
+                    });
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed/' + vm.fridge[index].item).on('value',
+                        function (snapshot) {
+                            consumed = snapshot.val()
+                        }
+                    );
+                consumed++;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
+                        [vm.fridge[index].item]: consumed
+                    });
+
             }
             /**
              * returns true if item is checked and small
@@ -508,19 +547,33 @@
 				else {
 					easterEggExecute2();
 				}
+				fruitquantity = this.fridge[index].quantity;
                 this.fridge[index].quantity = 0;
+                var wasted = -1;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).update({
                     quantity: 0
                 });
-                //TODO back end stuff
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalWasted/' + this.fridge[index].item).on('value',
+                    function(snapshot){
+                        wasted = snapshot.val()
+                    }
+                );
+                console.log("wasted is" + wasted)
+                if(wasted === -1){
+                    wasted = fruitquantity;
+                }else {
+                    wasted = wasted + fruitquantity;
+                }
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalWasted').update({
+                    [this.fridge[index].item]: wasted
+                });
             }
             /**
              * updates the percentage value of a large fruit based on input of a slider
              * @param index
              */
             ,
-            updateLargeQuantity: function(index) {
-                val = document.getElementById("largeQuantitySlider").value;
+            updateLargeQuantity: function(index, val) {
                 this.fridge[index].quantity = val;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).update({
                     quantity: val

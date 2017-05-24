@@ -220,7 +220,7 @@
     });
 </script>
 <script type="text/javascript">
-
+    var grease = false;
 	function easterEggTest(){
 		if (document.getElementById('easterToggle').checked){
 		
@@ -358,8 +358,8 @@
         data: {
             newTodoText: '',
             fridge: [{
-                quantity: 3,
-                item: "X",
+                quantity: 0,
+                item: "",
                 checked: true,
                 large: false
             }],
@@ -399,7 +399,7 @@
                     var num = 100;
                 } else {
                     var bool = false;
-                    var num = 1;
+                    var num = 0;
                 }
                 var obj = {
                     quantity: num,
@@ -417,13 +417,14 @@
 
                     }
                 });
-                firebase.database().ref('users/' + dbuser.uid + '/stats').update({
-                    [new_text]:{
-                        totalConsumed:0,
-                        totalWasted:0,
-                        totalQuantity:num
-                    }
-                })
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
+                    [new_text]: 1
+                });
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
+                    [new_text]: 1
+                });
+
+
             }
             /**
              * unchecks all items
@@ -464,9 +465,18 @@
                     quantity: vm.fridge[index].quantity
                 });
 
-                firebase.database().ref('users/' + dbuser.uid + '/stats/' + vm.fridge[index].item).update({
-                    totalQuantity: vm.fridge[index].quantity
-                });
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity/' + vm.fridge[index].item).on('value',
+                    function(snapshot){
+                        total = snapshot.val()
+                    }
+                );
+
+                    total++;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
+                        [vm.fridge[index].item]: total
+                    });
+
             }
             /**
              * subtracts one from the quantity of a small fruit, denoted by index
@@ -475,12 +485,27 @@
             ,
             minusQuantitySmall: function(index) {
                 var vm = this;
+                var consumed = null;
                 if (vm.fridge[index].quantity !== 0) {
                     vm.fridge[index].quantity -= 1;
                 }
-                firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
-                    quantity: vm.fridge[index].quantity
-                });
+
+                    var item = vm.fridge[index].item;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
+                        quantity: vm.fridge[index].quantity
+                    });
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed/' + vm.fridge[index].item).on('value',
+                        function (snapshot) {
+                            consumed = snapshot.val()
+                        }
+                    );
+                consumed++;
+
+                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
+                        [vm.fridge[index].item]: consumed
+                    });
+
             }
             /**
              * returns true if item is checked and small
@@ -522,14 +547,26 @@
 				else {
 					easterEggExecute2();
 				}
-
+				fruitquantity = this.fridge[index].quantity;
+                this.fridge[index].quantity = 0;
+                var wasted = -1;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).update({
                     quantity: 0
                 });
-                firebase.database().ref('users/' + dbuser.uid + '/stats/' + this.fridge[index].item).update({
-                    totalWasted:this.fridge[index].quantity
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalWasted/' + this.fridge[index].item).on('value',
+                    function(snapshot){
+                        wasted = snapshot.val()
+                    }
+                );
+                console.log("wasted is" + wasted)
+                if(wasted === -1){
+                    wasted = fruitquantity;
+                }else {
+                    wasted = wasted + fruitquantity;
+                }
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalWasted').update({
+                    [this.fridge[index].item]: wasted
                 });
-                this.fridge[index].quantity = 0;
             }
             /**
              * updates the percentage value of a large fruit based on input of a slider

@@ -1,6 +1,3 @@
-/*! lightslider - v1.1.6 - 2016-10-25
-* https://github.com/sachinchoolur/lightslider
-* Copyright (c) 2016 Sachin N; Licensed MIT */
 /*! lightslider - v1.1.3 - 2015-04-14
 * https://github.com/sachinchoolur/lightslider
 * Copyright (c) 2015 Sachin N; Licensed MIT */
@@ -99,7 +96,7 @@
     transition: all 0.5s linear 0s;
 }
 .lSSlideOuter .lSPager.lSpg > li:hover a, .lSSlideOuter .lSPager.lSpg > li.active a {
-    background-color: #428bca;
+    background-color: #00b74f;
 }
 .lSSlideOuter .media {
     opacity: 0.8;
@@ -153,15 +150,15 @@
 
 /* slider actions */
 .lSAction > a {
-    width: 32px;
+    width: 450px;
     display: block;
     top: 50%;
-    height: 32px;
-    background-image: url('../img/controls.png');
+    height: 40px;
+    background-image: url('.../images/controls.png');
     cursor: pointer;
     position: absolute;
     z-index: 99;
-    margin-top: -16px;
+    margin-top: -10px;
     opacity: 0.5;
     -webkit-transition: opacity 0.35s linear 0s;
     transition: opacity 0.35s linear 0s;

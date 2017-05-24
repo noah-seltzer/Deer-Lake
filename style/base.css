@@ -134,7 +134,8 @@ body {
     background-color: white;
     text-align: center;
     max-width: 90%;
-    
+    margin-left: auto;
+	margin-right: auto;
 }
 .addAList {
     margin-top:30px;

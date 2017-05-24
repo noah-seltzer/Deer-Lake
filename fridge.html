@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <!-- Stylesheets -->
+	<link rel="stylesheet" href="style/awesomplete.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link href="style/fridge.css" rel="stylesheet" type="text/css">
@@ -24,6 +25,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
+	<script src="awesomplete.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.2/vuefire.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 
@@ -349,6 +351,7 @@
         if(user) {
             dbuser = user;
             populatefridge();
+			predictText();
         }
     });
 
@@ -424,7 +427,14 @@
                     [new_text]: 1
                 });
 
-
+				//Add to predictive text list
+				firebase.database().ref('users/' + dbuser.uid + '/pastItems').update({
+                    [new_text]: true
+                })
+				
+				this.newTodoText = '';
+				$('#largeSelector').attr('hidden', true);
+				predictObj.close();
             }
             /**
              * unchecks all items
@@ -655,7 +665,20 @@
         );
     }
 
-
+	//Global predictive text object
+	var predictObj
+	
+	function predictText(){
+		var input = document.getElementById("addAnItem"); 
+		firebase.database().ref('users/' + dbuser.uid + '/pastItems/').on('value', 
+		function(snapshot) {
+			var keys = Object.keys(snapshot.val());
+			console.log(keys);
+			predictObj = new Awesomplete(input, {
+			list: keys
+		});
+		});
+	}
 </script>
     
     <!-- jQuery button functions -->

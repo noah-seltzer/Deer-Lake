@@ -130,7 +130,12 @@
                     <i class="fa fa-minus-circle fa-2x" @click="minusQuantitySmall(k)"></i><br>
                     </span>
                     <span v-if="isCheckedAndLarge(k)">
-                    <input id="largeQuantitySlider" type="range" min="0" max="100" :value="i.quantity" v-on:change="updateLargeQuantity(k)"><br>
+                    <!--<input id="largeQuantitySlider" type="range" min="0" max="100" :value="i.quantity" v-on:change="updateLargeQuantity(k)"><br>-->
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 0)">0%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 25)">25%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 50)">50%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 75)">75%</button>
+                        <button type="button" class="btn btn-success" @click="updateLargeQuantity(k, 100)">100%</button>
                     </span>
 					
                     <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -394,7 +399,7 @@
                     var num = 100;
                 } else {
                     var bool = false;
-                    var num = 0;
+                    var num = 1;
                 }
                 var obj = {
                     quantity: num,
@@ -410,6 +415,13 @@
                         checked: false,
                         large: bool
 
+                    }
+                });
+                firebase.database().ref('users/' + dbuser.uid + '/stats').update({
+                    [new_text]:{
+                        totalConsumed:0,
+                        totalWasted:0,
+                        totalQuantity:num
                     }
                 })
             }
@@ -446,13 +458,15 @@
             ,
             addQuantitySmall: function(index) {
                 var vm = this;
+                var total;
                 vm.fridge[index].quantity += 1;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
                     quantity: vm.fridge[index].quantity
                 });
 
-
-
+                firebase.database().ref('users/' + dbuser.uid + '/stats/' + vm.fridge[index].item).update({
+                    totalQuantity: vm.fridge[index].quantity
+                });
             }
             /**
              * subtracts one from the quantity of a small fruit, denoted by index
@@ -508,19 +522,21 @@
 				else {
 					easterEggExecute2();
 				}
-                this.fridge[index].quantity = 0;
+
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).update({
                     quantity: 0
                 });
-                //TODO back end stuff
+                firebase.database().ref('users/' + dbuser.uid + '/stats/' + this.fridge[index].item).update({
+                    totalWasted:this.fridge[index].quantity
+                });
+                this.fridge[index].quantity = 0;
             }
             /**
              * updates the percentage value of a large fruit based on input of a slider
              * @param index
              */
             ,
-            updateLargeQuantity: function(index) {
-                val = document.getElementById("largeQuantitySlider").value;
+            updateLargeQuantity: function(index, val) {
                 this.fridge[index].quantity = val;
                 firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).update({
                     quantity: val

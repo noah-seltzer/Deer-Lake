@@ -259,8 +259,18 @@
     var displayName;
     var email;
     var key;
-    var topFruitKey;
-    var topFruitVal;
+    var top5FruitKey = [];
+    var top5FruitVal = [];
+    var top5VegKey = [];
+    var top5VegVal = [];
+    var top5FruitConsumed = [];
+    var top5FruitConsumedVal = [];
+    var top5VegConsumed = [];
+    var top5VegConsumedVal = [];
+    var top5FruitWasted = [];
+    var top5FruitWastedVal = [];
+    var top5VegWasted = [];
+    var top5VegWastedVal = [];
 
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
@@ -280,17 +290,42 @@
                 displayName = user.displayName;
                 email = user.email;
                 uid = user.uid;
+                var qIndex = 0;
+                var cIndex = 0;
+                var wIndex = 0;
                 //stat references
                 totalQuantityRef = firebase.database().ref('users/' + uid + '/Stat2/totalQuantity');
-                // Sort, search top fruit bought
-                totalQuantityRef.orderByValue().limitToLast(1).once('value').then(function (data) {
+                totalConsumedRef = firebase.database().ref('users/' + uid + '/Stat2/totalConsumed');
+                totalWastedRef = firebase.database().ref('users/' + uid + '/Stat2/totalWasted');
+                // Sort, search top 5 fruit bought
+                totalQuantityRef.orderByValue().limitToLast(5).once('value').then(function (data) {
                     data.forEach(function (data) {
-                        topFruitKey = data.key;
-                        topFruitVal = data.val();
                         console.log(data.key + ": " + data.val());
-                        document.getElementById('testing').textContent = topFruitKey;
+                        top5FruitKey[qIndex] = data.key;
+                        top5FruitVal[qIndex] = data.val();
+                        qIndex++;
                     });
-                    console.log(topFruitKey);
+                    console.log(top5FruitKey[0]);
+                    document.getElementById('testing').textContent = top5FruitKey[3];
+                });
+                // Sort, search top 5 fruit consumed
+                totalConsumedRef.orderByValue().limitToLast(5).once('value').then(function (data) {
+                    data.forEach(function (data) {
+                        top5FruitConsumed[cIndex] = data.key;
+                        top5FruitConsumedVal[cIndex] = data.val();
+                        cIndex++;
+                    });
+                    console.log(top5FruitConsumed);
+                });
+                // Sort, search top 5 fruit wasted
+                totalWastedRef.orderByValue().limitToLast(5).once('value').then(function (data) {
+                    data.forEach(function (data) {
+                        top5FruitWasted[wIndex] = data.key;
+                        top5FruitWastedVal[wIndex] = data.val();
+                        wIndex++;
+                    });
+                    console.log(top5FruitWasted);
+                    initCharts();
                 });
                 user.getToken().then(function (accessToken) {
                     document.getElementById('sign-in-status').textContent = email;
@@ -308,7 +343,6 @@
     };
     window.addEventListener('load', function () {
         initApp();
-        initCharts();
     });
 </script>
 <!-- Chart component -->
@@ -325,7 +359,7 @@
                 this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
                 this.renderChart({
                     //need to make reactive, show only last 3-4months?
-                    labels: [topFruitKey, 'February', 'March', 'April', 'May', 'June', 'July']
+                    labels: [top5FruitKey[0], top5FruitKey[1], top5FruitKey[2], top5FruitKey[3], top5FruitKey[4]]
                     , datasets: [
                         {
                             label: 'UserName', //need to make reactive
@@ -333,7 +367,7 @@
                             , borderWidth: 1
                             , pointBorderColor: 'white'
                             , backgroundColor: this.gradient
-                            , data: [topFruitVal, 39, 10, 40, 39, 80, 40] //need to make reactive
+                            , data: [top5FruitVal[0], top5FruitVal[1], top5FruitVal[2], top5FruitVal[3], top5FruitVal[4]] //need to make reactive
         }
       ]
                 }, {
@@ -342,17 +376,16 @@
                 })
             }
         })
-        var item1 = item1;
         Vue.component('radar-chart', {
             extends: VueChartJs.Radar
             , mounted() {
                 this.renderChart({
-                    labels: [null, 'item2', 'item3', 'item4', 'item5', 'item6', 'item7']
+                    labels: [top5FruitConsumed[0], top5FruitConsumed[1], top5FruitConsumed[2], top5FruitConsumed[3], top5FruitConsumed[4]]
                     , datasets: [
                         {
                             label: '', //need to make reactive
                             backgroundColor: '#00b74f'
-                            , data: [0, 20, 100] // need to make reactive
+                            , data: [top5FruitConsumedVal[0],top5FruitConsumedVal[1], top5FruitConsumedVal[2],top5FruitConsumedVal[3],top5FruitConsumedVal[4]] // need to make reactive
         }
       ]
                 }, {
@@ -361,8 +394,9 @@
                 })
             }
         })
-        var numConsumed = topFruitVal;
-        var numWasted = 100 - numConsumed;
+        var numConsumed = top5FruitVal[3];
+        var numWasted = 100 - top5FruitVal[3];
+        console.log(numConsumed + ": " + top5FruitVal[3]);
         Vue.component('doughnut-chart', {
             extends: VueChartJs.Doughnut
             , mounted() {
@@ -387,19 +421,19 @@
         var vm = new Vue({
             el: '.lineChart'
             , data: {
-                message: ''
+                message: 'line'
             }
         })
         var vm = new Vue({
             el: '.radarChart'
             , data: {
-                message: ''
+                message: 'radar'
             }
         })
         var vm = new Vue({
             el: '.doughnutChart'
             , data: {
-                message: ''
+                message: 'doughnut'
             }
         })
     }

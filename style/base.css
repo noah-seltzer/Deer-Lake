@@ -79,6 +79,7 @@ body {
     margin:0px !important; 
 }
 
+
 #quickTip {
     background-color:  #00b74f;
     width:100%;
@@ -137,6 +138,17 @@ body {
     margin-left: auto;
 	margin-right: auto;
 }
+
+#addAnItem2 {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: white;
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+	margin-right: auto;
+}
+
 .addAList {
     margin-top:30px;
     
@@ -149,6 +161,11 @@ body {
 #addAnItem::placeholder {
     text-align: center;
 }
+
+#addAnItem2::placeholder {
+    text-align: center;
+}
+
 #removeList{
     color:black;
     margin-bottom:10px;

@@ -150,10 +150,10 @@
 
 /* slider actions */
 .lSAction > a {
-    width: 450px;
+    width: 45%;
     display: block;
-    top: 50%;
-    height: 40px;
+    top: 10%;
+    height: 100%;
     background-image: url('.../images/controls.png');
     cursor: pointer;
     position: absolute;

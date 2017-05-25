@@ -141,14 +141,14 @@
                     </span>
 					
                     <button v-if="isCheckedAndNotZero(k)" type="button" class="btn btn-success" @click="throwOutRest(k)" id="trashbutton">Throw Out The Rest <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-					
+                        <button v-if="i.checked" type="button" class="btn btn-danger" @click="remove(k)" id="removebutton">Remove Item</button>
                     </div>
 					<br>	
 					<!-- Rounded switch -->
-					<label class="switch">
-					<input type="checkbox" class="toggle-button" id="easterToggle" onchange="easterEggTest();">
-					<div class="slider round"></div>
-					</label>
+					<!--<label class="switch">-->
+					<!--<input type="checkbox" class="toggle-button" id="easterToggle" onchange="easterEggTest();">-->
+					<!--<div class="slider round"></div>-->
+					<!--</label>-->
                     </div>
                     </div>
                 </div>
@@ -551,7 +551,7 @@
              */
             ,
             throwOutRest: function(index) {
-				if(this.fridge[index].quantity >= 23) {
+				if(this.fridge[index].quantity >= 101) {
 					easterEggExecute();
 				}
 				else {
@@ -614,18 +614,18 @@
              * removes item, unused for now.
              */
             ,
-            remove: function() {
+            remove: function(index) {
 
                 var vm = this;
-                for (i = 0; i < vm.fridge.length; i++) {
-                    if (vm.fridge[i].checked) {
-                        vm.fridge.splice(i, 1);
-                        i--
-                    }
-                }
+                firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).remove();
+                vm.fridge.splice(index, 1)
             }
         }
     });
+
+    var vm = this;
+    firebase.database().ref('users/' + dbuser.uid + '/fridge/' + this.fridge[index].item).remove();
+    vm.fridge.splice(index, 1)
 
     var first = 1;
     //JOHN EDIT
@@ -666,17 +666,15 @@
     }
 
 	//Global predictive text object
-	var predictObj
+	var predictObj;
 	
 	function predictText(){
 		var input = document.getElementById("addAnItem"); 
+		predictObj = new Awesomplete(input, {list:''});
 		firebase.database().ref('users/' + dbuser.uid + '/pastItems/').on('value', 
 		function(snapshot) {
 			var keys = Object.keys(snapshot.val());
-			console.log(keys);
-			predictObj = new Awesomplete(input, {
-			list: keys
-		});
+			predictObj.list = keys;
 		});
 	}
 </script>

@@ -88,13 +88,24 @@
         <div class="container" id="container">
             <div class="row">
                 <div class="card">
-                    <div id="testing"></div>
+                    <div class="doughnutChart">
+                        <div class="doughnutChartMessage"> {{ message }} Overall Stats </div>
+                        <doughnut-chart></doughnut-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="barChart">
+                        <div class="barChartMessage"> {{ message }} Top 5 Items Bought </div>
+                        <bar-chart></bar-chart>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="card">
                     <div class="lineChart">
-                        <div class="lineChartMessage"> {{ message }} Average Monthly Consumption </div>
+                        <div class="lineChartMessage"> {{ message }} Top 5 Items Wasted </div>
                         <line-chart></line-chart>
                     </div>
                 </div>
@@ -102,16 +113,8 @@
             <div class="row">
                 <div class="card">
                     <div class="radarChart">
-                        <div class="radarChartMessage"> {{ message }} Top 7 Food Consumption </div>
+                        <div class="radarChartMessage"> {{ message }} Top 5 Items Consumed </div>
                         <radar-chart></radar-chart>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="doughnutChart">
-                        <div class="doughnutChartMessage"> {{ message }} Apple </div>
-                        <doughnut-chart></doughnut-chart>
                     </div>
                 </div>
             </div>
@@ -259,18 +262,20 @@
     var displayName;
     var email;
     var key;
-    var top5FruitKey = [];
-    var top5FruitVal = [];
-    var top5VegKey = [];
-    var top5VegVal = [];
-    var top5FruitConsumed = [];
-    var top5FruitConsumedVal = [];
-    var top5VegConsumed = [];
-    var top5VegConsumedVal = [];
-    var top5FruitWasted = [];
-    var top5FruitWastedVal = [];
-    var top5VegWasted = [];
-    var top5VegWastedVal = [];
+    //sorted array variables for stats
+    var consumedList = [];
+    var consumedListVal = [];
+    var quantityList = [];
+    var quantityListVal = [];
+    var wastedList = [];
+    var wastedListVal = [];
+    //stat display variables
+    var topConsumed;
+    var topWasted;
+    var topBought;
+    var totalConsumed = 0;
+    var totalWasted = 0;
+    var totalBought = 0;
 
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
@@ -294,37 +299,43 @@
                 var cIndex = 0;
                 var wIndex = 0;
                 //stat references
-                totalQuantityRef = firebase.database().ref('users/' + uid + '/Stat2/totalQuantity');
-                totalConsumedRef = firebase.database().ref('users/' + uid + '/Stat2/totalConsumed');
-                totalWastedRef = firebase.database().ref('users/' + uid + '/Stat2/totalWasted');
-                // Sort, search top 5 fruit bought
-                totalQuantityRef.orderByValue().limitToLast(5).once('value').then(function (data) {
+                totalQuantityRef = firebase.database().ref('users/' + uid + '/stats/totalQuantity');
+                totalConsumedRef = firebase.database().ref('users/' + uid + '/stats/totalConsumed');
+                totalWastedRef = firebase.database().ref('users/' + uid + '/stats/totalWasted');
+                // Sort totalQuantity, store in array
+                totalQuantityRef.orderByValue().once('value').then(function (data) {
                     data.forEach(function (data) {
-                        console.log(data.key + ": " + data.val());
-                        top5FruitKey[qIndex] = data.key;
-                        top5FruitVal[qIndex] = data.val();
+                        //                        console.log(data.key + ": " + data.val());
+                        quantityList[qIndex] = data.key;
+                        quantityListVal[qIndex] = data.val();
+                        totalBought += data.val();
                         qIndex++;
                     });
-                    console.log(top5FruitKey[0]);
-                    document.getElementById('testing').textContent = top5FruitKey[3];
+                    topBought = quantityList[quantityList.length - 1];
+                    console.log(quantityList[0]);
+                    //                    document.getElementById('testing').textContent = top5FruitKey[3];
                 });
-                // Sort, search top 5 fruit consumed
-                totalConsumedRef.orderByValue().limitToLast(5).once('value').then(function (data) {
+                // Sort totalConsumed, store in array
+                totalConsumedRef.orderByValue().once('value').then(function (data) {
                     data.forEach(function (data) {
-                        top5FruitConsumed[cIndex] = data.key;
-                        top5FruitConsumedVal[cIndex] = data.val();
+                        consumedList[cIndex] = data.key;
+                        consumedListVal[cIndex] = data.val();
+                        totalConsumed += data.val();
                         cIndex++;
                     });
-                    console.log(top5FruitConsumed);
+                    topConsumed = consumedList[consumedList.length - 1];
+                    console.log(topConsumed);
                 });
-                // Sort, search top 5 fruit wasted
-                totalWastedRef.orderByValue().limitToLast(5).once('value').then(function (data) {
+                // Sort totalWasted, store in array
+                totalWastedRef.orderByValue().once('value').then(function (data) {
                     data.forEach(function (data) {
-                        top5FruitWasted[wIndex] = data.key;
-                        top5FruitWastedVal[wIndex] = data.val();
+                        wastedList[wIndex] = data.key;
+                        wastedListVal[wIndex] = data.val();
+                        totalWasted += data.val();
                         wIndex++;
                     });
-                    console.log(top5FruitWasted);
+                    topWasted = wastedList[wastedList.length - 1];
+                    console.log(topWasted);
                     initCharts();
                 });
                 user.getToken().then(function (accessToken) {
@@ -351,70 +362,89 @@
     function initCharts() {
         //        lineChart
         Vue.component('line-chart', {
-            extends: VueChartJs.Line
-            , mounted() {
-                this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
-                this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
-                this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
-                this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
-                this.renderChart({
-                    //need to make reactive, show only last 3-4months?
-                    labels: [top5FruitKey[0], top5FruitKey[1], top5FruitKey[2], top5FruitKey[3], top5FruitKey[4]]
-                    , datasets: [
-                        {
-                            label: 'UserName', //need to make reactive
-                            pointBackgroundColor: 'white'
-                            , borderWidth: 1
-                            , pointBorderColor: 'white'
-                            , backgroundColor: this.gradient
-                            , data: [top5FruitVal[0], top5FruitVal[1], top5FruitVal[2], top5FruitVal[3], top5FruitVal[4]] //need to make reactive
+                extends: VueChartJs.Line
+                , mounted() {
+                    //                this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+                    //                this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
+                    //                this.gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+                    //                this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+                    this.renderChart({
+                        labels: [wastedList[wastedList.length - 1], wastedList[wastedList.length - 2], wastedList[wastedList.length - 3], wastedList[wastedList.length - 4], wastedList[wastedList.length - 5]]
+                        , datasets: [
+                            {
+                                label: displayName
+                                , pointBackgroundColor: 'white'
+                                , borderWidth: 1
+                                , pointBorderColor: 'white'
+                                , backgroundColor: '#00b74f'
+                                , data: [wastedListVal[wastedListVal.length - 1], wastedListVal[wastedListVal.length - 2], wastedListVal[wastedListVal.length - 3], wastedListVal[wastedListVal.length - 4], wastedListVal[wastedListVal.length - 5]]
         }
       ]
-                }, {
-                    responsive: true
-                    , maintainAspectRatio: true
-                })
-            }
-        })
+                    }, {
+                        responsive: true
+                        , maintainAspectRatio: true
+                    })
+                }
+            })
+            // bar chart
+        Vue.component('bar-chart', {
+                extends: VueChartJs.Bar
+                , mounted() {
+                    this.renderChart({
+                        labels: [quantityList[quantityList.length - 1], quantityList[quantityList.length - 2], quantityList[quantityList.length - 3], quantityList[quantityList.length - 4], quantityList[quantityList.length - 5]]
+                        , datasets: [
+                            {
+                                label: displayName
+                                , backgroundColor: '#00b74f'
+                                , data: [quantityListVal[quantityListVal.length - 1], quantityListVal[quantityListVal.length - 2], quantityListVal[quantityListVal.length - 3], quantityListVal[quantityListVal.length - 4], quantityListVal[quantityListVal.length - 5]]
+        }
+      ]
+                    }, {
+                        responsive: true
+                        , maintainAspectRatio: true
+                    })
+                }
+            })
+            // radar chart
         Vue.component('radar-chart', {
-            extends: VueChartJs.Radar
-            , mounted() {
-                this.renderChart({
-                    labels: [top5FruitConsumed[0], top5FruitConsumed[1], top5FruitConsumed[2], top5FruitConsumed[3], top5FruitConsumed[4]]
-                    , datasets: [
-                        {
-                            label: '', //need to make reactive
-                            backgroundColor: '#00b74f'
-                            , data: [top5FruitConsumedVal[0],top5FruitConsumedVal[1], top5FruitConsumedVal[2],top5FruitConsumedVal[3],top5FruitConsumedVal[4]] // need to make reactive
+                extends: VueChartJs.Radar
+                , mounted() {
+                    this.renderChart({
+                        labels: [null, consumedList[consumedList.length - 1], consumedList[consumedList.length - 2], consumedList[consumedList.length - 3], consumedList[consumedList.length - 4], consumedList[consumedList.length - 5]]
+                        , datasets: [
+                            {
+                                label: displayName
+                                , backgroundColor: '#00b74f'
+                                , data: [0, consumedListVal[consumedListVal.length - 1], consumedListVal[consumedListVal.length - 2], consumedListVal[consumedListVal.length - 3], consumedListVal[consumedListVal.length - 4], consumedListVal[consumedListVal.length - 5]]
         }
       ]
-                }, {
-                    responsive: true
-                    , maintainAspectRatio: true
-                })
-            }
-        })
-        var numConsumed = top5FruitVal[3];
-        var numWasted = 100 - top5FruitVal[3];
-        console.log(numConsumed + ": " + top5FruitVal[3]);
+                    }, {
+                        responsive: true
+                        , maintainAspectRatio: true
+                    })
+                }
+            })
+            // doughnut Chart
+        var wastedPercent = totalWasted / totalBought * 100;
+        var consumedPercent = totalConsumed / totalBought * 100;
         Vue.component('doughnut-chart', {
             extends: VueChartJs.Doughnut
             , mounted() {
                 this.renderChart({
-                    labels: ['Consumed', '']
+                    labels: ['TotalBought', 'TotalWasted']
                     , datasets: [
                         {
-                            label: 'UserName'
-                            , backgroundColor: ['#00b74f', '#FFFFFF']
-                            , data: [numConsumed, numWasted] //need to make reactive
+                            label: displayName
+                            , backgroundColor: ['#00b74f', '#CC6662']
+                            , data: [consumedPercent, wastedPercent] //need to make reactive
                                 
                             , cutoutPercentage: '90'
-                            , borderColor: ['#00b74f', 'white']
+                            , borderColor: ['#00b74f', '#CC6662']
         }
       ]
                 }, {
                     responsive: true
-                    , maintainAspectRatio: false
+                    , maintainAspectRatio: true
                 })
             }
         })
@@ -422,6 +452,12 @@
             el: '.lineChart'
             , data: {
                 message: 'line'
+            }
+        })
+        var vm = new Vue({
+            el: '.barChart'
+            , data: {
+                message: 'bar'
             }
         })
         var vm = new Vue({

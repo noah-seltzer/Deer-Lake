@@ -244,6 +244,7 @@
     var totalWasted = 0;
     var totalBought = 0;
     var potSavings = 0;
+    var wastedPercent = 0;
 
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
@@ -302,10 +303,14 @@
                         wastedList[wIndex] = data.key;
                         wastedListVal[wIndex] = data.val();
                         totalWasted += data.val();
+                        wastedPercent = totalWasted/totalBought * 100;
+                        firebase.database().ref('users/' + uid + '/stats/wastedPercent').set ({
+                            wastedPercent: wastedPercent
+                        });
                         wIndex++;
                     });
                     topWasted = wastedList[wastedList.length - 1];
-                    console.log(topWasted);
+                    console.log(wastedPercent);
                 });
                 // Get price of items
                 priceRef.orderByKey().once('value').then(function (data) {

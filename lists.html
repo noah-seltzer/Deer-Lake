@@ -175,11 +175,28 @@
             <div id="center">
                 <h3 id="info">Fruits
                 </h3>
+                
+                <div class="alert alert-success" style="display:none" role="alert">
+                    <strong style="text-align:center">You have added:</strong> 
+                    <button type="button" class="close"  @click="closeAlert()" aria-hidden="true">&times;</button>
+                    <p id="addedItems"></p>
+                    
+                </div>
+                
                 <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextF" @keyup.enter="addTodoF()" placeholder="Add new todo">
             </div>
             <ul>
                 <template v-for="todo in fruits">
-                    <li @click="checkIt(todo, fruitsRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
+                    <li @click="checkIt(todo, fruitsRef)" id="listItem"> <template v-if="!todo.checked">
+                        <i  class="fa fa-square-o" aria-hidden="true"></i> 
+                            {{todo['.key']}}
+                        </template>
+                        <template v-else >
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+                        <span style="text-decoration:line-through">
+                            {{todo['.key']}} 
+                            </span>
+                        </template> </li>
                 </template>
                 <div id="buttons">
                     <button v-if="anyChecked(fruitsRef)" type="button" @click="addToFridge(fruits)" class="btn btn-sm">Add To Fridge</button>
@@ -193,7 +210,18 @@
                 <input id="addAnItem2" placeholder="Add An Item" v-model.trim="newTodoTextV" @keyup.enter="addTodoV()" placeholder="Add new todo"> </div>
             <ul>
                 <template v-for="todo in vegs">
-                    <li @click="checkIt(todo, vegRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
+                    <li @click="checkIt(todo, vegRef)" id="listItem">
+                        <template v-if="!todo.checked">
+                        <i  class="fa fa-square-o" aria-hidden="true"></i> 
+                            {{todo['.key']}}
+                        </template>
+                        <template v-else >
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> 
+                        <span style="text-decoration:line-through">
+                            {{todo['.key']}} 
+                            </span>
+                        </template>
+                        </li>
                 </template>
                 <div id="buttons">
                     <button v-if="anyChecked(vegRef)" type="button" @click="addToFridge(vegs)" class="btn btn-sm">Add To Fridge</button>
@@ -435,9 +463,18 @@
                         }
 
                     }
-                    alert("These items have been added:\n" + added.toString())
+                    $('#addedItems').append(added.toString() +', ')
+                     $('.alert').show()
+                    
+                    
 
 
+                },
+                
+                closeAlert: function() {
+                  $('.alert').hide()
+                  $("#addedItems").html('')
+                    
                 },
                 getQuantity: function(str) {
                     var ret = parseInt(str.split(' ').slice(0, 1).toString())

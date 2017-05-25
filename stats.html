@@ -96,6 +96,13 @@
             </div>
             <div class="row">
                 <div class="card">
+                    <div id="potSavings">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
                     <div class="barChart">
                         <div class="barChartMessage"> {{ message }} Top 5 Items Bought </div>
                         <bar-chart></bar-chart>
@@ -269,6 +276,9 @@
     var quantityListVal = [];
     var wastedList = [];
     var wastedListVal = [];
+    // sorted price array
+    var priceList = [];
+    var priceListVal = [];
     //stat display variables
     var topConsumed;
     var topWasted;
@@ -276,6 +286,7 @@
     var totalConsumed = 0;
     var totalWasted = 0;
     var totalBought = 0;
+    var potSavings = 0;
 
     function toggleSignIn() {
         if (firebase.auth().currentUser) {
@@ -298,10 +309,12 @@
                 var qIndex = 0;
                 var cIndex = 0;
                 var wIndex = 0;
+                var pIndex = 0;
                 //stat references
                 totalQuantityRef = firebase.database().ref('users/' + uid + '/stats/totalQuantity');
                 totalConsumedRef = firebase.database().ref('users/' + uid + '/stats/totalConsumed');
                 totalWastedRef = firebase.database().ref('users/' + uid + '/stats/totalWasted');
+                priceRef = firebase.database().ref('price');
                 // Sort totalQuantity, store in array
                 totalQuantityRef.orderByValue().once('value').then(function (data) {
                     data.forEach(function (data) {
@@ -336,6 +349,24 @@
                     });
                     topWasted = wastedList[wastedList.length - 1];
                     console.log(topWasted);
+                });
+                // Get price of items
+                priceRef.orderByKey().once('value').then(function (data) {
+                    data.forEach(function (data) {
+                        priceList[pIndex] = data.key;
+                        priceListVal[pIndex] = data.val();
+                        pIndex++;
+                    });
+                    console.log(priceList);
+                    console.log(priceListVal);
+                    for (i = 0; i < wastedList.length; i++) {
+                        for (j = 0; j < priceList.length; j++) {
+                            if (priceList[j].includes(wastedList[i])) {
+                                potSavings += (wastedListVal[i] * priceListVal[j])
+                            }
+                        }
+                    };
+                    document.getElementById('potSavings').textContent = "$" + potSavings.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');;
                     initCharts();
                 });
                 user.getToken().then(function (accessToken) {

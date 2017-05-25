@@ -23,7 +23,7 @@
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff"> </head>
 
-<body>
+<body onload="setTimeout('openOnLoad()', 500);">
     <!-- Slideout menu -->
     <nav id="menu">
         <header>
@@ -169,6 +169,10 @@
 <script src="js/polyfills.js"></script>
 <script src="js/modernizr-2.6.2.min.js"></script>
 <script>
+    function openOnLoad () {
+    document.getElementById('cn-button').click();
+    };
+    
     (function () {
         var button = document.getElementById('cn-button')
             , wrapper = document.getElementById('cn-wrapper');

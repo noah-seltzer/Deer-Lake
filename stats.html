@@ -359,6 +359,7 @@
                     });
                     console.log(priceList);
                     console.log(priceListVal);
+                    // sum up all potential savings by comparing wasted list with the price db
                     for (i = 0; i < wastedList.length; i++) {
                         for (j = 0; j < priceList.length; j++) {
                             if (priceList[j].includes(wastedList[i])) {
@@ -366,6 +367,7 @@
                             }
                         }
                     };
+                    // Post potential savings in currency format
                     document.getElementById('potSavings').textContent = "$" + potSavings.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');;
                     initCharts();
                 });

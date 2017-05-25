@@ -434,13 +434,11 @@
                             var fridgeRef = firebase.database().ref('users/' + uid + '/fridge/' + name)
                             var existingQuantity;
 
-                            fridgeRef.on("value", function(snapshot) {
-                                if (snapshot.val()) {
+                            fridgeRef.on("value", function(snapshot) {   
                                     existingQuantity = snapshot.val().quantity
 
-                                }
-
                             })
+                            
                             if (existingQuantity) {
                                 fridgeRef.update({
 
@@ -454,11 +452,6 @@
                                     large: large
                                 })
                             }
-
-
-
-
-
 
                         }
 
@@ -478,11 +471,11 @@
                 },
                 getQuantity: function(str) {
                     var ret = parseInt(str.split(' ').slice(0, 1).toString())
-                    if (isNaN(ret)) return 0
+                    if (isNaN(ret)) return 100
                     else return ret
                 },
                 getLarge: function(num) {
-                    return !(num > 0)
+                    return (num == 100)
                 },
                 getName: function(l, name) {
                     if (l) {

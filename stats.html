@@ -94,6 +94,16 @@
                     </div>
                 </div>
             </div>
+			<div class="row">
+				<div class="card">
+					In total, you have wasted
+					<div class="potSavings">
+						
+					</div>
+					<br>
+                    <br> <small>*Cost determined by Superstore's current pricing</small>
+				</div>
+			</div>
             <div class="row">
                 <div class="card">
                     <div class="barChart">
@@ -118,24 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="card">
-                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
-                    <br>
-                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
-            </div>
-            <div class="row">
-                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
-            </div>
+            
         </div>
     </main>
 </body>
@@ -262,6 +255,8 @@
     var displayName;
     var email;
     var key;
+	// array of price
+	var priceList = [];
     //sorted array variables for stats
     var consumedList = [];
     var consumedListVal = [];
@@ -302,6 +297,7 @@
                 totalQuantityRef = firebase.database().ref('users/' + uid + '/stats/totalQuantity');
                 totalConsumedRef = firebase.database().ref('users/' + uid + '/stats/totalConsumed');
                 totalWastedRef = firebase.database().ref('users/' + uid + '/stats/totalWasted');
+				priceRef = firebase.database().ref('price');
                 // Sort totalQuantity, store in array
                 totalQuantityRef.orderByValue().once('value').then(function (data) {
                     data.forEach(function (data) {
@@ -338,6 +334,8 @@
                     console.log(topWasted);
                     initCharts();
                 });
+				// Get price of item 
+				
                 user.getToken().then(function (accessToken) {
                     document.getElementById('sign-in-status').textContent = email;
                     document.getElementById('sign-in').textContent = 'Sign out';

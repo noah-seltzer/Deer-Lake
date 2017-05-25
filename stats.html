@@ -319,13 +319,13 @@
                         priceListVal[pIndex] = data.val();
                         pIndex++;
                     });
-                    console.log(priceList);
-                    console.log(priceListVal);
+                    console.log(wastedList);
                     // sum up all potential savings by comparing wasted list with the price db
                     for (i = 0; i < wastedList.length; i++) {
                         for (j = 0; j < priceList.length; j++) {
-                            if (priceList[j].includes(wastedList[i])) {
+                            if (wastedList[i].includes(priceList[j])) {
                                 potSavings += (wastedListVal[i] * priceListVal[j])
+                                console.log(potSavings);
                             }
                         }
                     };

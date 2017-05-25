@@ -62,7 +62,18 @@
 	display: inline;
 }
 
+#potSavings {
+	font-size: 300%;
+	padding: 10px;
+	color: #00b74f;
+}
 
+#potSavingsTop {
+	
+}
 
+#potSavingsBottom {
+	
+}
 
 /* Chart JS pie chart + custom legends + update onlick */

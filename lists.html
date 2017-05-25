@@ -374,6 +374,8 @@
                 , //TODO
                 addToFridge: function (items) {
                     var added = [];
+                    
+                    
                       for(i=0; i< items.length; i++) {
                         if (items[i].checked) {
                              var v = items[i]
@@ -382,10 +384,19 @@
                             var q = this.getQuantity(v['.key'])
                             var l = this.getLarge(q)
                             var name = this.getName(l, v['.key'])
-                             firebase.database().ref('users/' + uid + '/fridge/' + name).update(
+//                            var fridgeRef = fireba  se.database().ref('users/' + uid + '/fridge/' + name)
+                            
+//                            var a = fridgeRef.once("value", function (snapshot) {
+//                                snapshot.child(name['.key']).val()
+//                                
+//                            })
+//                            console.log(a)
+//                            console.log(fridgeRef.child('quantity'))
+                            
+                             fridgeRef.update(
                                  {
                             
-                                quantity: q,
+                                quantity: q ,
                                      large: l
                         })
                              

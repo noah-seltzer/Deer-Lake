@@ -96,9 +96,11 @@
             </div>
             <div class="row">
                 <div class="card">
+                    In total, you could have saved...
                     <div id="potSavings">
-                        
                     </div>
+                    <br><br>
+                    <small>*Cost determined by Superstore's current pricing</small>
                 </div>
             </div>
             <div class="row">
@@ -131,18 +133,7 @@
                     <br>
                     <br> <small>*Cost determined by Superstore's current pricing</small> </div>
             </div>
-            <div class="row">
-                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
-            </div>
-            <div class="row">
-                <div class="card">
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{secondname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
-                    <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
-                    <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
-            </div>
+            
         </div>
     </main>
 </body>
@@ -197,37 +188,6 @@
                 , item: "Banana"
                 , cost: 0.71
             }]
-        , }
-        , computed: {
-            //computes top wasted foods
-            computeTopWasted: function () {
-                for (i = 0; i < this.items.length; i++) {
-                    if (this.items[i].quantityWasted > this.max) {
-                        this.thirdmax = this.secondmax;
-                        this.thirdname = this.secondname;
-                        this.secondmax = this.max;
-                        this.secondname = this.maxname;
-                        this.max = this.items[i].quantityWasted;
-                        this.maxname = this.items[i].item;
-                    }
-                    else if (this.items[i].quantityWasted > this.secondmax) {
-                        this.thirdmax = this.secondmax;
-                        this.thirdname = this.secondname;
-                        this.secondmax = this.items[i].quantityWasted;
-                        this.secondname = this.items[i].item;
-                    }
-                    else if (this.items[i].quantityWasted > this.thirdmax) {
-                        this.thirdmax = this.items[i].quantityWasted;
-                        this.thirdname = this.items[i].item;
-                    }
-                }
-            }, // computes total wasted food
-            computeTotalWasted: function () {
-                for (i = 0; i < this.items.length; i++) {
-                    this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
-                }
-                this.totalWasted = this.totalWasted.toFixed(2);
-            }
         , }
     , });
 </script>

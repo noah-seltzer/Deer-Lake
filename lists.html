@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <!--Stylesheets-->
-	<link rel="stylesheet" href="style/awesomplete.css" />
+    <link rel="stylesheet" href="style/awesomplete.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="style/mobile.css" />
     <!-- Bootstrap 4 alpha CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto" rel="stylesheet">
     <!-- Fav Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -22,7 +22,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-	<script src="awesomplete.js" async></script>
+    <script src="awesomplete.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.2/vuefire.min.js"></script>
@@ -82,7 +82,8 @@
                     <button class="toggle-button"><img src="images/Icon%20Assets/menu.png"></button>
                 </div>
                 <div class="menuTitle">
-                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> My Lists</h1></div>
+                    <h1 id="navTitle"><i class="fa fa-home" aria-hidden="true"></i> My Lists</h1>
+                </div>
                 <div class="menuRight">
                     <div id="sign-in-status"></div>
                     <button class="signOutButton" onclick="toggleSignIn()">
@@ -173,14 +174,14 @@
 -->
             <div id="center">
                 <h3 id="info">Fruits
-            </h3>
+                </h3>
                 <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextF" @keyup.enter="addTodoF()" placeholder="Add new todo">
             </div>
             <ul>
                 <template v-for="todo in fruits">
                     <li @click="checkIt(todo, fruitsRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
                 </template>
-                <div id="buttons" >
+                <div id="buttons">
                     <button v-if="anyChecked(fruitsRef)" type="button" @click="addToFridge(fruits)" class="btn btn-sm">Add To Fridge</button>
                     <button v-if="anyChecked(fruitsRef)" type="button" class="btn btn-sm" @click="removeChecked(fruits, fruitsRef)">Remove</button>
                 </div>
@@ -188,7 +189,7 @@
             <!--             END FRUITS-->
             <div id="center">
                 <h3 id="info">Vegetables
-            </h3>
+                </h3>
                 <input id="addAnItem2" placeholder="Add An Item" v-model.trim="newTodoTextV" @keyup.enter="addTodoV()" placeholder="Add new todo"> </div>
             <ul>
                 <template v-for="todo in vegs">
@@ -213,44 +214,47 @@
 <!-- Initialize Bootstrap functionality -->
 <script>
     // Initialize tooltip component
-    $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-        // Initialize popover component
-    $(function () {
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    // Initialize popover component
+    $(function() {
         $('[data-toggle="popover"]').popover()
     })
+
 </script>
-    <!-- slideout menu component -->
+<!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
 <script>
     var element = document.getElementById('menuHeader'),
-    style = window.getComputedStyle(element),
-    size = style.getPropertyValue('width');
+        style = window.getComputedStyle(element),
+        size = style.getPropertyValue('width');
     var slideout = new Slideout({
-        'panel': document.getElementById('panel')
-        , 'menu': document.getElementById('menu')
-        , 'padding': size
-        , 'tolerance': 70
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': size,
+        'tolerance': 70
     });
-    document.querySelector('.toggle-button').addEventListener('click', function () {
+    document.querySelector('.toggle-button').addEventListener('click', function() {
         slideout.toggle();
     });
+
 </script>
-    
+
 <!--Firebase component-->
 <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
 <script>
     // Initialize Firebase
     var config = {
-        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y"
-        , authDomain: "vegismart-9265b.firebaseapp.com"
-        , databaseURL: "https://vegismart-9265b.firebaseio.com"
-        , projectId: "vegismart-9265b"
-        , storageBucket: "vegismart-9265b.appspot.com"
-        , messagingSenderId: "37856046364"
+        apiKey: "AIzaSyB8DpIYhyJi5b_p3LrQcycvMuM-h5aH08Y",
+        authDomain: "vegismart-9265b.firebaseapp.com",
+        databaseURL: "https://vegismart-9265b.firebaseio.com",
+        projectId: "vegismart-9265b",
+        storageBucket: "vegismart-9265b.appspot.com",
+        messagingSenderId: "37856046364"
     };
     firebase.initializeApp(config);
+
 </script>
 <script>
     var fruitsRef;
@@ -263,30 +267,29 @@
             // [START signout]
             firebase.auth().signOut();
             // [END signout]
-        }
-        else {
+        } else {
             window.location.replace("login.html");
         }
         document.getElementById('sign-in').disabled = true;
     }
-    $('document').ready(function () {
+    $('document').ready(function() {
         initApp();
     });
 
     function initApp() {
         // Listening for auth state changes.
         // [START authstatelistener]
-        firebase.auth().onAuthStateChanged(function (user) {
+        firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 // User is signed in.
-                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
+                firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function(snapshot) {
                     var displayName = snapshot.val();
                     var email = user.email;
-                   uid = user.uid;
+                    uid = user.uid;
                     var providerData = user.providerData;
                     var emailVerified = user.emailVerified;
                     var photoURL = user.photoURL;
-                    user.getToken().then(function (accessToken) {
+                    user.getToken().then(function(accessToken) {
                         document.getElementById('sign-in-status').textContent = user.displayName;
                         document.getElementById('sign-in').textContent = 'Sign out';
                         $('#sign-in-status').text(displayName);
@@ -295,88 +298,87 @@
                     listsRef = firebase.database().ref('users/' + uid + '/Lists');
                     vegRef = firebase.database().ref('users/' + uid + '/Lists/Vegetables');
                     createVue();
-					predictText();
+                    predictText();
                 });
-            }
-            else {
+            } else {
                 // User is signed out.
                 document.getElementById('sign-in-status').textContent = 'Signed out';
                 document.getElementById('sign-in').textContent = 'Sign in';
                 createVueOffline();
             }
-        }, function (error) {
+        }, function(error) {
             console.log(error);
         });
     }
 
     function createVue() {
         new Vue({
-            el: '#container'
-            , data: {
-                newTodoTextF: ''
-                , newTodoTextV: ''
-                , newListName: ''
-                , listName: fruitsRef.getKey()
-                , todo: 'a'
-            }
-            , firebase: {
-                fruits: fruitsRef.limitToLast(25)
-                , lists: listsRef.limitToLast(25)
-                , vegs: vegRef.limitToLast(25)
-            }
-            , methods: {
-                addTodoF: function () {
+            el: '#container',
+            data: {
+                newTodoTextF: '',
+                newTodoTextV: '',
+                newListName: '',
+                listName: fruitsRef.getKey(),
+                todo: 'a'
+            },
+            firebase: {
+                fruits: fruitsRef.limitToLast(25),
+                lists: listsRef.limitToLast(25),
+                vegs: vegRef.limitToLast(25)
+            },
+            methods: {
+                addTodoF: function() {
                     if (this.newTodoTextF) {
                         firebase.database().ref('users/' + uid + '/Lists/Fruits/' + this.newTodoTextF).update({
                             checked: false
                         })
-						
-						//Add to predictive text list
-						firebase.database().ref('users/' + uid + '/pastItems').update({
-							[this.newTodoTextF]: true
-						})
-				
+
+                        //Add to predictive text list
+                        firebase.database().ref('users/' + uid + '/pastItems').update({
+                            [this.newTodoTextF]: true
+                        })
+
                         this.newTodoTextF = ''
-						predictObj.close();
+                        predictObj.close();
                     }
-                }
-                , addTodoV: function () {
+                },
+                addTodoV: function() {
                     if (this.newTodoTextV) {
                         firebase.database().ref('users/' + uid + '/Lists/Vegetables/' + this.newTodoTextV).update({
                             checked: false
                         })
-						
-						//Add to predictive text list
-						firebase.database().ref('users/' + uid + '/pastItems').update({
-							[this.newTodoTextV]: true
-						})
-						
+
+                        //Add to predictive text list
+                        firebase.database().ref('users/' + uid + '/pastItems').update({
+                            [this.newTodoTextV]: true
+                        })
+
                         this.newTodoTextV = ''
-						predictObj2.close();
+                        predictObj2.close();
                     }
-                }
-                , addList: function () {
+                },
+                addList: function() {
                     if (this.newListName) {
                         listsRef.update({
                             name: this.newListName
                         })
                         this.newListName = ''
                     }
-                }
-                , removeTodo: function (todo, ref) {
+                },
+                removeTodo: function(todo, ref) {
                     ref.child(todo['.key']).remove()
-                }
-                , checkIt: function (todo, ref) {
-                    ref.once("value", function (snapshot) {
+                },
+                checkIt: function(todo, ref) {
+                    ref.once("value", function(snapshot) {
                         var i = snapshot.child(todo['.key']).child('checked').val();
                         if (i) ref.child(todo['.key']).child('checked').set(false)
                         else ref.child(todo['.key']).child('checked').set(true)
                     });
-                }
-                , anyChecked: function (ref) {
+                },
+                anyChecked: function(ref) {
                     return true;
-                }
-                , removeChecked: function (items, ref) {
+                },
+                removeChecked: function(items, ref) {
                     for (i = 0; i < items.length; i++) {
                         if (items[i].checked) {
                             var v = items[i]
@@ -384,81 +386,100 @@
                             i--
                         }
                     }
-                }
-                , updateTodoText: function (todo, newText) {
-                    todosRef.child(todo['.key']).child('text').set(newText)
-                }
-                , //TODO
-                addToFridge: function (items) {
-                    var added = [];
-                    
-                    
-                      for(i=0; i< items.length; i++) {
-                        if (items[i].checked) {
-                             var v = items[i]
-                            added.push(v['.key'])
-                           
-                            var q = this.getQuantity(v['.key'])
-                            var l = this.getLarge(q)
-                            var name = this.getName(l, v['.key'])
-//                            var fridgeRef = fireba  se.database().ref('users/' + uid + '/fridge/' + name)
-                            
-//                            var a = fridgeRef.once("value", function (snapshot) {
-//                                snapshot.child(name['.key']).val()
-//                                
-//                            })
-//                            console.log(a)
-//                            console.log(fridgeRef.child('quantity'))
-                            
-                             fridgeRef.update(
-                                 {
-                            
-                                quantity: q ,
-                                     large: l
-                        })
-                             
-                            
-                        }
-                         
-                    }
-                     alert("These items have been added:\n" + added.toString())
-                    
-                   
                 },
-                getQuantity: function(str){
-                    var ret = parseInt(str.split(' ').slice(0,1).toString())
+                updateTodoText: function(todo, newText) {
+                    todosRef.child(todo['.key']).child('text').set(newText)
+                }, //TODO
+                addToFridge: function(items) {
+                    var added = [];
+
+
+                    for (i = 0; i < items.length; i++) {
+                        if (items[i].checked) {
+                            var v = items[i]
+                            added.push(v['.key'])
+
+
+                            var quantity = this.getQuantity(v['.key'])
+                            var large = this.getLarge(quantity)
+                            var name = this.getName(large, v['.key'])
+                            var fridgeRef = firebase.database().ref('users/' + uid + '/fridge/' + name)
+                            var existingQuantity;
+
+                            fridgeRef.on("value", function(snapshot) {
+                                if (snapshot.val()) {
+                                    existingQuantity = snapshot.val().quantity
+
+                                }
+
+                            })
+                            if (existingQuantity) {
+                                fridgeRef.update({
+
+                                    quantity: quantity + existingQuantity,
+                                    large: large
+                                })
+                            } else {
+                                fridgeRef.update({
+
+                                    quantity: quantity,
+                                    large: large
+                                })
+                            }
+
+
+
+
+
+
+                        }
+
+                    }
+                    alert("These items have been added:\n" + added.toString())
+
+
+                },
+                getQuantity: function(str) {
+                    var ret = parseInt(str.split(' ').slice(0, 1).toString())
                     if (isNaN(ret)) return 0
                     else return ret
                 },
-                getLarge:function(num){
+                getLarge: function(num) {
                     return !(num > 0)
                 },
                 getName: function(l, name) {
-                    if (l) {return name}
-                    else {return name.split(' ').slice(1).toString()}
-                    
+                    if (l) {
+                        return name
+                    } else {
+                        return name.split(' ').slice(1).toString()
+                    }
+
                 }
             }
         });
     }
-    
-	//Global predictive text object
-	var predictObj;
-	var predictObj2;
-	
-	function predictText(){
-		var input = document.getElementById("addAnItem"); 
-		predictObj = new Awesomplete(input, {list:''});
-		var input2 = document.getElementById("addAnItem2");
-		predictObj2 = new Awesomplete(input2, {list:''});	
-		firebase.database().ref('users/' + uid + '/pastItems/').on('value', 
-		function(snapshot) {
-			var keys = Object.keys(snapshot.val());
-			predictObj.list = keys;
-			predictObj2.list = keys;
-		});
-	}
-	
+
+    //Global predictive text object
+    var predictObj;
+    var predictObj2;
+
+    function predictText() {
+        var input = document.getElementById("addAnItem");
+        predictObj = new Awesomplete(input, {
+            list: ''
+        });
+        var input2 = document.getElementById("addAnItem2");
+        predictObj2 = new Awesomplete(input2, {
+            list: ''
+        });
+        firebase.database().ref('users/' + uid + '/pastItems/').on('value',
+            function(snapshot) {
+                var keys = Object.keys(snapshot.val());
+                predictObj.list = keys;
+                predictObj2.list = keys;
+            });
+    }
+
     //This vue object is used for offline storage
     /*
      function createVueOffline(){
@@ -572,4 +593,5 @@
      });
      }
      */
+
 </script>

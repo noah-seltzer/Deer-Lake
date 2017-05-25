@@ -666,17 +666,15 @@
     }
 
 	//Global predictive text object
-	var predictObj
+	var predictObj;
 	
 	function predictText(){
 		var input = document.getElementById("addAnItem"); 
+		predictObj = new Awesomplete(input, {list:''});
 		firebase.database().ref('users/' + dbuser.uid + '/pastItems/').on('value', 
 		function(snapshot) {
 			var keys = Object.keys(snapshot.val());
-			console.log(keys);
-			predictObj = new Awesomplete(input, {
-			list: keys
-		});
+			predictObj.list = keys;
 		});
 	}
 </script>

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <!--Stylesheets-->
+	<link rel="stylesheet" href="style/awesomplete.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link href="style/base.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="style/mobile.css" />
@@ -21,6 +22,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+	<script src="awesomplete.js" async></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuefire/1.4.2/vuefire.min.js"></script>
@@ -187,7 +189,7 @@
             <div id="center">
                 <h3 id="info">Vegetables
             </h3>
-                <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextV" @keyup.enter="addTodoV()" placeholder="Add new todo"> </div>
+                <input id="addAnItem2" placeholder="Add An Item" v-model.trim="newTodoTextV" @keyup.enter="addTodoV()" placeholder="Add new todo"> </div>
             <ul>
                 <template v-for="todo in vegs">
                     <li @click="checkIt(todo, vegRef)" id="listItem"> <i v-if="!todo.checked" class="fa fa-square-o" aria-hidden="true"></i> <i v-else class="fa fa-check-square-o" aria-hidden="true"></i> {{todo['.key']}} </li>
@@ -293,6 +295,7 @@
                     listsRef = firebase.database().ref('users/' + uid + '/Lists');
                     vegRef = firebase.database().ref('users/' + uid + '/Lists/Vegetables');
                     createVue();
+					predictText();
                 });
             }
             else {
@@ -327,7 +330,14 @@
                         firebase.database().ref('users/' + uid + '/Lists/Fruits/' + this.newTodoTextF).update({
                             checked: false
                         })
+						
+						//Add to predictive text list
+						firebase.database().ref('users/' + uid + '/pastItems').update({
+							[this.newTodoTextF]: true
+						})
+				
                         this.newTodoTextF = ''
+						predictObj.close();
                     }
                 }
                 , addTodoV: function () {
@@ -335,7 +345,14 @@
                         firebase.database().ref('users/' + uid + '/Lists/Vegetables/' + this.newTodoTextV).update({
                             checked: false
                         })
+						
+						//Add to predictive text list
+						firebase.database().ref('users/' + uid + '/pastItems').update({
+							[this.newTodoTextV]: true
+						})
+						
                         this.newTodoTextV = ''
+						predictObj2.close();
                     }
                 }
                 , addList: function () {
@@ -425,6 +442,23 @@
         });
     }
     
+	//Global predictive text object
+	var predictObj;
+	var predictObj2;
+	
+	function predictText(){
+		var input = document.getElementById("addAnItem"); 
+		predictObj = new Awesomplete(input, {list:''});
+		var input2 = document.getElementById("addAnItem2");
+		predictObj2 = new Awesomplete(input2, {list:''});	
+		firebase.database().ref('users/' + uid + '/pastItems/').on('value', 
+		function(snapshot) {
+			var keys = Object.keys(snapshot.val());
+			predictObj.list = keys;
+			predictObj2.list = keys;
+		});
+	}
+	
     //This vue object is used for offline storage
     /*
      function createVueOffline(){

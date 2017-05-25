@@ -96,11 +96,13 @@
             </div>
             <div class="row">
                 <div class="card">
+					<div id="potSavingsTop">
                     In total, you could have saved...
-                    <div id="potSavings">
-                    </div>
-                    <br><br>
-                    <small>*Cost determined by Superstore's current pricing</small>
+					</div>
+					<div id="potSavingsBottom">
+						<div id="potSavings"></div>
+						<small>*Cost determined by Superstore's current pricing</small>
+					</div>
                 </div>
             </div>
             <div class="row">
@@ -127,12 +129,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="card">
-                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
-                    <br>
-                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
-            </div>
+            
             
         </div>
     </main>

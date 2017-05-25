@@ -86,6 +86,13 @@
             </div>
         </header>
         <div class="container" id="container">
+			<div class="row">
+                <div class="card">
+                    <div class="bigText" v-model="max" @click="computeTotalWasted"> </div>
+                    <br>
+                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
+            </div>
+			
             <div class="row">
                 <div class="card">
                     <div class="lineChart">
@@ -94,6 +101,7 @@
                     </div>
                 </div>
             </div>
+			
             <div class="row">
                 <div class="card">
                     <div class="radarChart">
@@ -102,6 +110,7 @@
                     </div>
                 </div>
             </div>
+			
             <div class="row">
                 <div class="card">
                     <div class="doughnutChart">
@@ -110,14 +119,10 @@
                     </div>
                 </div>
             </div>
+            
+			<!--
             <div class="row">
-                <div class="card">
-                    <div class="bigText" v-model="max" @click="computeTotalWasted">{{"$ " + totalWasted}} </div>
-                    <br>
-                    <br> <small>*Cost determined by Superstore's current pricing</small> </div>
-            </div>
-            <div class="row">
-                <div class="card"> <img id="bigFoodIcon" src="images/apple.png" alt="Apple">
+                <div class="card"> 
                     <div class="medText" v-model="max" @click="computeTopWasted">{{maxname + "s"}}</div> You have wasted
                     <div class="smallText" v-model="max" @click="computeTopWasted">{{max}} </div> {{maxname + "s"}}. </div>
             </div>
@@ -127,7 +132,7 @@
                     <div class="smallText" v-model="max" @click="computeTopWasted">{{secondmax}}</div> {{secondname + "s"}}.
                     <div class="medText" v-model="max" @click="computeTopWasted">{{thirdname + "s"}}</div> You have wasted
                     <div class="smallText" v-model="max" @click="computeTopWasted">{{thirdmax}}</div> {{thirdname }}. </div>
-            </div>
+            </div>-->
         </div>
     </main>
 </body>
@@ -184,7 +189,7 @@
             }]
         , }
         , computed: {
-            //computes top wasted foods
+            /*computes top wasted foods
             computeTopWasted: function () {
                 for (i = 0; i < this.items.length; i++) {
                     if (this.items[i].quantityWasted > this.max) {
@@ -212,7 +217,7 @@
                     this.totalWasted += (this.items[i].quantityWasted * this.items[i].cost);
                 }
                 this.totalWasted = this.totalWasted.toFixed(2);
-            }
+            }*/
         , }
     , });
 </script>
@@ -260,7 +265,7 @@
     $('document').ready(function () {
         initApp();
     });
-
+	var uid;
     function initApp() {
         // Listening for auth state changes.
         // [START authstatelistener]
@@ -270,7 +275,7 @@
                 firebase.database().ref('users/' + user.uid + '/displayName').once('value').then(function (snapshot) {
                     var displayName = snapshot.val();
                     var email = user.email;
-                    var uid = user.uid;
+                    uid = user.uid;
                     var providerData = user.providerData;
                     user.getToken().then(function (accessToken) {
                         document.getElementById('sign-in-status').textContent = user.displayName;
@@ -286,6 +291,8 @@
                     item1= snapshot.val();
                      
                     });
+					
+					computeTotalWasted();
                     //iterate through the items in fridge, and monthly, weekly, yearly consumption rate + wasted rate
                     //iterate through the items and calculate wasted amount * price,
                     //iterate through and find the most consumed + most wasted and pull data in to doughtnut
@@ -399,4 +406,15 @@
             }
         })
     }
+</script>
+<!--Calculate total wasted-->
+<script>
+function computeTotalWasted(){
+        var input = document.getElementById("addAnItem"); 
+        firebase.database().ref('users/' + uid + '/stats').on('value', 
+        function(snapshot) {
+			console.log(snapshot.val());
+
+		});
+}
 </script>

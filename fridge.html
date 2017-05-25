@@ -396,7 +396,15 @@
              */
             ,
             addItem: function() {
-                var new_text = this.newTodoText;
+				var awsElements = $('.awesomplete > ul > li');
+				for(var i = 0; i < awsElements.length; i++){
+					if($(awsElements[i]).attr("aria-selected") == 'true') {
+						this.newTodoText = $(awsElements[i]).text();
+					}
+				}
+				
+				var new_text = this.newTodoText;
+
                 if (document.getElementById("largebox").checked) {
                     var bool = true;
                     var num = 100;

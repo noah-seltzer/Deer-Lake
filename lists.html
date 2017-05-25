@@ -357,6 +357,12 @@
             methods: {
                 addTodoF: function() {
                     if (this.newTodoTextF) {
+						var awsElements = $('.awesomplete > ul > li');
+						for(var i = 0; i < awsElements.length; i++){
+							if($(awsElements[i]).attr("aria-selected") == 'true') {
+							this.newTodoTextF = $(awsElements[i]).text();
+							}
+						}
                         firebase.database().ref('users/' + uid + '/Lists/Fruits/' + this.newTodoTextF).update({
                             checked: false
                         })
@@ -372,6 +378,12 @@
                 },
                 addTodoV: function() {
                     if (this.newTodoTextV) {
+						var awsElements = $('.awesomplete > ul > li');
+						for(var i = 0; i < awsElements.length; i++){
+							if($(awsElements[i]).attr("aria-selected") == 'true') {
+							this.newTodoTextV = $(awsElements[i]).text();
+							}
+						}
                         firebase.database().ref('users/' + uid + '/Lists/Vegetables/' + this.newTodoTextV).update({
                             checked: false
                         })

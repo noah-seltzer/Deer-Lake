@@ -93,6 +93,11 @@
                         <doughnut-chart></doughnut-chart>
                     </div>
                 </div>
+                <br>
+                Share your waste on twitter!
+                <div id="tweet-container"></div>
+                <!--<a href="https://twitter.com/share" class="twitter-share-button" id="twitshare" data-hashtags="vegismart" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+
             </div>
             <div class="row">
                 <div class="card">
@@ -136,6 +141,7 @@
 </body>
 <!-- slideout menu component -->
 <script src="dist/slideout.min.js"></script>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
     var element = document.getElementById('menuHeader')
         , style = window.getComputedStyle(element)
@@ -311,6 +317,19 @@
                     });
                     topWasted = wastedList[wastedList.length - 1];
                     console.log(wastedPercent);
+                    var string = "I have only wasted " + wastedPercent.toFixed(2) + "% of my food! Keeping track of my food has never been easier!";
+//                    console.log("twitstring is: " + string);
+//                    document.getElementById('twitshare').setAttribute("data-text", string);
+                    twttr.widgets.createShareButton(
+                        "https:\/\/vegismart.site",
+                        document.getElementById("tweet-container"),
+                        {
+                            size: "default",
+                            text: string,
+                            hashtags: "vegismart",
+                            related: "twitterapi,twitter"
+                        }
+                    );
                 });
                 // Get price of items
                 priceRef.orderByKey().once('value').then(function (data) {

@@ -456,19 +456,24 @@
                                     quantity:quantity + x,
                                     large:large
                                 })
-
-                            })
-                            statsRef.once("value", function(snapshot) {
-                                var x = 0;
-                                if(snapshot.val())
-                                {x = snapshot.val()}
-                                console.log("x is" + x)
-                                statsRef2.update({
+                                  statsRef2.update({
                                     [name]:quantity + x
 
                                 })
 
                             })
+                             
+//                            statsRef.once("value", function(snapshot) {
+//                                var x = 0;
+//                                if(snapshot.val())
+//                                {x = snapshot.val()}
+//                                console.log("x is" + x)
+//                                statsRef2.update({
+//                                    [name]:quantity + x
+//
+//                                })
+//
+//                            })
 
 
 

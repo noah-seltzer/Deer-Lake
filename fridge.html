@@ -429,10 +429,10 @@
                     }
                 });
                 firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
-                    [new_text]: 1
+                    [new_text]: 0
                 });
                 firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
-                    [new_text]: 1
+                    [new_text]: 0
                 });
 
 				//Add to predictive text list
@@ -483,17 +483,23 @@
                     quantity: vm.fridge[index].quantity
                 });
 
-                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity/' + vm.fridge[index].item).on('value',
-                    function(snapshot){
-                        total = snapshot.val()
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity/' + vm.fridge[index].item).once('' +
+                    "value", function(snapshot){
+                        var total = 0;
+                        if(snapshot.val()){
+                            total = snapshot.val()
+                        }
+                        total++;
+                        firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
+                            [vm.fridge[index].item]: total
+                        });
+
                     }
                 );
 
-                    total++;
 
-                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalQuantity').update({
-                        [vm.fridge[index].item]: total
-                    });
+
+
 
             }
             /**
@@ -513,16 +519,19 @@
                     firebase.database().ref('users/' + dbuser.uid + '/fridge/' + vm.fridge[index].item).update({
                         quantity: vm.fridge[index].quantity
                     });
-                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed/' + vm.fridge[index].item).on('value',
-                        function (snapshot) {
-                            consumed = snapshot.val()
+                firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed/' + vm.fridge[index].item).once('' +
+                    "value", function(snapshot){
+                        var total = 0;
+                        if(snapshot.val()){
+                            total = snapshot.val()
                         }
-                    );
-                consumed++;
+                        total++;
+                        firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
+                            [vm.fridge[index].item]: total
+                        });
 
-                    firebase.database().ref('users/' + dbuser.uid + '/stats/totalConsumed').update({
-                        [vm.fridge[index].item]: consumed
-                    });
+                    }
+                );
 
             }
             /**

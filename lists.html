@@ -175,14 +175,14 @@
             <div id="center">
                 <h3 id="info">Fruits
                 </h3>
-                
+
                 <div class="alert alert-success" style="display:none" role="alert">
-                    <strong style="text-align:center">You have added:</strong> 
-                    <button type="button" class="close"  @click="closeAlert()" aria-hidden="true">&times;</button>
+                    <strong style="text-align:center">You have added:</strong>
+                    <button type="button" class="close" @click="closeAlert()" aria-hidden="true">&times;</button>
                     <p id="addedItems"></p>
-                    
+
                 </div>
-                
+
                 <input id="addAnItem" placeholder="Add An Item" v-model.trim="newTodoTextF" @keyup.enter="addTodoF()" placeholder="Add new todo">
             </div>
             <ul>
@@ -191,7 +191,7 @@
                         <i  class="fa fa-square-o" aria-hidden="true"></i> 
                             {{todo['.key']}}
                         </template>
-                        <template v-else >
+                <template v-else>
                         <i class="fa fa-check-square-o" aria-hidden="true"></i> 
                         <span style="text-decoration:line-through">
                             {{todo['.key']}} 
@@ -215,13 +215,13 @@
                         <i  class="fa fa-square-o" aria-hidden="true"></i> 
                             {{todo['.key']}}
                         </template>
-                        <template v-else >
+                <template v-else>
                         <i class="fa fa-check-square-o" aria-hidden="true"></i> 
                         <span style="text-decoration:line-through">
                             {{todo['.key']}} 
                             </span>
                         </template>
-                        </li>
+                </li>
                 </template>
                 <div id="buttons">
                     <button v-if="anyChecked(vegRef)" type="button" @click="addToFridge(vegs)" class="btn btn-sm">Add To Fridge</button>
@@ -357,12 +357,12 @@
             methods: {
                 addTodoF: function() {
                     if (this.newTodoTextF) {
-						var awsElements = $('.awesomplete > ul > li');
-						for(var i = 0; i < awsElements.length; i++){
-							if($(awsElements[i]).attr("aria-selected") == 'true') {
-							this.newTodoTextF = $(awsElements[i]).text();
-							}
-						}
+                        var awsElements = $('.awesomplete > ul > li');
+                        for (var i = 0; i < awsElements.length; i++) {
+                            if ($(awsElements[i]).attr("aria-selected") == 'true') {
+                                this.newTodoTextF = $(awsElements[i]).text();
+                            }
+                        }
                         firebase.database().ref('users/' + uid + '/Lists/Fruits/' + this.newTodoTextF).update({
                             checked: false
                         })
@@ -378,12 +378,12 @@
                 },
                 addTodoV: function() {
                     if (this.newTodoTextV) {
-						var awsElements = $('.awesomplete > ul > li');
-						for(var i = 0; i < awsElements.length; i++){
-							if($(awsElements[i]).attr("aria-selected") == 'true') {
-							this.newTodoTextV = $(awsElements[i]).text();
-							}
-						}
+                        var awsElements = $('.awesomplete > ul > li');
+                        for (var i = 0; i < awsElements.length; i++) {
+                            if ($(awsElements[i]).attr("aria-selected") == 'true') {
+                                this.newTodoTextV = $(awsElements[i]).text();
+                            }
+                        }
                         firebase.database().ref('users/' + uid + '/Lists/Vegetables/' + this.newTodoTextV).update({
                             checked: false
                         })
@@ -444,42 +444,48 @@
                             var large = this.getLarge(quantity)
                             var name = this.getName(large, v['.key'])
                             var fridgeRef = firebase.database().ref('users/' + uid + '/fridge/' + name)
-                            var existingQuantity;
-
-                            fridgeRef.on("value", function(snapshot) {   
-                                    existingQuantity = snapshot.val().quantity
-
-                            })
+                            var existingQuantity = this.getExistingQuantity(fridgeRef);
                             
-                            if (existingQuantity) {
-                                fridgeRef.update({
+                             fridgeRef.once("value", function(snapshot) {
+                                 var x = 0;
+                                 if(snapshot.val())
+                                     {x = snapshot.val().quantity}
+                                 fridgeRef.update({
+                                     quantity:quantity + x,
+                                     large:large
+                                 })
 
-                                    quantity: quantity + existingQuantity,
-                                    large: large
-                                })
-                            } else {
-                                fridgeRef.update({
+                             })
 
-                                    quantity: quantity,
-                                    large: large
-                                })
-                            }
+//                            if (existingQuantity) {
+//                                fridgeRef.update({
+//
+//                                    quantity: quantity + existingQuantity,
+//                                    large: large
+//                                })
+//                            } else {
+//                                fridgeRef.update({
+//
+//                                    quantity: quantity,
+//                                    large: large
+//                                })
+//                            }
 
                         }
 
                     }
-                    $('#addedItems').append(added.toString() +', ')
-                     $('.alert').show()
-                    
-                    
+                    $('#addedItems').append(added.toString() + ', ')
+                    $('.alert').show()
+
+
 
 
                 },
-                
+
                 closeAlert: function() {
-                  $('.alert').hide()
-                  $("#addedItems").html('')
-                    
+                    $('.alert').hide()
+                    $("#addedItems").html('')
+
                 },
                 getQuantity: function(str) {
                     var ret = parseInt(str.split(' ').slice(0, 1).toString())
@@ -488,6 +494,21 @@
                 },
                 getLarge: function(num) {
                     return (num == 100)
+                },
+                getExistingQuantity: function(ref) {
+                    var x;
+
+                    //                     ref.once('value').then(function(snapshot){
+                    //                          x = snapshot.val().quantity
+                    //                      })
+                    ref.on("value", function(snapshot) {
+                        x = snapshot.val().quantity
+
+                    })
+
+                    return x
+
+
                 },
                 getName: function(l, name) {
                     if (l) {
